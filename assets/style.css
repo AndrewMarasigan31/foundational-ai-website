@@ -140,26 +140,6 @@ section { padding: var(--section-py) 0; }
 .why-item h4 { color: var(--c-white); margin-bottom: 10px; font-size: 16px; }
 .why-item p { font-size: 14px; line-height: 1.75; }
 
-/* ===== TRUST STRIP ===== */
-.trust-strip {
-  display: flex; flex-wrap: wrap; gap: 10px;
-  margin-top: 40px;
-}
-.trust-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 6px 14px;
-  background: rgba(201, 162, 39, 0.07);
-  border: 1px solid var(--c-gold-border);
-  border-radius: 40px;
-  font-size: 12px; font-weight: 500; color: var(--c-gray-light);
-  letter-spacing: 0.01em;
-}
-.trust-pill::before {
-  content: '';
-  display: block; width: 5px; height: 5px;
-  background: var(--c-gold); border-radius: 50%; flex-shrink: 0;
-}
-
 /* ===== HOW IT WORKS (Homepage) ===== */
 .how-section { background: var(--c-surface); border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border); }
 .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
