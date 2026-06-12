@@ -32,3 +32,15 @@
   - Material Symbols class is `material-symbols-outlined` (not `material-icons`)
   - Nav was pre-wired into layout.tsx here; US-014 just confirms it's in place
 ---
+
+## 2026-06-13 - US-003
+- Built components/Footer.tsx: 4-column responsive footer with brand, services, company, and legal columns
+- Includes LinkedIn and Twitter SVG icons in brand column; copyright line at bottom
+- Updated app/layout.tsx to import and render <Footer /> below {children}
+- Files changed: components/Footer.tsx (new), app/layout.tsx
+- Typecheck passes
+- **Learnings for future iterations:**
+  - Footer uses inline SVG for social icons (no external icon library needed)
+  - Grid collapses via `grid-cols-1 sm:grid-cols-2 md:grid-cols-4`
+  - Footer does NOT need "use client" — it has no interactivity
+---
