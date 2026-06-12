@@ -19,12 +19,6 @@ export default function HeroSection() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-24 md:py-32 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
         {/* Left: copy */}
         <div className="flex flex-col gap-6">
-          {/* Eyebrow pill */}
-          <div className="inline-flex items-center gap-2 self-start bg-[#C9A227]/10 border border-[#C9A227]/30 text-[#C9A227] text-sm font-semibold px-4 py-1.5 rounded-full">
-            <span className="material-symbols-outlined text-base leading-none">bolt</span>
-            Local SEO for US Small Businesses
-          </div>
-
           {/* H1 */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
             Your Competitors<br />Rank Higher.
