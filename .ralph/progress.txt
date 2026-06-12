@@ -1,3 +1,16 @@
+## 2026-06-13 - US-011
+- Built components/WhyUsSection.tsx: three differentiator cards section
+- 3-column grid (desktop), single column (mobile)
+- Each card: surface bg (#0e2131), white/10 border, faded gold number at 35% opacity (absolute positioned, top-right)
+- AnimatedSection wraps header (no delay) and cards grid (0.1s delay)
+- Updated app/page.tsx to render WhyUsSection below HowItWorksSection
+- Build and typecheck pass
+- **Learnings for future iterations:**
+  - Faded number uses `text-[#C9A227]/[0.35]` with `absolute` positioning + `select-none pointer-events-none`
+  - Card content needs `relative z-10` to sit above the absolute-positioned faded number
+  - `overflow-hidden` on the card clips the large number neatly at card edges
+---
+
 ## 2026-06-13 - US-010
 - Built components/HowItWorksSection.tsx: four-step process section
 - 4 steps in a 4-column grid (desktop), single column stack (mobile)
