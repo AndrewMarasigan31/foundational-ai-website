@@ -1,3 +1,40 @@
+## 2026-06-13 - US-016
+- Replaced DashboardVisual.tsx (Recharts bar chart + stat cards) with GBPOptimizationSequence component
+- Updated DashboardSection.tsx: pill label → "The Work", heading → "What Optimization Looks Like", new subhead
+- 4 steps animate in with Framer Motion stagger (0.2s between each), triggered by useInView
+- Step 1 (SEO Content Added): content block with blog post tag fades/slides in
+- Step 2 (Category Cleanup): wrong categories get line-through + fade to 35% opacity; correct ones pulse in with CSS transition delays
+- Step 3 (Business Description Refresh): skeleton placeholders fade out, real copy fades in (absolute positioned overlay swap)
+- Step 4 (Photo & Content Recommendations): 4 image slots fill with gold check badges and label text
+- Each step header shows gold checkmark icon via Framer Motion scale-in animation
+- Removed recharts from package.json (only dependency was DashboardVisual.tsx)
+- Build and typecheck both pass
+- Manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - Overlay swap pattern for before/after content: both layers `absolute inset-4`, one fades out while other fades in via CSS transition with delay
+  - Framer Motion `custom` prop on variants enables per-item delay without creating N variants
+  - CSS transition + `isInView` boolean is sufficient for simple opacity/transform effects; no need for Framer Motion for every child element
+  - Removing a package from package.json does not uninstall it from node_modules (run `npm install` if needed), but build succeeds if nothing imports it
+---
+
+## 2026-06-13 - US-015
+- Enhanced components/LocalPackVisual.tsx with a pure SVG city map background
+- SVG map (300x260 viewBox): dark navy base, road grid (main highways + side streets), city block rectangles, a park area (green tinted)
+- 3 gold pins positioned in upper/mid map area with double pulse rings via SVG `<animate>` (no JS) — staggered begin delays (0s, 0.35s+0.95s, 0.7s+1.3s)
+- 5 gray muted competitor pins scattered across the map
+- Gradient vignette linearGradient (transparent → 97% opacity dark) covers bottom 54% for card readability
+- Listing cards repositioned to overlay bottom of map with `backdrop-blur-md` and 80% opacity background
+- Top 3 Local Pack badge floats above cards in the overlay layer
+- Component is fully responsive (SVG + absolute overlay pattern)
+- No external image dependencies — pure SVG + Framer Motion for card stagger
+- Build and typecheck both pass; manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - SVG `<animate>` pulse rings: set initial `strokeOpacity="0"` on the circle, then animate `stroke-opacity` from value to 0 — avoids flash on mount
+  - SVG `<defs>` gradients with `id` work fine inside React SVG; put `<defs>` before all geometry for clarity
+  - Pattern for map overlay UI: `relative overflow-hidden rounded-2xl` container + `<svg viewBox>` sets aspect ratio + `absolute inset-0 flex flex-col justify-end` for overlay
+  - `backdrop-blur-md` on cards requires `bg-[color]/opacity` (transparent background) to show the blur effect
+---
+
 ## 2026-06-13 - US-014
 - Verified homepage composition: all sections wired in correct order in app/page.tsx
 - app/layout.tsx already renders Nav and Footer around {children} (wired in US-002/US-003)

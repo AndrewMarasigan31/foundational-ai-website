@@ -279,7 +279,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 15,
-      "passes": false,
+      "passes": true,
       "notes": "Reference: components/LocalPackVisual.tsx. Used in components/HeroSection.tsx right panel."
     },
     {
@@ -305,7 +305,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 16,
-      "passes": false,
+      "passes": true,
       "notes": "Files: components/DashboardSection.tsx (update label/heading), components/DashboardVisual.tsx (full replacement). Issue #14."
     }
   ]
