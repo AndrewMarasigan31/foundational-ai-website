@@ -1,3 +1,17 @@
+## 2026-06-13 - US-010
+- Built components/HowItWorksSection.tsx: four-step process section
+- 4 steps in a 4-column grid (desktop), single column stack (mobile)
+- Horizontal connecting line (hidden md:block) positioned behind circles using absolute positioning at top-8
+- Step 1 circle: gold bg, gold border, gold glow shadow; Steps 2–4: muted, hover → gold border + text
+- AnimatedSection wraps both header and steps grid (0.1s delay on steps)
+- Updated app/page.tsx to render HowItWorksSection below ServicesSection
+- Build and typecheck pass
+- **Learnings for future iterations:**
+  - Connecting line trick: `absolute top-8 left-[12.5%] right-[12.5%] h-px bg-white/10 z-0` with grid items at `z-10` keeps line behind circles
+  - `group` class on the column container + `group-hover:` on inner elements enables hover effects on children without JS
+  - `&apos;` needed for apostrophes in JSX text to avoid linting errors
+---
+
 ## 2026-06-13 - US-009
 - Built components/ServicesSection.tsx: asymmetric 12-column bento grid of 4 service cards
 - GBP card (col-span-8): manage_search icon, description, 2 checklist items, inline mock GBP panel sub-component
