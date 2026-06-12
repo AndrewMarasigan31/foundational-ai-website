@@ -44,3 +44,17 @@
   - Grid collapses via `grid-cols-1 sm:grid-cols-2 md:grid-cols-4`
   - Footer does NOT need "use client" — it has no interactivity
 ---
+
+## 2026-06-13 - US-004
+- Built components/AnimatedSection.tsx: scroll-triggered animation wrapper using Framer Motion
+- Uses useInView with `once: true` and `margin: "-10% 0px"` for natural trigger timing
+- Supports direction prop ('up' | 'left' | 'right', default 'up') and delay prop (number, seconds)
+- Entry animation: opacity 0→1 + translate 24px→0, 0.5s easeOut
+- Files changed: components/AnimatedSection.tsx (new)
+- Typecheck passes
+- **Learnings for future iterations:**
+  - AnimatedSection requires "use client" (uses useRef and useInView hooks)
+  - useInView margin: "-10% 0px" prevents animations triggering only when element fully enters viewport
+  - Variants object pattern cleanly maps direction prop to Framer Motion initial/animate states
+  - All section components (US-007 through US-013) should import AnimatedSection from components/AnimatedSection
+---
