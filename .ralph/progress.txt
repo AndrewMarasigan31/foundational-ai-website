@@ -1,3 +1,34 @@
-# Ralph Progress Log
-Started: Sat Jun 13 00:04:05 PST 2026
+## Codebase Patterns
+- Next.js 14 App Router project at repo root; app/ directory, tailwind.config.ts, postcss.config.js, next.config.js
+- Tailwind custom colors: primary #C9A227, background #021524, surface #0e2131, on-surface #d1e5fb, outline #99907b
+- TypeScript target must be ES2017+ (not ES5 — deprecated in TS 6+)
+- CSS imports in layout.tsx require a css.d.ts module declaration file
+- framer-motion and recharts are installed; recharts requires dynamic import with ssr: false
+- Plus Jakarta Sans via next/font/google; Material Symbols via <link> in layout head
+
+---
+
+## 2026-06-13 - US-001
+- Scaffolded Next.js 14 App Router project at repo root
+- Installed: next@14, react@18, react-dom@18, framer-motion, recharts, tailwindcss@3, postcss, autoprefixer, typescript, @types/*
+- Files created: package.json, tsconfig.json, tailwind.config.ts, postcss.config.js, next.config.js, app/layout.tsx, app/page.tsx, app/globals.css, app/css.d.ts, public/logo.png, next-env.d.ts, .gitignore
+- npm run build and typecheck both pass
+- **Learnings for future iterations:**
+  - TypeScript 6 deprecates target=ES5; use ES2017
+  - CSS side-effect imports need app/css.d.ts with `declare module "*.css"`
+  - Plus Jakarta Sans font variable is --font-plus-jakarta-sans
+  - logo.png is at public/logo.png (copied from assets/logo.png)
+---
+
+## 2026-06-13 - US-002
+- Built components/Nav.tsx: sticky glassmorphism nav with logo, links, Book a Call CTA, and mobile hamburger drawer
+- Updated app/layout.tsx to import and render <Nav /> above {children}
+- Files changed: components/Nav.tsx (new), app/layout.tsx
+- npm run build and typecheck both pass
+- **Learnings for future iterations:**
+  - Use `"use client"` on components that use useState or usePathname
+  - usePathname from next/navigation for active link detection
+  - Components live in /components directory (already in Tailwind content scan)
+  - Material Symbols class is `material-symbols-outlined` (not `material-icons`)
+  - Nav was pre-wired into layout.tsx here; US-014 just confirms it's in place
 ---
