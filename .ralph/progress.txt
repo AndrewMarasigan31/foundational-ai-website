@@ -1,3 +1,19 @@
+## 2026-06-13 - US-013
+- Built components/CTABand.tsx: closing CTA section before footer
+- Heading "Start with a free audit call. No pitch, no pressure." with gold span on second clause
+- Subhead from current site copy (no obligation framing)
+- Two buttons: gold filled (Book a Free Audit Call → /contact) and outline (See the Services → /services)
+- Subtle gold radial-gradient glow via inline style background
+- AnimatedSection wraps all content
+- Mobile: buttons are full-width (w-full sm:w-auto), stacked via flex-col sm:flex-row
+- Updated app/page.tsx to render CTABand after FAQSection
+- Typecheck and build pass
+- **Learnings for future iterations:**
+  - CTABand does NOT need "use client" — AnimatedSection is a client component imported as a child
+  - Radial glow pattern: `radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,162,39,0.10) 0%, transparent 70%)` applied via inline style
+  - Full-width mobile buttons: `w-full sm:w-auto` on each button + `flex-col sm:flex-row` on the container
+---
+
 ## 2026-06-13 - US-012
 - Built components/FAQSection.tsx: 6-item accordion FAQ section
 - "use client" component; each FAQItem has independent useState(false) for open/close
