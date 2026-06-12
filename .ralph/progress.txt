@@ -45,6 +45,22 @@
   - Footer does NOT need "use client" — it has no interactivity
 ---
 
+## 2026-06-13 - US-005
+- Built components/LocalPackVisual.tsx: animated Google local pack mockup
+- Three mock business listing cards with name, star rating (★), and review count
+- Map pin SVG icon at top with gold glow drop-shadow
+- "Top 3 Local Pack" badge with animate-pulse
+- Framer Motion staggerChildren (0.15s each) on container variants, cards fade+slide up on mount
+- Rank number circles with gold accent, hover border highlight on cards
+- Subtle gold radial glow background (z-10, blur-2xl)
+- Files changed: components/LocalPackVisual.tsx (new)
+- Typecheck passes
+- **Learnings for future iterations:**
+  - Framer Motion `ease` in variant `transition` must be typed `as const` to match `Easing` type
+  - Use `staggerChildren` in containerVariants + per-item `cardVariants` for stagger effect
+  - `animate-pulse` is a Tailwind utility, works independently of Framer Motion
+---
+
 ## 2026-06-13 - US-004
 - Built components/AnimatedSection.tsx: scroll-triggered animation wrapper using Framer Motion
 - Uses useInView with `once: true` and `margin: "-10% 0px"` for natural trigger timing
