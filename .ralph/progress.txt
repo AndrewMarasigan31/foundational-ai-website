@@ -1,3 +1,16 @@
+## 2026-06-13 - US-014
+- Verified homepage composition: all sections wired in correct order in app/page.tsx
+- app/layout.tsx already renders Nav and Footer around {children} (wired in US-002/US-003)
+- app/page.tsx already composes: HeroSection, DashboardSection, ServicesSection, HowItWorksSection, WhyUsSection, FAQSection, CTABand (completed by US-013)
+- Smooth scroll: `scroll-behavior: smooth` already present in globals.css html selector
+- No code changes required — final integration was achieved incrementally across prior stories
+- npm run build and typecheck both pass; static export at / (47.5kB)
+- Manual browser verification needed (no dev-browser MCP available in this environment)
+- **Learnings for future iterations:**
+  - US-014 composition stories are "free" if each section story updates app/page.tsx incrementally
+  - scroll-behavior: smooth on html element is all that's needed for anchor-link scrolling in Next.js App Router
+---
+
 ## 2026-06-13 - US-013
 - Built components/CTABand.tsx: closing CTA section before footer
 - Heading "Start with a free audit call. No pitch, no pressure." with gold span on second clause
