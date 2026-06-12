@@ -104,3 +104,16 @@
   - Variants object pattern cleanly maps direction prop to Framer Motion initial/animate states
   - All section components (US-007 through US-013) should import AnimatedSection from components/AnimatedSection
 ---
+
+## 2026-06-13 - US-008
+- Built components/DashboardSection.tsx: Business Growth Engine section with darker background (#000f1d)
+- Section pill label "Business Growth Engine", centered heading, subhead, and DashboardVisual below
+- Two AnimatedSection wrappers: one for the header copy (no delay) and one for DashboardVisual (0.15s delay)
+- Updated app/page.tsx to import and render DashboardSection below HeroSection
+- Files changed: components/DashboardSection.tsx (new), app/page.tsx
+- Build and typecheck pass
+- **Learnings for future iterations:**
+  - DashboardSection does NOT need "use client" — DashboardVisual is a client component imported as a child
+  - Two separate AnimatedSection wrappers with staggered delay give heading + visual independent entrance animations
+  - Background #000f1d for this section creates visible contrast against adjacent #021524 sections
+---
