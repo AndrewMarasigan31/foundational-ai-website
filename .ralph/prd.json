@@ -1,7 +1,7 @@
 {
   "project": "Foundational AI Systems Website",
   "branchName": "ralph/homepage-redesign-nextjs",
-  "description": "Homepage Redesign — migrate static HTML/CSS to Next.js 14 + Tailwind CSS v3 + Framer Motion with animated visual components",
+  "description": "Homepage Redesign \u2014 migrate static HTML/CSS to Next.js 14 + Tailwind CSS v3 + Framer Motion with animated visual components",
   "userStories": [
     {
       "id": "US-001",
@@ -65,7 +65,7 @@
         "AnimatedSection wraps children in a motion.div",
         "Uses Framer Motion useInView with once: true",
         "Accepts optional direction prop: 'up' | 'left' | 'right' (default: 'up')",
-        "Entry animation: opacity 0→1, translate 24px→0",
+        "Entry animation: opacity 0\u21921, translate 24px\u21920",
         "Accepts optional delay prop (number, seconds)",
         "Typecheck passes"
       ],
@@ -83,7 +83,7 @@
         "A 'Top 3 Local Pack' badge pulses using animate-pulse",
         "Listing cards stagger in using Framer Motion staggerChildren on mount (0.15s delay each)",
         "Styled with dark surface background and gold accent details",
-        "Fully responsive — scales within its container",
+        "Fully responsive \u2014 scales within its container",
         "No external image dependencies",
         "Typecheck passes",
         "Verify in browser using dev-browser skill"
@@ -174,7 +174,7 @@
       "acceptanceCriteria": [
         "Section pill label: 'Process'",
         "Heading: 'Simple Enough to Explain in Four Steps'",
-        "4 steps: Free Audit Call, We Build the Plan, You Approve We Execute, Track Results Iterate — with full copy from current site",
+        "4 steps: Free Audit Call, We Build the Plan, You Approve We Execute, Track Results Iterate \u2014 with full copy from current site",
         "Desktop: circular number icons in a row with a horizontal connecting line behind them",
         "Step 1 circle is gold with gold glow shadow by default",
         "Steps 2-4 circles are muted, transition to gold border on hover",
@@ -194,7 +194,7 @@
       "acceptanceCriteria": [
         "Section pill label: 'Why Foundational AI Systems'",
         "Heading: 'Built Lean. Scoped Clearly.'",
-        "3 cards: AI-Assisted Human-Reviewed, Playbooks That Work in Local Search, No Bloated Layers — with copy from current site",
+        "3 cards: AI-Assisted Human-Reviewed, Playbooks That Work in Local Search, No Bloated Layers \u2014 with copy from current site",
         "Each card has a large faded gold number (01 02 03) at 35% opacity",
         "Cards use surface background with border",
         "AnimatedSection wraps section with stagger",
@@ -261,6 +261,52 @@
       "priority": 14,
       "passes": true,
       "notes": ""
+    },
+    {
+      "id": "US-015",
+      "title": "Enhance LocalPackVisual with SVG map background behind competitor listings",
+      "description": "As a visitor, I want to see a map context behind the local pack listings so that I immediately understand what the local pack is and why ranking matters.",
+      "acceptanceCriteria": [
+        "SVG map background fills the full component area with roads, city blocks, and a park area",
+        "3 gold pins positioned in upper/mid map area \u2014 one per listing card \u2014 with animated SVG pulse rings using <animate> (no JS)",
+        "4-5 gray muted pins scattered around the map representing competitor businesses",
+        "Listing cards rendered in the lower portion with backdrop-blur and semi-transparent background over the map",
+        "Gradient vignette darkens the bottom half so listing card text remains readable",
+        "Top 3 Local Pack badge remains visible above the cards",
+        "No external image dependencies \u2014 pure SVG",
+        "Component is fully responsive within its container",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 15,
+      "passes": false,
+      "notes": "Reference: components/LocalPackVisual.tsx. Used in components/HeroSection.tsx right panel."
+    },
+    {
+      "id": "US-016",
+      "title": "Replace DashboardSection with animated GBP optimization sequence",
+      "description": "As a visitor, I want to see the actual SEO work animated in sequence so that I understand what optimization means in practice, not just abstract metrics.",
+      "acceptanceCriteria": [
+        "Remove the 'Business Growth Engine' pill label",
+        "Section pill label updated to: 'The Work'",
+        "Section heading updated to: 'What Optimization Looks Like'",
+        "DashboardVisual (Recharts bar chart + stat cards) replaced with a new animated optimization sequence component",
+        "4 steps animate in on scroll entry with Framer Motion stagger (0.2s between each):",
+        "Step 1 \u2014 SEO Content Added: a content block fades/slides in tagged 'Blog Post \u00b7 Local SEO'",
+        "Step 2 \u2014 Category Cleanup: incorrect category chip gets strikethrough + fades out, correct ones pulse in",
+        "Step 3 \u2014 Business Description Refresh: placeholder gray text transitions to clean white copy",
+        "Step 4 \u2014 Photo & Content Recommendations: image placeholder slots fill in with gold check badges",
+        "Each completed step shows a gold checkmark icon",
+        "No results statement after the steps \u2014 animation ends after step 4 completes",
+        "Recharts dependency removed from package.json if not used elsewhere",
+        "Section background remains #000f1d",
+        "Fully responsive \u2014 single column on mobile",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 16,
+      "passes": false,
+      "notes": "Files: components/DashboardSection.tsx (update label/heading), components/DashboardVisual.tsx (full replacement). Issue #14."
     }
   ]
 }
