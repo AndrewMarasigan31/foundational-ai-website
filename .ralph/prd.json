@@ -1,0 +1,266 @@
+{
+  "project": "Foundational AI Systems Website",
+  "branchName": "ralph/homepage-redesign-nextjs",
+  "description": "Homepage Redesign — migrate static HTML/CSS to Next.js 14 + Tailwind CSS v3 + Framer Motion with animated visual components",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Scaffold Next.js 14 project with Tailwind and Framer Motion",
+      "description": "As a developer, I need the project initialized with Next.js 14 App Router, Tailwind CSS v3, Framer Motion, Plus Jakarta Sans font, and Material Symbols so that all subsequent stories have a working foundation.",
+      "acceptanceCriteria": [
+        "Next.js 14 App Router project created at repo root",
+        "Tailwind CSS v3 configured with custom color tokens: primary #C9A227, background #021524, surface #0e2131, on-surface #d1e5fb, outline #99907b, surface-container #0e2131",
+        "Framer Motion installed",
+        "Plus Jakarta Sans loaded via next/font/google",
+        "Material Symbols Outlined loaded via <link> in layout",
+        "assets/logo.png copied to public/logo.png",
+        "npm run build succeeds",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-002",
+      "title": "Build shared Nav component",
+      "description": "As a visitor, I want a sticky glassmorphism navigation bar with logo, page links, and a Book a Call CTA button so that I can navigate the site from any scroll position.",
+      "acceptanceCriteria": [
+        "Nav is sticky top-0 with backdrop-blur and a subtle bottom border",
+        "Logo (public/logo.png) and 'Foundational AI Systems' text on the left",
+        "Links: Services (/services), About (/about) in the center/right",
+        "'Book a Call' gold pill button links to /contact",
+        "Mobile: links hidden, hamburger button toggles a nav drawer",
+        "Active page link is visually highlighted",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-003",
+      "title": "Build shared Footer component",
+      "description": "As a visitor, I want a multi-column footer with brand info, page links, and social icons so that I can navigate from the bottom of any page.",
+      "acceptanceCriteria": [
+        "Brand column: logo, company name, tagline, LinkedIn and Twitter icon links",
+        "Services column: GBP Audit, Local SEO Content, Website Design, Performance Tracking links",
+        "Company column: About, Contact links",
+        "Legal column: Privacy Policy, Terms of Service",
+        "Copyright line at bottom",
+        "Responsive: collapses to single column on mobile",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-004",
+      "title": "Build AnimatedSection wrapper component",
+      "description": "As a developer, I want a reusable scroll-triggered animation wrapper so that all sections can fade/slide in consistently without duplicating Framer Motion logic.",
+      "acceptanceCriteria": [
+        "AnimatedSection wraps children in a motion.div",
+        "Uses Framer Motion useInView with once: true",
+        "Accepts optional direction prop: 'up' | 'left' | 'right' (default: 'up')",
+        "Entry animation: opacity 0→1, translate 24px→0",
+        "Accepts optional delay prop (number, seconds)",
+        "Typecheck passes"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-005",
+      "title": "Build LocalPackVisual animated component",
+      "description": "As a visitor, I want to see an animated Google local pack mockup in the hero section so that the service is visually demonstrated without a stock photo.",
+      "acceptanceCriteria": [
+        "Renders three mock business listing cards with name, star rating, and review count",
+        "Includes a map pin SVG icon at the top",
+        "A 'Top 3 Local Pack' badge pulses using animate-pulse",
+        "Listing cards stagger in using Framer Motion staggerChildren on mount (0.15s delay each)",
+        "Styled with dark surface background and gold accent details",
+        "Fully responsive — scales within its container",
+        "No external image dependencies",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-006",
+      "title": "Build DashboardVisual animated component",
+      "description": "As a visitor, I want to see an animated stats dashboard with a bar chart and count-up metrics so that the data-driven nature of the service is conveyed.",
+      "acceptanceCriteria": [
+        "Bar chart rendered using Recharts BarChart, dynamically imported with ssr: false",
+        "Chart data shows 6 months of mock traffic growth",
+        "Two stat cards: '42.8K' (Total Views) and '94%' (Retention Rate)",
+        "Stat card numbers count up from 0 to their target value when section enters viewport",
+        "Count-up uses Framer Motion useMotionValue or a simple interval triggered by useInView",
+        "Dashboard panel has a simulated browser chrome (3 traffic light dots, URL bar)",
+        "No external image dependencies",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-007",
+      "title": "Build HeroSection component",
+      "description": "As a visitor, I want to see a split-layout hero with the brand headline, subhead, CTAs on the left and the LocalPackVisual on the right so that the value proposition and service are immediately clear.",
+      "acceptanceCriteria": [
+        "Eyebrow pill label: 'Local SEO for US Small Businesses' with bolt icon",
+        "H1: 'Your Competitors Rank Higher.' with 'That's Fixable.' on second line in gold",
+        "Subhead: current site copy",
+        "Two CTA buttons: 'Book a Free Audit Call' (gold, links to /contact) and 'See the Services' (outline, links to /services)",
+        "LocalPackVisual renders in the right panel on desktop",
+        "On mobile: stacked single column, visual below text",
+        "Subtle grid background pattern behind the section",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-008",
+      "title": "Build DashboardSection component",
+      "description": "As a visitor, I want to see the Business Growth Engine dashboard section so that I understand the analytics capability behind the service.",
+      "acceptanceCriteria": [
+        "Section label pill: 'Business Growth Engine'",
+        "Centered heading and subhead",
+        "DashboardVisual component renders below the heading",
+        "Section has a darker background (#000f1d) to distinguish it from adjacent sections",
+        "AnimatedSection wraps the content",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-009",
+      "title": "Build ServicesSection component",
+      "description": "As a visitor, I want to see the four services in an asymmetric bento grid so that I understand the offerings at a glance.",
+      "acceptanceCriteria": [
+        "Section pill label: 'What We Do'",
+        "Heading: 'The Work That Gets Local Businesses Found'",
+        "GBP Audit & Optimization: spans md:col-span-8, includes manage_search icon, full description, two checklist items, secondary mock UI panel",
+        "Local SEO Content: spans md:col-span-4, article icon, short description",
+        "Website Built to Convert: spans md:col-span-4, web icon, short description",
+        "Performance Tracking: spans md:col-span-8, monitoring icon, description",
+        "All cards have feature-card style: surface bg, subtle border, gold border on hover, translateY(-4px) on hover",
+        "AnimatedSection wraps the grid",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-010",
+      "title": "Build HowItWorksSection component",
+      "description": "As a visitor, I want to see the four-step process with animated circular steps and a connecting line so that I understand exactly what happens after I reach out.",
+      "acceptanceCriteria": [
+        "Section pill label: 'Process'",
+        "Heading: 'Simple Enough to Explain in Four Steps'",
+        "4 steps: Free Audit Call, We Build the Plan, You Approve We Execute, Track Results Iterate — with full copy from current site",
+        "Desktop: circular number icons in a row with a horizontal connecting line behind them",
+        "Step 1 circle is gold with gold glow shadow by default",
+        "Steps 2-4 circles are muted, transition to gold border on hover",
+        "AnimatedSection wraps section",
+        "Mobile: single column stack",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 10,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-011",
+      "title": "Build WhyUsSection component",
+      "description": "As a visitor, I want to see three differentiator cards so that I understand why Foundational AI Systems is the right choice.",
+      "acceptanceCriteria": [
+        "Section pill label: 'Why Foundational AI Systems'",
+        "Heading: 'Built Lean. Scoped Clearly.'",
+        "3 cards: AI-Assisted Human-Reviewed, Playbooks That Work in Local Search, No Bloated Layers — with copy from current site",
+        "Each card has a large faded gold number (01 02 03) at 35% opacity",
+        "Cards use surface background with border",
+        "AnimatedSection wraps section with stagger",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 11,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-012",
+      "title": "Build FAQSection component with accordion",
+      "description": "As a visitor, I want to see six FAQ items that expand on click so that my objections are addressed before booking.",
+      "acceptanceCriteria": [
+        "Section pill label: 'Common Questions'",
+        "Heading: 'Things Worth Asking Before You Hire Anyone'",
+        "6 Q&A items from current site rendered in a 2-column grid",
+        "Each item expands/collapses on click using useState",
+        "Answer panel animates open/close with Framer Motion AnimatePresence",
+        "Collapsed state shows only the question; expanded shows question + answer",
+        "AnimatedSection wraps section",
+        "Mobile: single column",
+        "Tests pass (accordion open/close behavior)",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 12,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-013",
+      "title": "Build CTABand component",
+      "description": "As a visitor, I want a closing CTA section before the footer so that there is a final prompt to book a call.",
+      "acceptanceCriteria": [
+        "Heading: 'Start with a free audit call. No pitch, no pressure.'",
+        "Subhead: current site copy",
+        "Two buttons: 'Book a Free Audit Call' (gold, /contact) and 'See the Services' (outline, /services)",
+        "Subtle gold radial glow behind the section",
+        "AnimatedSection wraps content",
+        "Mobile: buttons stack full width",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 13,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-014",
+      "title": "Compose homepage and wire shared layout",
+      "description": "As a visitor, I want the homepage to render all sections in order inside the shared Nav + Footer layout so that the complete page is accessible at /.",
+      "acceptanceCriteria": [
+        "app/layout.tsx renders Nav and Footer around {children}",
+        "app/page.tsx composes: HeroSection, DashboardSection, ServicesSection, HowItWorksSection, WhyUsSection, FAQSection, CTABand in order",
+        "Page scrolls smoothly between sections",
+        "All Tailwind responsive breakpoints work correctly (test at 375px, 768px, 1280px)",
+        "No console errors",
+        "npm run build succeeds",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 14,
+      "passes": false,
+      "notes": ""
+    }
+  ]
+}
