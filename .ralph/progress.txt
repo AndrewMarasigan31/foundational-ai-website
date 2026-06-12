@@ -1,3 +1,20 @@
+## 2026-06-13 - US-009
+- Built components/ServicesSection.tsx: asymmetric 12-column bento grid of 4 service cards
+- GBP card (col-span-8): manage_search icon, description, 2 checklist items, inline mock GBP panel sub-component
+- Local SEO Content (col-span-4): article icon, short description
+- Website Built to Convert (col-span-4): web icon, short description
+- Performance Tracking (col-span-8): monitoring icon, description
+- All cards: surface bg (#0e2131), white/10 border, gold border + -translate-y-1 on hover
+- AnimatedSection wraps both the header and the grid (0.1s delay on grid)
+- Updated app/page.tsx to render ServicesSection below DashboardSection
+- Build and typecheck pass
+- **Learnings for future iterations:**
+  - 12-column bento layout: `grid-cols-1 md:grid-cols-12` with per-card `md:col-span-N`
+  - Hover animation via Tailwind: `hover:border-[#C9A227]/60 hover:-translate-y-1` (no Framer Motion needed)
+  - Inline sub-components (MockGBPPanel) keep the file self-contained for complex card content
+  - `shrink-0` on inline icons prevents them from being squished by long adjacent text
+---
+
 ## Codebase Patterns
 - Next.js 14 App Router project at repo root; app/ directory, tailwind.config.ts, postcss.config.js, next.config.js
 - Tailwind custom colors: primary #C9A227, background #021524, surface #0e2131, on-surface #d1e5fb, outline #99907b
