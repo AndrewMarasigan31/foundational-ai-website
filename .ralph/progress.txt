@@ -77,6 +77,20 @@
   - Count-up easing via `1 - Math.pow(1 - progress, 3)` gives smooth cubic ease-out without external libs
 ---
 
+## 2026-06-13 - US-007
+- Built components/HeroSection.tsx: split-layout hero with eyebrow pill, H1, subhead, two CTA buttons, and LocalPackVisual on the right
+- Updated app/page.tsx to render HeroSection
+- Grid background uses inline backgroundImage style for the subtle dot grid pattern
+- CTA buttons: gold filled (Book a Free Audit Call → /contact) and outline (See the Services → /services)
+- Mobile: single column stacked layout; desktop: 2-column grid
+- Files changed: components/HeroSection.tsx (new), app/page.tsx
+- Typecheck and build both pass
+- **Learnings for future iterations:**
+  - HeroSection does not need "use client" — LocalPackVisual (client component) is imported as a child; Next.js handles the boundary
+  - Eyebrow pill uses material-symbols-outlined class for the bolt icon, consistent with Nav pattern
+  - Gold glow on primary CTA via `shadow-[0_0_20px_rgba(201,162,39,0.3)]` — reusable pattern for CTA buttons
+---
+
 ## 2026-06-13 - US-004
 - Built components/AnimatedSection.tsx: scroll-triggered animation wrapper using Framer Motion
 - Uses useInView with `once: true` and `margin: "-10% 0px"` for natural trigger timing
