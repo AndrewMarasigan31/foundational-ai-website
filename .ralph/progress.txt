@@ -1,3 +1,21 @@
+## 2026-06-13 - US-012
+- Built components/FAQSection.tsx: 6-item accordion FAQ section
+- "use client" component; each FAQItem has independent useState(false) for open/close
+- AnimatePresence + motion.div animates height 0→auto and opacity on expand/collapse
+- 2-column grid (desktop), single column (mobile)
+- AnimatedSection wraps header and grid (0.1s delay on grid)
+- Set up Jest testing infrastructure: jest.config.js, jest.setup.ts, @types/jest, installed jest/jsdom/@testing-library
+- Added "types": ["jest", "@testing-library/jest-dom"] to tsconfig.json for typecheck
+- __tests__/FAQSection.test.tsx: 6 tests covering render, open/close, aria-expanded, multi-item independence
+- Updated app/page.tsx to render FAQSection below WhyUsSection
+- Tests pass (6/6), typecheck passes, build succeeds
+- **Learnings for future iterations:**
+  - Jest setup: `setupFilesAfterEnv` (not `setupFilesAfterFramework`) is the correct config key
+  - Add `"types": ["jest", "@testing-library/jest-dom"]` to tsconfig to avoid typecheck errors for jest globals
+  - Mock framer-motion AnimatePresence in tests: render children directly so animation state doesn't block assertions
+  - Mock AnimatedSection in tests to unwrap children for simpler query targeting
+---
+
 ## 2026-06-13 - US-011
 - Built components/WhyUsSection.tsx: three differentiator cards section
 - 3-column grid (desktop), single column (mobile)
@@ -49,6 +67,7 @@
 - CSS imports in layout.tsx require a css.d.ts module declaration file
 - framer-motion and recharts are installed; recharts requires dynamic import with ssr: false
 - Plus Jakarta Sans via next/font/google; Material Symbols via <link> in layout head
+- Jest testing: setupFilesAfterEnv (not setupFilesAfterFramework); add "types": ["jest", "@testing-library/jest-dom"] to tsconfig; mock framer-motion and AnimatedSection in component tests
 
 ---
 
