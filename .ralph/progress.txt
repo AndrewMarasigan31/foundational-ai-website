@@ -61,6 +61,22 @@
   - `animate-pulse` is a Tailwind utility, works independently of Framer Motion
 ---
 
+## 2026-06-13 - US-006
+- Built components/DashboardVisual.tsx: animated stats dashboard with Recharts bar chart and count-up stat cards
+- Bar chart dynamically imported with ssr: false using `dynamic(() => import("recharts").then(...))` pattern returning an inner function component
+- 6 months of mock traffic data (Jan–Jun), bar colors gradient from muted gold to bright gold for latest bar
+- Two stat cards: 42.8K (Total Views) and 94% (Retention Rate) with eased count-up via useEffect + setInterval
+- Count-up triggered by useInView (once: true), easing: cubic ease-out
+- Browser chrome: 3 macOS traffic-light dots (red/yellow/green), URL bar with site address
+- Files changed: components/DashboardVisual.tsx (new)
+- Typecheck and build both pass
+- **Learnings for future iterations:**
+  - Recharts `formatter` prop on Tooltip receives `value: ValueType | undefined` — must handle undefined, not type as `number` directly
+  - Pattern for SSR-safe recharts: `dynamic(async () => { const { BarChart, ... } = await import("recharts"); return function Inner() {...}; }, { ssr: false })`
+  - `Cell` component from recharts used for per-bar coloring inside `Bar` — must be a child of `Bar`, not `BarChart`
+  - Count-up easing via `1 - Math.pow(1 - progress, 3)` gives smooth cubic ease-out without external libs
+---
+
 ## 2026-06-13 - US-004
 - Built components/AnimatedSection.tsx: scroll-triggered animation wrapper using Framer Motion
 - Uses useInView with `once: true` and `margin: "-10% 0px"` for natural trigger timing
