@@ -1,4 +1,3 @@
-import AnimatedSection from "@/components/AnimatedSection";
 import ContactForm from "@/components/ContactForm";
 
 const coverItems = [
@@ -48,7 +47,6 @@ export default function ContactPage() {
         />
 
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <AnimatedSection>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
               Book Your Free{" "}
               <em className="font-serif not-italic text-[#C9A227]">Audit</em>{" "}
@@ -58,16 +56,14 @@ export default function ContactPage() {
               No pitch. No pressure. 30 minutes to map exactly where revenue is
               leaking.
             </p>
-          </AnimatedSection>
         </div>
       </section>
 
       {/* Two-column layout */}
       <section className="bg-[#021524] py-16 md:py-24 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
-          {/* Left — Info panel */}
-          <AnimatedSection direction="left" delay={0.1}>
-            <div className="flex flex-col gap-8">
+          {/* Left — Info panel (below form on mobile) */}
+          <div className="flex flex-col gap-8 order-last md:order-first">
               <h2 className="font-display font-bold text-xl text-[#d1e5fb]">
                 What We Cover on the Call
               </h2>
@@ -97,15 +93,12 @@ export default function ContactPage() {
                   </div>
                 ))}
               </div>
-            </div>
-          </AnimatedSection>
+          </div>
 
-          {/* Right — Form */}
-          <AnimatedSection direction="right" delay={0.2}>
-            <div id="contact-form-slot">
-              <ContactForm />
-            </div>
-          </AnimatedSection>
+          {/* Right — Form (first on mobile) */}
+          <div id="contact-form-slot" className="order-first md:order-last">
+            <ContactForm />
+          </div>
         </div>
       </section>
     </main>
