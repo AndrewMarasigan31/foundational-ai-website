@@ -309,3 +309,26 @@
   - Color pattern for non-competing UI elements: use #99907b (outline/muted) instead of gold
   - flex-wrap gap-2 is sufficient for pill wrapping across breakpoints
 ---
+
+## 2026-06-13 - US-021
+- Created components/CustomerJourneySection.tsx — 6-node horizontal customer journey funnel
+- 6 nodes: Search → Found → Visits Site → Calls/Books → Goes Cold → Books Again
+- AnimatedJourneyLine: 3-segment horizontal line using motion.div with x: "-100%" → "0%" inside overflow-hidden wrappers (slide-reveal pattern)
+  - Segment 1 solid white/10 (nodes 1→4): 0.7s, delay 0.2s
+  - Segment 2 dashed red repeating-gradient (nodes 4→5): 0.25s, delay 0.9s
+  - Segment 3 gold (nodes 5→6): 0.25s, delay 1.15s
+  - Total line draw time: ~1.4s from scroll entry
+- Service impact tags stagger in with AnimatedSection delays 1.4s–1.8s (after line finishes)
+- "Books Again" node: gold fill + glow shadow + task_alt checkmark icon
+- "Goes Cold" node: red/warning border + schedule icon
+- Desktop: grid-cols-6, AnimatedJourneyLine positioned at top: 28px (center of w-14 circles)
+- Mobile: flex-col, each node is [circle + vertical connector | label + tags], connector uses repeating-gradient for dashed segment
+- Added to app/page.tsx between ServicesSection and HowItWorksSection
+- Build passes (56.9 kB page); typecheck passes; manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - slide-reveal pattern for line animation: `overflow-hidden` parent + `motion.div` with `x: "-100%" → "0%"` is cleaner than pathLength on SVG and works with CSS-based dashes (repeating-gradient)
+  - repeating-linear-gradient(90deg, ...) creates dashed horizontal lines without SVG; repeating-linear-gradient(to bottom, ...) for vertical dashes on mobile
+  - For 6-column grids, node centers are at 8.33%, 25%, 41.67%, 58.33%, 75%, 91.67%
+  - `nodeTagDelays` IIFE pattern (immediately invoked function expression) at module level is clean for precomputing stagger delays
+  - `style={{ minHeight: "2rem", ...mobileConnectorStyle(i) }}` — spreading style objects in JSX works for conditional mobile connector styles
+---

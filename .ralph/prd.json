@@ -380,6 +380,33 @@
       "priority": 20,
       "passes": true,
       "notes": "Modifies components/ServicesSection.tsx. Add 4 small inline animation sub-components."
+    },
+    {
+      "id": "US-021",
+      "title": "Build horizontal customer journey funnel section with animated SVG flow and service impact tags",
+      "description": "As a visitor, I want to see the full local customer journey laid out horizontally so that I can immediately identify where my business is losing customers and which Foundational AI Systems service fixes each leak point.",
+      "acceptanceCriteria": [
+        "New component: CustomerJourneySection — inserted in app/page.tsx between ServicesSection and HowItWorksSection",
+        "Section pill label: 'The Full Picture'",
+        "Section heading: 'Where Most Local Businesses Lose Customers'",
+        "Section subhead: 'And what we do about it'",
+        "6 journey nodes rendered horizontally on desktop: Search → Found → Visits Site → Calls/Books → Goes Cold → Books Again",
+        "Each node has an icon (Material Symbols Outlined), a short label, and a faint circular background",
+        "SVG horizontal line connects all 6 nodes and draws left-to-right on scroll entry using Framer Motion useInView + stroke-dashoffset animation, 1.2s duration ease-in-out",
+        "The segment between 'Calls/Books' and 'Goes Cold' renders as a dashed SVG line with a muted red/warning tint to signal revenue leakage",
+        "'Books Again' node renders with gold glow and a checkmark to signal recovery",
+        "Service impact tags drop below their respective nodes: 'GBP Audit' + 'Local SEO Content' below Found, 'Website Built to Convert' below Visits Site, 'Performance Tracking' below Calls/Books, 'Lead Reactivation Sprint' below Goes Cold",
+        "Each service tag is a pill styled with surface bg and subtle border — Lead Reactivation Sprint pill has gold border to distinguish it",
+        "Tags slide up with staggered Framer Motion animation (0.1s between each) after the SVG line finishes drawing",
+        "Mobile (below md): collapses to vertical single-column layout, line runs top to bottom, tags sit to the right of each node",
+        "AnimatedSection wraps the full section",
+        "No new dependencies — Framer Motion + Tailwind only",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 21,
+      "passes": true,
+      "notes": "New component: components/CustomerJourneySection.tsx. Add to app/page.tsx between ServicesSection and HowItWorksSection. Lead Reactivation Sprint service introduced here for the first time on the homepage."
     }
   ]
 }
