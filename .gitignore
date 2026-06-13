@@ -1,3 +1,12 @@
 node_modules/
 .next/
 tsconfig.tsbuildinfo
+
+# macOS
+.DS_Store
+
+# Internal tooling
+.ralph/archive/
+.superpowers/
+.tours/
+tasks/
