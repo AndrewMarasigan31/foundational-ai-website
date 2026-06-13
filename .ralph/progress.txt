@@ -332,3 +332,17 @@
   - `nodeTagDelays` IIFE pattern (immediately invoked function expression) at module level is clean for precomputing stagger delays
   - `style={{ minHeight: "2rem", ...mobileConnectorStyle(i) }}` — spreading style objects in JSX works for conditional mobile connector styles
 ---
+
+## 2026-06-13 - US-022
+- Created app/services/page.tsx as a client component (required for IntersectionObserver hooks)
+- Hero section: centered layout with H1 'The Work We Do', subhead, gold 'Book a Free Audit Call' CTA, grid background pattern matching HeroSection
+- Sticky StickyServiceNav sub-component: 6 anchor links (GBP Audit, Local SEO Content, AI Search, Lead Reactivation, Website, Performance Tracking), backdrop-blur, gold underline on active via IntersectionObserver
+- IntersectionObserver uses rootMargin "-40% 0px -55% 0px" to activate link when section is near center of viewport
+- Placeholder sections for each service anchor — content filled in US-023 and US-024
+- Typecheck passes, build passes (1.53kB /services page); manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - Services page is "use client" because StickyServiceNav needs IntersectionObserver — the page itself becomes a client component
+  - Sticky nav `top-[64px]` offsets below the Nav bar (assumed ~64px height); adjust if Nav height changes
+  - IntersectionObserver rootMargin "-40% 0px -55% 0px" gives a centered active trigger zone — activates the section whose content is crossing the middle of the viewport
+  - Placeholder sections with the correct `id` attributes must be present in US-022 so the sticky nav links work before US-023/024 add real content
+---

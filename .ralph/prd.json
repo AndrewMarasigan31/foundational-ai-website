@@ -407,6 +407,111 @@
       "priority": 21,
       "passes": true,
       "notes": "New component: components/CustomerJourneySection.tsx. Add to app/page.tsx between ServicesSection and HowItWorksSection. Lead Reactivation Sprint service introduced here for the first time on the homepage."
+    },
+    {
+      "id": "US-022",
+      "title": "Scaffold Services page with hero and shared layout",
+      "description": "As a visitor, I want a dedicated Services page at /services so that I can explore each offering in detail before booking a call.",
+      "acceptanceCriteria": [
+        "Create app/services/page.tsx using the existing RootLayout (Nav + Footer auto-applied)",
+        "Short centered hero: no eyebrow pill, H1 'The Work We Do', subhead 'Six services. All scoped. All built to produce results you can measure. Every engagement starts with a free audit call.'",
+        "Hero uses bg-[#021524] with the same subtle grid background pattern as HeroSection",
+        "Single 'Book a Free Audit Call' gold CTA button links to /contact — no pricing anywhere on the page",
+        "Below the hero, a sticky section nav (thin horizontal bar) links to each of the 6 service anchors: GBP Audit, Local SEO Content, AI Search, Lead Reactivation, Website, Performance Tracking",
+        "Sticky nav uses backdrop-blur, bg-[#021524]/80, gold underline on active section via IntersectionObserver",
+        "Page shell renders without content sections yet — those come in US-023 and US-024",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 22,
+      "passes": true,
+      "notes": "Creates app/services/page.tsx. Sticky section nav is a new pattern — use IntersectionObserver to track which service section is in view."
+    },
+    {
+      "id": "US-023",
+      "title": "Build Services page — first three service sections",
+      "description": "As a visitor, I want to read detailed descriptions of GBP Audit, Local SEO Content, and AI Search Visibility so that I understand exactly what each service includes before booking.",
+      "acceptanceCriteria": [
+        "Each service is a full-width section with id anchor matching the sticky nav links",
+        "Alternating two-column layout on desktop: service 1 (GBP) copy left / visual right, service 2 (Content) visual left / copy right, service 3 (AI Search) copy left / visual right",
+        "Single column stacked on mobile, visual always below copy",
+        "Each section copy block includes: icon (Material Symbols), title, 2-3 sentence description, bullet checklist of 3-4 deliverables, and a 'Book a Free Audit Call' gold CTA button",
+        "Visual panels reuse the existing animation components from ServicesSection: GBPStarAnimation, BlogTypingAnimation, AISearchAnimation",
+        "Section backgrounds alternate: bg-[#021524] and bg-[#000f1d]",
+        "AnimatedSection wraps each section",
+        "GBP Audit copy: audit, profile fixes, category and description optimization, photo strategy, review response setup",
+        "Local SEO Content copy: monthly blog posts, GBP updates, location-targeted content, hands-off and consistent, cancel any month",
+        "AI Search Visibility copy: structured data, authority signals, content optimized for ChatGPT/Perplexity/AI Overviews, not just traditional results",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 23,
+      "passes": false,
+      "notes": "Adds to app/services/page.tsx. Reuse animation components from components/ServicesSection.tsx — import them directly, do not duplicate."
+    },
+    {
+      "id": "US-024",
+      "title": "Build Services page — last three service sections",
+      "description": "As a visitor, I want to read detailed descriptions of Lead Reactivation Sprint, Website Built to Convert, and Performance Tracking so that I understand the full scope of services available.",
+      "acceptanceCriteria": [
+        "Three additional alternating sections following the same pattern as US-023",
+        "Service 4 (Lead Reactivation Sprint) visual left / copy right — reuses LeadReactivationAnimation from ServicesSection",
+        "Service 5 (Website Built to Convert) copy left / visual right — reuses LighthouseAnimation from ServicesSection",
+        "Service 6 (Performance Tracking) visual left / copy right — reuses RankTrackingAnimation from ServicesSection",
+        "Lead Reactivation Sprint copy: 90-day SMS and email sequence, CRM workflow setup, contact list cleanup, review and referral ask sequence, live in 5 to 7 business days — no pricing mentioned, CTA is 'Book a Free Audit Call'",
+        "Website copy: clean fast conversion-focused site, one review one approval one launch, no revision loops no hostage hosting",
+        "Performance Tracking copy: monthly reporting on rankings, profile views, call volume, adjustments included not extra",
+        "Each section has a 'Book a Free Audit Call' gold CTA button linking to /contact",
+        "Page ends with the existing CTABand component",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 24,
+      "passes": false,
+      "notes": "Completes app/services/page.tsx. Import CTABand at the bottom of the page."
+    },
+    {
+      "id": "US-025",
+      "title": "Build About page",
+      "description": "As a visitor, I want to understand who is behind Foundational AI Systems, why they built it, and what they stand for so that I can decide if they are the right fit before booking.",
+      "acceptanceCriteria": [
+        "Create app/about/page.tsx using the existing RootLayout",
+        "Section 1 — Founder statement hero: bg-[#021524] with grid background, centered, H1 'We built this because local businesses keep losing to bigger competitors who simply show up better online.', no CTA in hero",
+        "Section 2 — Story: bg-[#000f1d], two short honest paragraphs: (1) Most local SEO agencies sell bloated retainers and generic advice. We scope clearly, execute lean, and report on what actually moved. (2) We use AI tools to move faster on research and content, but every output is reviewed and approved by a human before it touches your business.",
+        "Section 3 — Principles: bg-[#021524], heading 'How We Work', three cards using the same style as WhyUsSection (bg-[#0e2131] border border-white/10 rounded-2xl p-8, large faded gold number): (01) Scoped before started — every engagement has a defined deliverable, not an open-ended retainer. (02) You stay in control — nothing goes live without your review and approval. (03) Straight reporting — we tell you what moved, what didn't, and what we'd change.",
+        "Section 4 — What we don't do: bg-[#000f1d], heading 'What We Don't Do', clean list of 4 items with muted red X icons: No long-term lock-in contracts. No offshore execution teams. No AI content published without human review. No scope that exists just to justify a monthly fee.",
+        "Section 5 — CTA: reuse existing CTABand component",
+        "AnimatedSection wraps each section",
+        "Mobile: all sections single column",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 25,
+      "passes": false,
+      "notes": "Creates app/about/page.tsx. Reuse WhyUsSection card style for principles. Reuse CTABand at the bottom."
+    },
+    {
+      "id": "US-026",
+      "title": "Add Playfair Display italic serif accent to key heading words across the site",
+      "description": "As a visitor, I want to see select words in headlines rendered in an italic serif font so that the most important ideas on the page are visually emphasized in a premium, editorial way.",
+      "acceptanceCriteria": [
+        "Add Playfair_Display to app/layout.tsx via next/font/google with subsets: ['latin'], style: ['italic'], weight: ['400', '700'], variable: '--font-playfair'",
+        "Add the variable to the <html> element alongside the existing Plus Jakarta Sans variable",
+        "Add a Tailwind utility in tailwind.config.ts: fontFamily.serif = ['var(--font-playfair)', 'Georgia', 'serif']",
+        "Apply selectively — italic serif wraps only 1 key word or short phrase per heading, rendered as <em className='font-serif not-italic text-[#C9A227]'>word</em>",
+        "HeroSection H1: 'Fixable.' rendered in Playfair Display italic gold",
+        "ServicesSection heading: 'Recover' in 'Get Found. Convert. Recover What You Left on the Table.' rendered in Playfair Display italic gold",
+        "CustomerJourneySection heading: 'Lose' in 'Where Most Local Businesses Lose Customers' rendered in Playfair Display italic gold",
+        "WhyUsSection heading: 'Lean.' in 'Built Lean. Scoped Clearly.' rendered in Playfair Display italic gold",
+        "CTABand heading: 'free' in 'Start with a free audit call.' rendered in Playfair Display italic gold",
+        "Serif accent inherits the gold color (#C9A227) so it pairs with the existing accent system",
+        "No other headings or body text changed — serif is accent only",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 26,
+      "passes": false,
+      "notes": "Modifies app/layout.tsx, tailwind.config.ts, components/HeroSection.tsx, components/ServicesSection.tsx, components/CustomerJourneySection.tsx, components/WhyUsSection.tsx, components/CTABand.tsx."
     }
   ]
 }
