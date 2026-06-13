@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import AnimatedSection from "@/components/AnimatedSection";
 import CTABand from "@/components/CTABand";
 import {
   GBPStarAnimation,
@@ -82,12 +81,11 @@ function ServiceSectionBlock({
   return (
     <section id={id} className={`py-24 md:py-32 ${bg} border-t border-white/5`}>
       <div className="max-w-7xl mx-auto px-6">
-        <AnimatedSection>
-          <div
-            className={`grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center ${
-              reverse ? "md:[&>*:first-child]:order-2" : ""
-            }`}
-          >
+        <div
+          className={`grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center ${
+            reverse ? "md:[&>*:first-child]:order-2" : ""
+          }`}
+        >
             {/* Copy block */}
             <div className="flex flex-col gap-6">
               <div className="w-12 h-12 rounded-xl bg-[#C9A227]/10 flex items-center justify-center">
@@ -119,8 +117,7 @@ function ServiceSectionBlock({
               {visual}
             </div>
           </div>
-        </AnimatedSection>
-      </div>
+        </div>
     </section>
   );
 }
