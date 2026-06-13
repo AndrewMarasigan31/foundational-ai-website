@@ -446,7 +446,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 23,
-      "passes": false,
+      "passes": true,
       "notes": "Adds to app/services/page.tsx. Reuse animation components from components/ServicesSection.tsx — import them directly, do not duplicate."
     },
     {

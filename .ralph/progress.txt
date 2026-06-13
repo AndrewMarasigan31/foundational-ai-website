@@ -1,3 +1,18 @@
+## 2026-06-13 - US-023
+- Built first three service sections in app/services/page.tsx
+- Exported GBPStarAnimation, BlogTypingAnimation, AISearchAnimation from components/ServicesSection.tsx
+- Replaced placeholder sections with full ServiceSectionBlock components for GBP Audit, Local SEO Content, AI Search Visibility
+- Alternating layout: GBP (copy left / visual right, bg-[#021524]), Content (visual left / copy right, bg-[#000f1d]), AI Search (copy left / visual right, bg-[#021524])
+- Each section: icon, heading, 2-3 sentence description, 3-4 bullet deliverables, gold BookCTA button
+- Visual panels wrap the reused animation components in a branded rounded card with supplementary detail
+- Remaining 3 service placeholder sections (lead-reactivation, website, performance-tracking) preserved with correct ids for sticky nav
+- Typecheck passes, build passes (3.09kB /services page); manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - Export animation sub-components from their parent file (not a separate file) so they stay co-located but are importable by other pages
+  - ServiceSectionBlock reverse prop pattern: `md:[&>*:first-child]:order-2` flips the two-column order on desktop without touching mobile
+  - Shared BookCTA extracted as a small helper component avoids prop-drilling link/styles across every section
+---
+
 ## 2026-06-13 - US-020
 - Added 4 inline animation sub-components to components/ServicesSection.tsx
 - GBPStarAnimation: useMotionValue + Framer Motion animate(), 3.2 → 4.9 star rating over 1.5s easeOut, triggered by useInView once:true
