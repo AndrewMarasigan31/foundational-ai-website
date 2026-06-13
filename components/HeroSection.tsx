@@ -25,9 +25,7 @@ export default function HeroSection() {
           </h1>
 
           <p className="text-lg sm:text-xl text-[#99907b] leading-relaxed">
-            We build the local presence your business needs: optimized Google profiles,
-            AI search visibility, targeted content, and a system that recovers the leads
-            you already paid for. Stop losing customers to competitors who simply show up first.
+            Google top 3 for local businesses. Scoped clearly, executed lean.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
