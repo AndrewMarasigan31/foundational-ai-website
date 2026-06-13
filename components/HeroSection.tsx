@@ -1,8 +1,7 @@
-"use client";
-
 import Link from "next/link";
 import LocalPackVisual from "./LocalPackVisual";
 import TrustBar from "./TrustBar";
+import AnimatedSection from "./AnimatedSection";
 
 export default function HeroSection() {
   return (
@@ -17,46 +16,52 @@ export default function HeroSection() {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-24 md:py-32 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-        {/* Left: copy */}
-        <div className="flex flex-col gap-6">
-          {/* H1 */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-24 md:py-32 flex flex-col items-center text-center gap-8">
+        {/* Eyebrow pill */}
+        <div className="inline-flex items-center gap-2 bg-[#0e2131] border border-[#C9A227]/30 text-[#C9A227] text-sm font-medium px-4 py-1.5 rounded-full">
+          <span className="material-symbols-outlined text-base leading-none">bolt</span>
+          Local SEO for US Small Businesses
+        </div>
+
+        {/* Copy block */}
+        <div className="flex flex-col gap-5 max-w-3xl">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
             Your Competitors<br />Rank Higher.
             <br />
             <span className="text-[#C9A227]">That&apos;s Fixable.</span>
           </h1>
 
-          {/* Subhead */}
-          <p className="text-lg sm:text-xl text-[#99907b] leading-relaxed max-w-lg">
+          <p className="text-lg sm:text-xl text-[#99907b] leading-relaxed">
             We build the Google presence your local business needs — optimized profiles,
             targeted content, and a site that converts — so you stop losing customers
             to competitors who simply show up first.
           </p>
+        </div>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-2">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 bg-[#C9A227] hover:bg-[#b8911f] text-[#021524] font-bold text-base px-7 py-3.5 rounded-full transition-colors shadow-[0_0_20px_rgba(201,162,39,0.3)] hover:shadow-[0_0_28px_rgba(201,162,39,0.5)]"
-            >
-              Book a Free Audit Call
-            </Link>
-            <Link
-              href="/services"
-              className="inline-flex items-center justify-center gap-2 border border-[#C9A227]/50 hover:border-[#C9A227] text-[#d1e5fb] hover:text-[#C9A227] font-semibold text-base px-7 py-3.5 rounded-full transition-colors"
-            >
-              See the Services
-            </Link>
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center gap-2 bg-[#C9A227] hover:bg-[#b8911f] text-[#021524] font-bold text-base px-7 py-3.5 rounded-full transition-colors shadow-[0_0_20px_rgba(201,162,39,0.3)] hover:shadow-[0_0_28px_rgba(201,162,39,0.5)]"
+          >
+            Book a Free Audit Call
+          </Link>
+          <Link
+            href="/services"
+            className="inline-flex items-center justify-center gap-2 border border-[#C9A227]/50 hover:border-[#C9A227] text-[#d1e5fb] hover:text-[#C9A227] font-semibold text-base px-7 py-3.5 rounded-full transition-colors"
+          >
+            See the Services
+          </Link>
+        </div>
+
+        <TrustBar />
+
+        {/* LocalPackVisual scroll-reveal */}
+        <AnimatedSection direction="up" delay={0.3}>
+          <div className="w-full max-w-xl">
+            <LocalPackVisual />
           </div>
-
-          <TrustBar />
-        </div>
-
-        {/* Right: visual */}
-        <div className="flex items-center justify-center">
-          <LocalPackVisual />
-        </div>
+        </AnimatedSection>
       </div>
     </section>
   );
