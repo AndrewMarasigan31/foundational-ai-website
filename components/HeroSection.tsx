@@ -17,24 +17,18 @@ export default function HeroSection() {
       />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-24 md:py-32 flex flex-col items-center text-center gap-8">
-        {/* Eyebrow pill */}
-        <div className="inline-flex items-center gap-2 bg-[#0e2131] border border-[#C9A227]/30 text-[#C9A227] text-sm font-medium px-4 py-1.5 rounded-full">
-          <span className="material-symbols-outlined text-base leading-none">bolt</span>
-          Local SEO for US Small Businesses
-        </div>
-
         {/* Copy block */}
         <div className="flex flex-col gap-5 max-w-3xl">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
             Your Competitors<br />Rank Higher.
             <br />
-            <span className="text-[#C9A227]">That&apos;s Fixable.</span>
+            That&apos;s <em className="font-serif not-italic text-[#C9A227]">Fixable.</em>
           </h1>
 
           <p className="text-lg sm:text-xl text-[#99907b] leading-relaxed">
-            We build the Google presence your local business needs — optimized profiles,
-            targeted content, and a site that converts — so you stop losing customers
-            to competitors who simply show up first.
+            We build the local presence your business needs: optimized Google profiles,
+            AI search visibility, targeted content, and a system that recovers the leads
+            you already paid for. Stop losing customers to competitors who simply show up first.
           </p>
         </div>
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
 import Footer from "../components/Footer";
 import Nav from "../components/Nav";
 import "./globals.css";
@@ -7,6 +7,13 @@ import "./globals.css";
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-plus-jakarta-sans",
+});
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  style: ["italic"],
+  weight: ["400", "700"],
+  variable: "--font-playfair",
 });
 
 export const metadata: Metadata = {
@@ -20,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={plusJakartaSans.variable}>
+    <html lang="en" className={`${plusJakartaSans.variable} ${playfairDisplay.variable}`}>
       <head>
         <link
           rel="stylesheet"

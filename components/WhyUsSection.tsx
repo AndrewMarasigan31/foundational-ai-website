@@ -5,19 +5,19 @@ const reasons = [
     num: "01",
     title: "AI-Assisted, Human-Reviewed",
     description:
-      "We use AI tools to move faster — research, drafts, audits. But every output is reviewed, edited, and approved by a human before it touches your business. Speed without slop.",
+      "We use AI tools to move faster on research, drafts, audits, and content. But every output is reviewed, edited, and approved by a human before it touches your business. Speed without slop.",
   },
   {
     num: "02",
-    title: "Playbooks That Work in Local Search",
+    title: "Built for How Search Actually Works Now",
     description:
-      "We are not adapting generic SEO advice for local. Local search has its own signals, its own ranking factors, and its own failure modes. We have worked through them.",
+      "Customers now find businesses through Google, ChatGPT, Perplexity, and AI Overviews. We optimize for the full search landscape, not just the version of local SEO that existed three years ago.",
   },
   {
     num: "03",
     title: "No Bloated Layers",
     description:
-      "No account manager, no junior execution team, no offshore handoff. You work directly with the people doing the work. That means clearer communication and faster decisions.",
+      "No account manager, no junior execution team, no offshore handoff. You work directly with the people doing the work. Clearer communication, faster decisions, and no scope that exists just to justify a retainer.",
   },
 ];
 
@@ -28,11 +28,8 @@ export default function WhyUsSection() {
         {/* Header */}
         <AnimatedSection>
           <div className="flex flex-col items-center text-center gap-6 mb-16">
-            <div className="inline-flex items-center gap-2 bg-[#C9A227]/10 border border-[#C9A227]/30 text-[#C9A227] text-sm font-semibold px-4 py-1.5 rounded-full">
-              Why Foundational AI Systems
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
-              Built Lean. Scoped Clearly.
+              Built <em className="font-serif not-italic text-[#C9A227]">Lean.</em> Scoped Clearly.
             </h2>
           </div>
         </AnimatedSection>

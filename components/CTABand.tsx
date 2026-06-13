@@ -16,13 +16,14 @@ export default function CTABand() {
       <AnimatedSection>
         <div className="relative z-10 max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-6">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
-            Start with a free audit call.{" "}
+            Start with a <em className="font-serif not-italic text-[#C9A227]">free</em> audit call.{" "}
             <span className="text-[#C9A227]">No pitch, no pressure.</span>
           </h2>
 
           <p className="text-lg sm:text-xl text-[#99907b] leading-relaxed max-w-xl">
-            We look at what&apos;s holding your Google presence back, tell you exactly what
-            we&apos;d fix, and let you decide if we&apos;re the right fit. No obligation.
+            We review your Google and AI search visibility, your existing lead list, and your
+            current site. Then we tell you exactly where revenue is leaking and what we would fix first.
+            No obligation.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-2">

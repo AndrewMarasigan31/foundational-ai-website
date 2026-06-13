@@ -2,157 +2,143 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import AnimatedSection from "./AnimatedSection";
 
-type Tag = { label: string; isGold: boolean };
+type Tag = { label: string; gold?: boolean };
 
-type JourneyNode = {
+type Node = {
   icon: string;
   label: string;
+  sublabel: string;
   tags: Tag[];
-  isLeak: boolean;
-  isRecovery: boolean;
+  state: "neutral" | "leak" | "recovery";
 };
 
-const nodes: JourneyNode[] = [
-  { icon: "search", label: "Search", tags: [], isLeak: false, isRecovery: false },
+const nodes: Node[] = [
+  {
+    icon: "travel_explore",
+    label: "Search",
+    sublabel: "Google, ChatGPT, Perplexity, AI Overviews",
+    tags: [],
+    state: "neutral",
+  },
   {
     icon: "location_on",
-    label: "Found",
+    label: "Gets Found",
+    sublabel: "Local pack, maps, or AI answer",
     tags: [
-      { label: "GBP Audit", isGold: false },
-      { label: "Local SEO Content", isGold: false },
+      { label: "GBP Audit" },
+      { label: "Local SEO Content" },
+      { label: "AI Search Visibility" },
     ],
-    isLeak: false,
-    isRecovery: false,
+    state: "neutral",
   },
   {
     icon: "language",
     label: "Visits Site",
-    tags: [{ label: "Website Built to Convert", isGold: false }],
-    isLeak: false,
-    isRecovery: false,
+    sublabel: "Clicks through to website",
+    tags: [{ label: "Website Built to Convert" }],
+    state: "neutral",
   },
   {
     icon: "call",
-    label: "Calls/Books",
-    tags: [{ label: "Performance Tracking", isGold: false }],
-    isLeak: false,
-    isRecovery: false,
+    label: "Calls / Books",
+    sublabel: "Converts to a real lead",
+    tags: [{ label: "Performance Tracking" }],
+    state: "neutral",
   },
   {
-    icon: "schedule",
+    icon: "hourglass_empty",
     label: "Goes Cold",
-    tags: [{ label: "Lead Reactivation Sprint", isGold: true }],
-    isLeak: true,
-    isRecovery: false,
+    sublabel: "No follow-up. Revenue lost.",
+    tags: [{ label: "Lead Reactivation Sprint", gold: true }],
+    state: "leak",
   },
   {
     icon: "task_alt",
     label: "Books Again",
+    sublabel: "Recovered revenue.",
     tags: [],
-    isLeak: false,
-    isRecovery: true,
+    state: "recovery",
   },
 ];
 
-// Stagger tag delays: 0.1s each, starting after line finishes drawing (~1.4s)
-const nodeTagDelays: number[][] = (() => {
-  let d = 1.4;
-  return nodes.map((node) =>
-    node.tags.map(() => {
-      const delay = d;
-      d += 0.1;
-      return delay;
-    })
+const cardStyles: Record<Node["state"], string> = {
+  neutral:
+    "bg-[#0e2131] border border-white/10 hover:border-white/20",
+  leak:
+    "bg-[#1a0a0a] border border-red-500/40 hover:border-red-500/60",
+  recovery:
+    "bg-[#0a1208] border border-[#C9A227]/50 shadow-[0_0_32px_rgba(201,162,39,0.15)] hover:shadow-[0_0_48px_rgba(201,162,39,0.25)]",
+};
+
+const iconBgStyles: Record<Node["state"], string> = {
+  neutral: "bg-white/5 text-[#99907b]",
+  leak: "bg-red-500/10 text-red-400",
+  recovery: "bg-[#C9A227]/15 text-[#C9A227]",
+};
+
+const labelStyles: Record<Node["state"], string> = {
+  neutral: "text-[#d1e5fb]",
+  leak: "text-red-400",
+  recovery: "text-[#C9A227]",
+};
+
+const sublabelStyles: Record<Node["state"], string> = {
+  neutral: "text-[#99907b]",
+  leak: "text-red-400/60",
+  recovery: "text-[#C9A227]/70",
+};
+
+function Arrow({ isLeak }: { isLeak: boolean }) {
+  return (
+    <div className="hidden md:flex items-center justify-center shrink-0 w-6">
+      <span
+        className={`material-symbols-outlined text-base ${
+          isLeak ? "text-red-500/50" : "text-white/20"
+        }`}
+      >
+        arrow_forward
+      </span>
+    </div>
   );
-})();
-
-function circleClass(node: JourneyNode): string {
-  if (node.isRecovery) {
-    return "bg-[#C9A227] border-2 border-[#C9A227] text-[#021524] shadow-[0_0_24px_rgba(201,162,39,0.45)]";
-  }
-  if (node.isLeak) {
-    return "bg-[#0e2131] border-2 border-red-500/40 text-red-400/80";
-  }
-  return "bg-[#0e2131] border-2 border-white/20 text-[#99907b]";
 }
 
-function labelClass(node: JourneyNode): string {
-  if (node.isRecovery) return "text-[#C9A227]";
-  if (node.isLeak) return "text-red-400/80";
-  return "text-[#d1e5fb]";
-}
-
-function mobileConnectorStyle(i: number): React.CSSProperties {
-  if (i === 3) {
-    return {
-      backgroundImage:
-        "repeating-linear-gradient(to bottom, rgba(239,68,68,0.5) 0, rgba(239,68,68,0.5) 4px, transparent 4px, transparent 8px)",
-    };
-  }
-  if (i === 4) {
-    return { backgroundColor: "rgba(201,162,39,0.5)" };
-  }
-  return { backgroundColor: "rgba(255,255,255,0.1)" };
-}
-
-// Desktop: 3-segment animated horizontal line
-// Nodes at grid-cols-6 centers: 8.33%, 25%, 41.67%, 58.33%, 75%, 91.67%
-// Seg 1 solid (node1→node4): left 8.33%, width 50%
-// Seg 2 dashed red (node4→node5): left 58.33%, width 16.67%
-// Seg 3 gold (node5→node6): left 75%, width 16.67%
-function AnimatedJourneyLine() {
+function AnimatedLine() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
 
   return (
-    <div
-      ref={ref}
-      className="hidden md:block absolute inset-x-0 z-0"
-      style={{ top: "28px", height: "2px" }}
-      aria-hidden="true"
-    >
-      {/* Solid: Search → Calls/Books */}
-      <div
-        className="absolute inset-y-0 overflow-hidden"
-        style={{ left: "8.33%", width: "50%" }}
-      >
-        <motion.div
-          className="absolute inset-0 bg-white/10"
-          initial={{ x: "-100%" }}
-          animate={{ x: isInView ? "0%" : "-100%" }}
-          transition={{ duration: 0.7, delay: 0.2, ease: "easeInOut" }}
-        />
-      </div>
-
-      {/* Dashed red: Calls/Books → Goes Cold */}
-      <div
-        className="absolute inset-y-0 overflow-hidden"
-        style={{ left: "58.33%", width: "16.67%" }}
-      >
+    <div ref={ref} className="hidden md:block absolute inset-x-0 top-[52px] h-px z-0 pointer-events-none">
+      {/* Solid neutral line */}
+      <div className="absolute inset-y-0 overflow-hidden" style={{ left: "4.16%", width: "58.33%" }}>
         <motion.div
           className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(90deg, rgba(239,68,68,0.5) 0, rgba(239,68,68,0.5) 5px, transparent 5px, transparent 10px)",
-          }}
-          initial={{ x: "-100%" }}
-          animate={{ x: isInView ? "0%" : "-100%" }}
-          transition={{ duration: 0.25, delay: 0.9, ease: "easeInOut" }}
+          style={{ background: "linear-gradient(90deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.12) 100%)" }}
+          initial={{ scaleX: 0, transformOrigin: "left" }}
+          animate={{ scaleX: inView ? 1 : 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut" }}
         />
       </div>
-
-      {/* Solid gold: Goes Cold → Books Again */}
-      <div
-        className="absolute inset-y-0 overflow-hidden"
-        style={{ left: "75%", width: "16.67%" }}
-      >
+      {/* Dashed red leak line */}
+      <div className="absolute inset-y-0 overflow-hidden" style={{ left: "62.5%", width: "12.5%" }}>
         <motion.div
-          className="absolute inset-0 bg-[#C9A227]/50"
-          initial={{ x: "-100%" }}
-          animate={{ x: isInView ? "0%" : "-100%" }}
-          transition={{ duration: 0.25, delay: 1.15, ease: "easeInOut" }}
+          className="absolute inset-y-0 w-full"
+          style={{
+            backgroundImage: "repeating-linear-gradient(90deg, rgba(239,68,68,0.5) 0px, rgba(239,68,68,0.5) 6px, transparent 6px, transparent 12px)",
+          }}
+          initial={{ scaleX: 0, transformOrigin: "left" }}
+          animate={{ scaleX: inView ? 1 : 0 }}
+          transition={{ duration: 0.3, delay: 1.1, ease: "easeInOut" }}
+        />
+      </div>
+      {/* Gold recovery line */}
+      <div className="absolute inset-y-0 overflow-hidden" style={{ left: "75%", width: "20.83%" }}>
+        <motion.div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(90deg, rgba(201,162,39,0.3) 0%, rgba(201,162,39,0.6) 100%)" }}
+          initial={{ scaleX: 0, transformOrigin: "left" }}
+          animate={{ scaleX: inView ? 1 : 0 }}
+          transition={{ duration: 0.3, delay: 1.4, ease: "easeInOut" }}
         />
       </div>
     </div>
@@ -161,119 +147,154 @@ function AnimatedJourneyLine() {
 
 export default function CustomerJourneySection() {
   return (
-    <section className="py-20 md:py-28 px-6 bg-[#021524]">
+    <section className="py-20 md:py-28 px-6 bg-[#000f1d]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <AnimatedSection>
-          <div className="flex flex-col items-center text-center gap-6 mb-16">
-            <div className="inline-flex items-center gap-2 bg-[#C9A227]/10 border border-[#C9A227]/30 text-[#C9A227] text-sm font-semibold px-4 py-1.5 rounded-full">
-              The Full Picture
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
-              Where Most Local Businesses Lose Customers
-            </h2>
-            <p className="text-lg text-[#99907b] leading-relaxed max-w-xl">
-              And what we do about it
-            </p>
-          </div>
-        </AnimatedSection>
+        <motion.div
+          className="flex flex-col items-center text-center gap-5 mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
+            Where Most Local Businesses<br className="hidden sm:block" /> <em className="font-serif not-italic text-[#C9A227]">Lose</em> Customers
+          </h2>
+          <p className="text-lg text-[#99907b] max-w-xl leading-relaxed">
+            Every stage of the customer journey is a place revenue leaks out, or gets recovered.
+          </p>
+        </motion.div>
 
-        {/* Desktop layout: 6-column grid with animated SVG line */}
+        {/* Desktop: horizontal flow */}
         <div className="hidden md:block relative">
-          <AnimatedJourneyLine />
-          <div className="grid grid-cols-6 gap-4 relative z-10">
+          <AnimatedLine />
+          <div className="grid grid-cols-6 gap-3 relative z-10">
             {nodes.map((node, i) => (
-              <AnimatedSection key={node.label} delay={i * 0.08}>
-                <div className="flex flex-col items-center gap-3">
-                  {/* Circle */}
-                  <div
-                    className={`w-14 h-14 rounded-full flex items-center justify-center shrink-0 ${circleClass(node)}`}
-                  >
-                    <span className="material-symbols-outlined text-xl leading-none">
-                      {node.icon}
-                    </span>
-                  </div>
+              <motion.div
+                key={node.label}
+                className={`rounded-2xl p-4 flex flex-col items-center text-center gap-3 transition-all duration-300 ${cardStyles[node.state]}`}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+              >
+                {/* Icon */}
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${iconBgStyles[node.state]}`}>
+                  <span className="material-symbols-outlined text-2xl leading-none">
+                    {node.icon}
+                  </span>
+                </div>
 
-                  {/* Label */}
-                  <span
-                    className={`text-sm font-bold text-center ${labelClass(node)}`}
-                  >
+                {/* Label */}
+                <div className="flex flex-col gap-1">
+                  <span className={`text-sm font-bold leading-tight ${labelStyles[node.state]}`}>
                     {node.label}
                   </span>
-
-                  {/* Service impact tags — staggered in after line draws */}
-                  {node.tags.length > 0 && (
-                    <div className="flex flex-col gap-1.5 items-center">
-                      {node.tags.map((tag, ti) => (
-                        <AnimatedSection
-                          key={tag.label}
-                          delay={nodeTagDelays[i][ti]}
-                        >
-                          <span
-                            className={`text-xs px-2.5 py-1 rounded-full border whitespace-nowrap ${
-                              tag.isGold
-                                ? "bg-[#0e2131] border-[#C9A227]/60 text-[#C9A227]"
-                                : "bg-[#0e2131] border-white/10 text-[#99907b]"
-                            }`}
-                          >
-                            {tag.label}
-                          </span>
-                        </AnimatedSection>
-                      ))}
-                    </div>
-                  )}
+                  <span className={`text-xs leading-snug ${sublabelStyles[node.state]}`}>
+                    {node.sublabel}
+                  </span>
                 </div>
-              </AnimatedSection>
+
+                {/* Tags */}
+                {node.tags.length > 0 && (
+                  <div className="flex flex-col gap-1.5 w-full mt-auto pt-2 border-t border-white/5">
+                    {node.tags.map((tag) => (
+                      <motion.span
+                        key={tag.label}
+                        className={`text-xs px-2 py-1 rounded-lg border text-center ${
+                          tag.gold
+                            ? "border-[#C9A227]/50 text-[#C9A227] bg-[#C9A227]/5"
+                            : "border-white/10 text-[#99907b] bg-white/5"
+                        }`}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: 0.8 + i * 0.1 }}
+                      >
+                        {tag.label}
+                      </motion.span>
+                    ))}
+                  </div>
+                )}
+
+                {/* Recovery badge */}
+                {node.state === "recovery" && (
+                  <div className="mt-auto pt-2 border-t border-[#C9A227]/20 w-full flex justify-center">
+                    <span className="text-xs text-[#C9A227]/80 flex items-center gap-1">
+                      <span className="material-symbols-outlined text-sm leading-none">
+                        trending_up
+                      </span>
+                      Revenue recovered
+                    </span>
+                  </div>
+                )}
+
+                {/* Leak badge */}
+                {node.state === "leak" && (
+                  <div className="mt-auto pt-2 border-t border-red-500/20 w-full flex justify-center">
+                    <span className="text-xs text-red-400/70 flex items-center gap-1">
+                      <span className="material-symbols-outlined text-sm leading-none">
+                        warning
+      </span>
+                      Most stop here
+                    </span>
+                  </div>
+                )}
+              </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Mobile layout: vertical single column, tags to the right */}
-        <div className="md:hidden flex flex-col">
+        {/* Mobile: vertical stack */}
+        <div className="md:hidden flex flex-col gap-0">
           {nodes.map((node, i) => (
-            <AnimatedSection key={node.label} delay={i * 0.1}>
-              <div className="flex items-start">
-                {/* Left: circle + vertical connector */}
-                <div className="flex flex-col items-center mr-4 shrink-0" style={{ width: "48px" }}>
-                  <div
-                    className={`w-12 h-12 rounded-full flex items-center justify-center ${circleClass(node)}`}
-                  >
-                    <span className="material-symbols-outlined text-xl leading-none">
-                      {node.icon}
-                    </span>
-                  </div>
-                  {i < nodes.length - 1 && (
-                    <div
-                      className="w-0.5 flex-1 my-1"
-                      style={{ minHeight: "2rem", ...mobileConnectorStyle(i) }}
-                    />
-                  )}
+            <div key={node.label} className="flex items-stretch gap-4">
+              {/* Left: connector column */}
+              <div className="flex flex-col items-center shrink-0 w-10">
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${iconBgStyles[node.state]} border ${
+                  node.state === "leak" ? "border-red-500/30" :
+                  node.state === "recovery" ? "border-[#C9A227]/40" :
+                  "border-white/10"
+                }`}>
+                  <span className="material-symbols-outlined text-lg leading-none">{node.icon}</span>
                 </div>
-
-                {/* Right: label + tags */}
-                <div className="flex flex-col gap-2 pt-3 pb-8">
-                  <span className={`text-sm font-bold ${labelClass(node)}`}>
-                    {node.label}
-                  </span>
-                  {node.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5">
-                      {node.tags.map((tag) => (
-                        <span
-                          key={tag.label}
-                          className={`text-xs px-2.5 py-1 rounded-full border ${
-                            tag.isGold
-                              ? "bg-[#0e2131] border-[#C9A227]/60 text-[#C9A227]"
-                              : "bg-[#0e2131] border-white/10 text-[#99907b]"
-                          }`}
-                        >
-                          {tag.label}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                {i < nodes.length - 1 && (
+                  <div className={`w-px flex-1 my-1 min-h-[2rem] ${
+                    i === 3 ? "bg-red-500/30" :
+                    i === 4 ? "bg-[#C9A227]/40" :
+                    "bg-white/10"
+                  }`} />
+                )}
               </div>
-            </AnimatedSection>
+
+              {/* Right: content */}
+              <motion.div
+                className="flex-1 pb-6"
+                initial={{ opacity: 0, x: 16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+              >
+                <span className={`text-sm font-bold ${labelStyles[node.state]}`}>{node.label}</span>
+                <p className={`text-xs mt-0.5 mb-2 ${sublabelStyles[node.state]}`}>{node.sublabel}</p>
+                {node.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {node.tags.map((tag) => (
+                      <span
+                        key={tag.label}
+                        className={`text-xs px-2.5 py-1 rounded-lg border ${
+                          tag.gold
+                            ? "border-[#C9A227]/50 text-[#C9A227] bg-[#C9A227]/5"
+                            : "border-white/10 text-[#99907b] bg-white/5"
+                        }`}
+                      >
+                        {tag.label}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </motion.div>
+            </div>
           ))}
         </div>
       </div>
