@@ -31,6 +31,7 @@ const steps = [
 ];
 
 const stepDelays = [0, 0.15, 0.3, 0.45];
+const stepNumColors = ["text-white", "text-white/60", "text-white/30", "text-white/15"];
 
 function AnimatedProcessLine() {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -91,14 +92,7 @@ export default function HowItWorksSection() {
               <div key={step.num} className="group flex flex-col items-center text-center gap-4">
                 {/* Large display number */}
                 <span
-                  className={`
-                    text-8xl font-extrabold leading-none transition-colors duration-300
-                    ${
-                      index === 0
-                        ? "text-[#C9A227]"
-                        : "text-white/10 group-hover:text-[#C9A227]"
-                    }
-                  `}
+                  className={`text-8xl font-extrabold leading-none ${stepNumColors[index]}`}
                 >
                   {step.num}
                 </span>
