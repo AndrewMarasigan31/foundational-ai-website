@@ -1,3 +1,25 @@
+## 2026-06-13 - US-038
+- Removed AnimatedSection import and all three AnimatedSection wrappers from app/contact/page.tsx (hero section and both two-column panel wrappers)
+- Added order-last md:order-first to the trust signals (left) column div
+- Added order-first md:order-last to the form (right) column div so form appears above trust signals on mobile
+- Files changed: app/contact/page.tsx
+- Typecheck passes; browser testing unavailable (Chrome not installed)
+- **Learnings for future iterations:**
+  - CSS order swap pattern for mobile-first reordering: add `order-first md:order-last` to the element that should appear first on mobile, and `order-last md:order-first` to the element that should appear second
+  - This pattern only works inside a flex or grid container — the existing `grid grid-cols-1 md:grid-cols-2` satisfies this requirement
+---
+
+## 2026-06-13 - US-037
+- Removed AnimatedSection import and wrapper from ServiceSectionBlock in app/services/page.tsx
+- AnimatedSection wrapped the grid div inside each ServiceSectionBlock; replaced with the grid div directly
+- StickyServiceNav and its IntersectionObserver logic were untouched
+- Files changed: app/services/page.tsx
+- Typecheck passes; manual browser verification recommended
+- **Learnings for future iterations:**
+  - When removing AnimatedSection that wraps an inner div, merge the wrapper removal carefully — the replacement is just removing the outer element, not replacing it with another div wrapper
+  - Watch for JSX nesting errors when removing a wrapper: removing `<AnimatedSection>` + inner `<div>` and replacing with just `<div>` means one fewer closing tag is needed
+---
+
 ## Codebase Patterns
 - AnimatedSection wraps content at section level (heading + grid/list) using opacity:0 initial state; removing it is a direct import removal + replace wrapper with plain div
 - Individual motion.div elements using whileInView (FAQItem, CustomerJourneySection, DashboardVisual) are NOT AnimatedSection wrappers — leave them untouched

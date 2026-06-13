@@ -34,7 +34,7 @@
         "Verify in browser using dev-browser skill: navigate to /services and confirm all service section content is visible on scroll without animation delay"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "The services page is scroll-based with a sticky nav — not a tab system. The IntersectionObserver that drives the sticky nav must not be touched. Only the AnimatedSection wrapper inside the ServiceSection render component is removed."
     },
     {
@@ -51,7 +51,7 @@
         "Verify in browser using dev-browser skill: resize browser to 375px, navigate to /contact, confirm form is visible above the fold without scrolling"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "The two-column grid (grid-cols-1 md:grid-cols-2) stays as-is. Only the column order changes on mobile. The ContactForm component itself does not need to change."
     },
     {
