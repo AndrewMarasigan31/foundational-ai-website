@@ -408,3 +408,19 @@
   - IntersectionObserver rootMargin "-40% 0px -55% 0px" gives a centered active trigger zone — activates the section whose content is crossing the middle of the viewport
   - Placeholder sections with the correct `id` attributes must be present in US-022 so the sticky nav links work before US-023/024 add real content
 ---
+
+## 2026-06-13 - US-027
+- Replaced Plus_Jakarta_Sans with Syne (display headings) + Inter (body) in app/layout.tsx
+- Syne: weights 400/600/700/800, variable --font-syne; Inter: weights 400/500/600, variable --font-inter
+- Applied both variables (and Playfair) to <html> element; Inter className applied to <body>
+- Updated tailwind.config.ts: fontFamily.sans = Inter var, fontFamily.display = Syne var
+- Added `font-display` class to all h1 and h2 elements across: HeroSection, ServicesSection, CustomerJourneySection, HowItWorksSection, WhyUsSection, FAQSection, CTABand, DashboardSection, app/services/page.tsx, app/about/page.tsx
+- h3 elements, button labels, body text, nav links left unchanged (Inter by default)
+- Playfair Display italic accent from US-026 preserved unchanged
+- Build passes, typecheck passes; manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - `fontFamily.display` is a custom Tailwind key (not built-in) — generates `font-display` utility; must add it under `theme.extend.fontFamily`
+  - Only h1 and h2 get `font-display` — h3, buttons, body text stay on default sans (Inter)
+  - When swapping body font, apply the new font's `.className` to `<body>`, not just the CSS variable — next/font generates both
+  - Decorative elements (faded gold numbers, animated counter spans) should NOT get `font-display` even if they use `font-extrabold`
+---

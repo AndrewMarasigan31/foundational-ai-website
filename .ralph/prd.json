@@ -512,6 +512,28 @@
       "priority": 26,
       "passes": true,
       "notes": "Modifies app/layout.tsx, tailwind.config.ts, components/HeroSection.tsx, components/ServicesSection.tsx, components/CustomerJourneySection.tsx, components/WhyUsSection.tsx, components/CTABand.tsx."
+    },
+    {
+      "id": "US-027",
+      "title": "Replace Plus Jakarta Sans with Syne + Inter font pairing",
+      "description": "As a visitor, I want the site to use a distinctive modern font pairing so that the typography feels confident and premium on dark backgrounds.",
+      "acceptanceCriteria": [
+        "In app/layout.tsx, remove Plus_Jakarta_Sans import and add two imports: Syne (weights: 400, 600, 700, 800; subsets: latin; variable: --font-syne) and Inter (weights: 400, 500, 600; subsets: latin; variable: --font-inter)",
+        "Apply --font-syne and --font-inter variables to the <html> element",
+        "Apply Inter as the default body font on <body> using the Inter className",
+        "In tailwind.config.ts, update fontFamily: sans = ['var(--font-inter)', 'system-ui', 'sans-serif'] and add fontFamily: display = ['var(--font-syne)', 'system-ui', 'sans-serif']",
+        "Replace all instances of font-extrabold and font-bold on h1 and h2 heading elements across all page components with font-display font-extrabold or font-display font-bold to use Syne",
+        "Body text, nav links, button labels, card descriptions, and FAQ answers remain in Inter (default sans — no class change needed)",
+        "Syne headings affected: HeroSection h1, ServicesSection h2, CustomerJourneySection h2, HowItWorksSection h2, WhyUsSection h2, FAQSection h2, CTABand h2, DashboardSection h2, and equivalent headings on /services and /about pages",
+        "Playfair Display italic accent from US-026 is preserved unchanged",
+        "No layout or color changes — typography swap only",
+        "npm run build succeeds",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 27,
+      "passes": true,
+      "notes": "Modifies app/layout.tsx, tailwind.config.ts, and all components/pages with h1/h2 headings. Inter replaces Plus Jakarta Sans for body. Syne replaces Plus Jakarta Sans for display headings."
     }
   ]
 }
