@@ -150,7 +150,7 @@
         "Verify in browser using dev-browser skill: at 1280px confirm the large numbers create a bold visual rhythm across the four steps"
       ],
       "priority": 10,
-      "passes": false,
+      "passes": true,
       "notes": "The circle badges (w-16 h-16 rounded-full) are replaced entirely. The stepDelays array and AnimatedProcessLine component are untouched. The hover state (group-hover:text-[#C9A227]) can be preserved on the number element."
     }
   ]

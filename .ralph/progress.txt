@@ -1,3 +1,16 @@
+## 2026-06-13 - US-045
+- Replaced w-16 h-16 circle badge divs in HowItWorksSection with text-8xl font-extrabold span elements
+- Step 01 number uses text-[#C9A227]; steps 02-04 use text-white/10 with group-hover:text-[#C9A227] transition
+- Step title updated from text-lg to text-xl font-bold text-[#d1e5fb]
+- stepDelays array and AnimatedProcessLine component left untouched
+- 4-column grid layout (grid-cols-1 md:grid-cols-4) preserved
+- Files changed: components/HowItWorksSection.tsx
+- Typecheck passes; browser testing unavailable (Chrome not installed)
+- **Learnings for future iterations:**
+  - Large display number pattern: use `<span className="text-8xl font-extrabold leading-none">` inside a flex-col items-center group div
+  - white/10 opacity class creates a very subtle ghost number — visually subordinate but present; steps 02-04 light up gold on hover
+---
+
 ## 2026-06-13 - US-044
 - Replaced the 47-word two-sentence subtext paragraph in HeroSection.tsx with a single line: 'Google top 3 for local businesses. Scoped clearly, executed lean.'
 - Same className (text-lg sm:text-xl text-[#99907b] leading-relaxed) preserved
