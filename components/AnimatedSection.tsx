@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 
 type Direction = "up" | "left" | "right";
@@ -26,13 +26,18 @@ export default function AnimatedSection({
 }: AnimatedSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <motion.div
       ref={ref}
       className={className}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      initial={mounted ? "hidden" : false}
+      animate={isInView ? "visible" : mounted ? "hidden" : false}
       variants={variants[direction]}
       transition={{ duration: 0.5, ease: "easeOut", delay }}
     >
