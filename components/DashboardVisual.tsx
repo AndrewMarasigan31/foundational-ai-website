@@ -192,7 +192,7 @@ export default function GBPOptimizationSequence() {
   ];
 
   return (
-    <div ref={ref} className="w-full max-w-2xl mx-auto space-y-4">
+    <div ref={ref} className="w-full max-w-4xl mx-auto space-y-4">
       {STEPS.map((step, index) => (
         <motion.div
           key={step.label}
