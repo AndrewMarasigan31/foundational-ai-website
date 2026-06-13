@@ -1,3 +1,17 @@
+## 2026-06-13 - US-024
+- Built last three service sections in app/services/page.tsx: Lead Reactivation Sprint, Website Built to Convert, Performance Tracking
+- Exported LighthouseAnimation, LeadReactivationAnimation, RankTrackingAnimation from components/ServicesSection.tsx (were function-private, added export keyword)
+- Alternating layout: Lead Reactivation (visual left / copy right, bg-[#000f1d]), Website (copy left / visual right, bg-[#021524]), Performance Tracking (visual left / copy right, bg-[#000f1d])
+- Each section: icon, heading, 2-3 sentence description, 4 bullet deliverables, gold BookCTA button, stat grid in visual panel
+- Added CTABand at the bottom of the services page
+- Removed placeholder sections — all 6 service anchors now have full content
+- Build passes (4.18kB /services page); typecheck passes; manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - When reusing animation sub-components across pages, just add `export` to the function — no refactor needed
+  - Alternating layout pattern continues the count from the previous story: service 4 = reverse=true, 5 = reverse=false, 6 = reverse=true
+  - Visual panel wrapping: wrap animation in a `rounded-2xl bg-[#0e2131] border border-white/10 p-6` card with a mini label above and supporting stats grid below
+---
+
 ## 2026-06-13 - US-023
 - Built first three service sections in app/services/page.tsx
 - Exported GBPStarAnimation, BlogTypingAnimation, AISearchAnimation from components/ServicesSection.tsx

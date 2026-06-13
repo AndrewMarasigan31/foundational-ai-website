@@ -467,7 +467,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 24,
-      "passes": false,
+      "passes": true,
       "notes": "Completes app/services/page.tsx. Import CTABand at the bottom of the page."
     },
     {
