@@ -1,4 +1,5 @@
 import AnimatedSection from "@/components/AnimatedSection";
+import ContactForm from "@/components/ContactForm";
 
 const coverItems = [
   {
@@ -99,13 +100,10 @@ export default function ContactPage() {
             </div>
           </AnimatedSection>
 
-          {/* Right — Form slot */}
+          {/* Right — Form */}
           <AnimatedSection direction="right" delay={0.2}>
-            <div
-              id="contact-form-slot"
-              className="bg-[#0e2131] border border-white/10 rounded-2xl p-8 min-h-[400px] flex items-center justify-center"
-            >
-              <p className="text-[#99907b] text-sm">Form coming soon.</p>
+            <div id="contact-form-slot">
+              <ContactForm />
             </div>
           </AnimatedSection>
         </div>
