@@ -19,7 +19,7 @@ export default function HeroSection() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-24 md:py-32 flex flex-col items-center text-center gap-8">
         {/* Copy block */}
         <div className="flex flex-col gap-5 max-w-3xl">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
             Your Competitors<br />Rank Higher.
             <br />
             That&apos;s <em className="font-serif not-italic text-[#C9A227]">Fixable.</em>

@@ -157,7 +157,7 @@ export default function CustomerJourneySection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
             Where Most Local Businesses<br className="hidden sm:block" /> <em className="font-serif not-italic text-[#C9A227]">Lose</em> Customers
           </h2>
           <p className="text-lg text-[#99907b] max-w-xl leading-relaxed">

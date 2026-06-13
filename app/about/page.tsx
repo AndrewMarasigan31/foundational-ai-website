@@ -43,7 +43,7 @@ export default function AboutPage() {
       >
         <div className="max-w-3xl mx-auto text-center">
           <AnimatedSection>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
               We built this because local businesses keep losing to bigger
               competitors who simply show up better online.
             </h1>
@@ -74,7 +74,7 @@ export default function AboutPage() {
       <section className="bg-[#021524] py-20 md:py-28 px-6">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#d1e5fb] text-center mb-14 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#d1e5fb] text-center mb-14 tracking-tight">
               How We Work
             </h2>
           </AnimatedSection>
@@ -106,7 +106,7 @@ export default function AboutPage() {
       <section className="bg-[#000f1d] py-20 md:py-28 px-6">
         <div className="max-w-3xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#d1e5fb] mb-10 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#d1e5fb] mb-10 tracking-tight">
               What We Don&apos;t Do
             </h2>
             <ul className="flex flex-col gap-4">

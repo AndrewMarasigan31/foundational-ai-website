@@ -15,7 +15,7 @@ export default function CTABand() {
 
       <AnimatedSection>
         <div className="relative z-10 max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-6">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
             Start with a <em className="font-serif not-italic text-[#C9A227]">free</em> audit call.{" "}
             <span className="text-[#C9A227]">No pitch, no pressure.</span>
           </h2>

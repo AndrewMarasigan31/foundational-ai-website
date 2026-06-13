@@ -95,7 +95,7 @@ function ServiceSectionBlock({
                   {icon}
                 </span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
                 {title}
               </h2>
               <p className="text-[#99907b] text-lg leading-relaxed">{description}</p>
@@ -166,7 +166,7 @@ export default function ServicesPage() {
           }}
         />
         <div className="relative z-10 max-w-3xl mx-auto px-6 flex flex-col items-center text-center gap-8">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
             The Work We Do
           </h1>
           <p className="text-lg sm:text-xl text-[#99907b] leading-relaxed">

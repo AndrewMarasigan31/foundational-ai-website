@@ -9,25 +9,25 @@ const steps = [
     num: "01",
     title: "Free Audit Call",
     description:
-      "30 minutes. We look at your GBP, your search visibility, and your current site. You walk away with a clear picture of what's costing you rankings, whether you hire us or not.",
+      "30 minutes. We review your GBP, Google and AI search visibility, existing lead list, and current site. You leave with a clear picture of where revenue is leaking, whether you hire us or not.",
   },
   {
     num: "02",
     title: "We Build the Plan",
     description:
-      "Based on the audit, we recommend the right starting point: usually the GBP optimization, sometimes content, sometimes both. No upsells and no unnecessary scope.",
+      "Based on the audit, we recommend the right starting point: GBP optimization, content, AI search, or a lead reactivation sprint. No upsells. No unnecessary scope.",
   },
   {
     num: "03",
     title: "You Approve, We Execute",
     description:
-      "Every deliverable goes through your review before it goes live. You're not handing us the keys; you stay in control of your brand and your messaging.",
+      "Every deliverable goes through your review before it goes live. You're not handing us the keys. You stay in control of your brand and your messaging.",
   },
   {
     num: "04",
     title: "Track Results, Iterate",
     description:
-      "We report on ranking movement, profile views, and call volume. If something isn't working, we adjust. No waiting on a quarterly review to find out what happened.",
+      "We report on ranking movement, AI search appearances, profile views, and call volume. If something isn't working, we adjust. No waiting on a quarterly review.",
   },
 ];
 
@@ -74,10 +74,7 @@ export default function HowItWorksSection() {
         {/* Header */}
         <AnimatedSection>
           <div className="flex flex-col items-center text-center gap-6 mb-16">
-            <div className="inline-flex items-center gap-2 bg-[#C9A227]/10 border border-[#C9A227]/30 text-[#C9A227] text-sm font-semibold px-4 py-1.5 rounded-full">
-              Process
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
               Simple Enough to Explain in Four Steps
             </h2>
             <p className="text-lg text-[#99907b] leading-relaxed max-w-2xl">

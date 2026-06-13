@@ -7,27 +7,27 @@ import AnimatedSection from "./AnimatedSection";
 const faqs = [
   {
     q: "Do I have to sign a long-term contract?",
-    a: "No long-term contract required to start. We use the call to recommend the right starting point and scope, then keep the engagement clear and straightforward from there.",
+    a: "No long-term contract required to start. We use the audit call to recommend the right starting point and scope, then keep the engagement clear and month-to-month. The Lead Reactivation Sprint is a one-time project with no ongoing commitment unless you choose the optional management add-on.",
   },
   {
     q: "How fast will I see results?",
-    a: "GBP fixes can show ranking movement in weeks. Content compounds over 60 to 90 days as pages index and authority builds. We’ll be straight with you if your category or market is unusually competitive.",
+    a: "GBP fixes can show ranking movement in weeks. Lead reactivation replies typically come in within the first 5 to 7 days of the sprint going live. Content and AI search visibility compound over 60 to 90 days. We’ll be straight with you if your market is unusually competitive.",
   },
   {
-    q: "Is this just AI-generated content?",
-    a: "AI-assisted, human-reviewed, locally specific. Every article gets a human pass for accuracy, voice, and local relevance before it goes near your site or profile. We don’t publish slop.",
+    q: "Do you help with AI search results like ChatGPT and Perplexity?",
+    a: "Yes. AI Overviews, ChatGPT, and Perplexity pull business information from structured data, review signals, and authoritative content. Those are the same foundations we build for traditional local SEO. We optimize for the full search landscape, not just the Google results page.",
+  },
+  {
+    q: "What is the Lead Reactivation Sprint?",
+    a: "A focused one-time project that turns your cold lead list, past customer list, or stale pipeline back into replies and booked appointments. We build a 90-day SMS and email follow-up sequence, set up your CRM workflow, and have it live within 5 to 7 business days. Starts at $1,500.",
   },
   {
     q: "I already have a website. Can you still help?",
-    a: "Yes. The GBP audit and Local SEO Content work independently of your existing site. We don’t require you to use our website product to get results from the other two services.",
-  },
-  {
-    q: "Do I need all three services?",
-    a: "Most clients start with just the GBP audit because it’s the fastest lever for local rankings and the lowest-risk way to see how we work. From there, you decide what makes sense to add.",
+    a: "Yes. The GBP audit, Local SEO Content, AI Search Visibility, and Lead Reactivation Sprint all work independently of your existing site. We don’t require you to use our website product to get results from the other services.",
   },
   {
     q: "What kinds of businesses do you work with?",
-    a: "Service-area businesses in the US include trades, home services, professional services, healthcare, and similar categories where local search drives inbound calls. If you rely on Google to get found, we can help.",
+    a: "Local service businesses in the US: trades, home services, professional services, healthcare, dental, med spas, legal, and similar categories where local search and follow-up drive inbound revenue. If you rely on Google or referrals to get found and convert, we can help.",
   },
 ];
 
@@ -78,10 +78,7 @@ export default function FAQSection() {
         {/* Header */}
         <AnimatedSection>
           <div className="flex flex-col items-center text-center gap-6 mb-16">
-            <div className="inline-flex items-center gap-2 bg-[#C9A227]/10 border border-[#C9A227]/30 text-[#C9A227] text-sm font-semibold px-4 py-1.5 rounded-full">
-              Common Questions
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
               Things Worth Asking Before You Hire Anyone
             </h2>
             <p className="text-[#99907b] text-lg max-w-2xl">
