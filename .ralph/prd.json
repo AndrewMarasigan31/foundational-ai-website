@@ -378,7 +378,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 20,
-      "passes": false,
+      "passes": true,
       "notes": "Modifies components/ServicesSection.tsx. Add 4 small inline animation sub-components."
     }
   ]

@@ -1,3 +1,22 @@
+## 2026-06-13 - US-020
+- Added 4 inline animation sub-components to components/ServicesSection.tsx
+- GBPStarAnimation: useMotionValue + Framer Motion animate(), 3.2 → 4.9 star rating over 1.5s easeOut, triggered by useInView once:true
+- BlogTypingAnimation: useEffect interval types out blog post title character by character (40ms/char), starts on scroll entry
+- LighthouseAnimation: requestAnimationFrame loop counts score 54 → 98 over 1.5s cubic ease-out with color transition red → orange → green
+- RankTrackingAnimation: setInterval decrements #12 → #3 at 180ms each, gold highlight + "Top 3 ✓" label on completion
+- All sub-components use useRef(false) started guard to prevent re-triggering; all hold final state once complete
+- Added "use client" to ServicesSection.tsx (required for hooks in sub-components)
+- Removed old MockGBPPanel, replaced with GBPStarAnimation in GBP card mockPanel slot
+- Added mockPanel to Content, Website, Tracking cards (previously null)
+- Typecheck passes, build passes (55.9kB page); manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - JSX elements in data arrays (e.g. `mockPanel: <GBPStarAnimation />`) work fine — React instantiates hooks when the element renders, not when the array is defined
+  - `useRef(false)` started guard prevents double-trigger on React strict mode remount in dev
+  - `performance.now()` is safe in component code (not restricted like in workflow scripts)
+  - `requestAnimationFrame` loop is cleaner than `setInterval` for count animations that track wall-clock time precisely
+  - Framer Motion `useMotionValue` + `animate()` (function import) is the correct pattern for animated numbers — `motion.span` animate prop is for layout-tied animations
+---
+
 ## 2026-06-13 - US-019
 - Animated SVG process line in HowItWorksSection replacing the static `bg-white/10` div
 - Added "use client" to HowItWorksSection (required for useRef/useInView/useAnimation hooks)
