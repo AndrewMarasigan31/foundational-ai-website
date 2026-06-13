@@ -1,3 +1,17 @@
+## 2026-06-13 - US-018
+- Refactored components/HeroSection.tsx from md:grid-cols-2 split layout to single centered column
+- Added eyebrow pill: 'Local SEO for US Small Businesses' with bolt icon (was missing from prior implementation)
+- Layout order: eyebrow pill → H1 → subhead (max-w-3xl) → CTAs → TrustBar → LocalPackVisual
+- LocalPackVisual wrapped in AnimatedSection (direction='up', delay=0.3) with max-w-xl centering constraint
+- Removed "use client" directive (not needed; client children handle their own boundaries)
+- Grid background pattern retained; mobile graceful single column at any breakpoint
+- Typecheck and build both pass; manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - Centered hero pattern: `flex flex-col items-center text-center` on the container, copy at `max-w-3xl`, visual at `max-w-xl`
+  - AnimatedSection on a below-fold visual within the hero creates a scroll-triggered reveal while keeping the above-fold content static
+  - Eyebrow pill pattern: `inline-flex items-center gap-2 bg-[#0e2131] border border-[#C9A227]/30 text-[#C9A227] text-sm font-medium px-4 py-1.5 rounded-full`
+---
+
 ## 2026-06-13 - US-016
 - Replaced DashboardVisual.tsx (Recharts bar chart + stat cards) with GBPOptimizationSequence component
 - Updated DashboardSection.tsx: pill label → "The Work", heading → "What Optimization Looks Like", new subhead
