@@ -11,6 +11,17 @@
   - 21st.dev mcp tool still returning [object Object] — always hand-craft components
 ---
 
+## 2026-06-13 - US-035
+- Added useReducedMotion() hook from framer-motion to AnimatedSection.tsx
+- When prefersReducedMotion is true, renders a plain <div> with no animation — children immediately visible at final state
+- When false/null, existing scroll-reveal (useMounted + useInView) behavior is unchanged
+- Prop API (direction, delay, className) is unchanged
+- Files changed: components/AnimatedSection.tsx
+- **Learnings for future iterations:**
+  - Framer Motion's useReducedMotion() returns null on SSR and false/true on the client — treat null as false (no early return)
+  - The early-return plain <div> approach is simpler than conditionally nullifying motion props; keeps motion.div logic clean
+---
+
 ## Codebase Patterns
 - AnimatedSection uses useMounted guard (useState/useEffect) to prevent Framer Motion SSR opacity:0 serialisation; initial={false} on SSR, initial="hidden" on client
 - CustomerJourneySection has its own 6 direct motion.div elements with initial={{ opacity: 0, y: 24 }} — these are NOT wrapped in AnimatedSection

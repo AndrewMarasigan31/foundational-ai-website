@@ -76,7 +76,7 @@
         "Manually verified by enabling Reduce Motion in macOS System Settings > Accessibility and reloading the page — sections appear instantly with no motion"
       ],
       "priority": 4,
-      "passes": false,
+      "passes": true,
       "notes": "Depends on US-032 being merged first. Do not change the AnimatedSection prop API. Do not gate behind a feature flag."
     }
   ]
