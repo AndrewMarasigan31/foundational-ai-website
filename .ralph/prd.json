@@ -29,7 +29,7 @@
         "Typecheck passes"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Current: text-8xl font-extrabold with no mobile override. At 375px this is ~96px — almost the full viewport width for a single character. Use text-5xl md:text-8xl or text-6xl md:text-8xl."
     },
     {
@@ -44,7 +44,7 @@
         "Typecheck passes"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "Current: max-w-2xl mx-auto in GBPOptimizationSequence root div. At 1440px this creates ~500px of empty space on each side. Widening to max-w-4xl (896px) keeps it readable while filling the section better."
     },
     {

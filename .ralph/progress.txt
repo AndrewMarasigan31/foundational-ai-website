@@ -15,3 +15,18 @@ Started: Sat Jun 13 18:50:20 PST 2026
   - The design-visibility-overhaul branch had all the Next.js components; this branch was branched from main (which lacked them) — had to merge design-visibility-overhaul in first
   - Tailwind opacity fractions on text work well for progressive fading without custom colors
 ---
+
+## 2026-06-13 - US-047
+- Added responsive size breakpoint to HowItWorks display number: text-6xl md:text-8xl
+- Files changed: components/HowItWorksSection.tsx (line 95)
+- **Learnings for future iterations:**
+  - Single-character change — responsive Tailwind prefixes (md:) are the right pattern for mobile size overrides
+---
+
+## 2026-06-13 - US-048
+- Widened GBPOptimizationSequence wrapper from max-w-2xl to max-w-4xl in DashboardVisual.tsx
+- Widened heading from max-w-3xl to max-w-4xl and subhead from max-w-2xl to max-w-3xl in DashboardSection.tsx
+- Files changed: components/DashboardVisual.tsx, components/DashboardSection.tsx
+- **Learnings for future iterations:**
+  - Section-level content width constraints live in two places: the visual component root div and the section heading/subhead wrappers — update both for alignment
+---
