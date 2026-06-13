@@ -58,7 +58,7 @@
         "Typecheck passes"
       ],
       "priority": 4,
-      "passes": false,
+      "passes": true,
       "notes": "Current heading is 8 words and reads like a listicle subheading. Compare to other page headings: 'Your Competitors Rank Higher. That's Fixable.' — confident and short. The FAQ heading should match that energy."
     },
     {
@@ -72,7 +72,7 @@
         "Typecheck passes"
       ],
       "priority": 5,
-      "passes": false,
+      "passes": true,
       "notes": "The orphan happens because the heading has no max-w and stretches to fill the section width. A max-w-xl or max-w-2xl centered on the heading element will force a clean break."
     },
     {
@@ -86,7 +86,7 @@
         "Typecheck passes"
       ],
       "priority": 6,
-      "passes": false,
+      "passes": true,
       "notes": "Current: bullet text uses text-[#99907b] which is the muted/secondary color used for supporting copy. These bullets are persuasive selling points (Your GBP and local search pages, AI search visibility, etc.) and should use the primary text color to match their importance."
     }
   ]

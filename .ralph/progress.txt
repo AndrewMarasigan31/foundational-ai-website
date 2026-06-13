@@ -23,6 +23,29 @@ Started: Sat Jun 13 18:50:20 PST 2026
   - Single-character change — responsive Tailwind prefixes (md:) are the right pattern for mobile size overrides
 ---
 
+## 2026-06-13 - US-049
+- Replaced FAQ heading "Things Worth Asking Before You Hire Anyone" with "Questions We Get Every Time"
+- Preserved em/italic treatment on "Every" to match brand voice pattern
+- Files changed: components/FAQSection.tsx (line 111-113)
+- **Learnings for future iterations:**
+  - The FAQ heading uses an em element for italic accent on a key word — keep that pattern when updating copy
+---
+
+## 2026-06-13 - US-051
+- Changed coverItems bullet text in app/contact/page.tsx from text-[#99907b] to text-[#d1e5fb]
+- Bullet icon color (text-[#C9A227]) and section label color unchanged
+- Files changed: app/contact/page.tsx (line 76)
+- **Learnings for future iterations:**
+  - Contact page trust/cover items are in app/contact/page.tsx, not a separate component — inline page file
+---
+
+## 2026-06-13 - US-050
+- Added max-w-xl to the h2 in CTABand.tsx to force a clean line break before "No pitch, no pressure."
+- Files changed: components/CTABand.tsx (line 16)
+- **Learnings for future iterations:**
+  - CTA Band heading lives in components/CTABand.tsx; the outer container is max-w-3xl, adding max-w-xl directly on the h2 is the right scope for controlling text wrapping
+---
+
 ## 2026-06-13 - US-048
 - Widened GBPOptimizationSequence wrapper from max-w-2xl to max-w-4xl in DashboardVisual.tsx
 - Widened heading from max-w-3xl to max-w-4xl and subhead from max-w-2xl to max-w-3xl in DashboardSection.tsx
