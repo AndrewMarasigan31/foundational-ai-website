@@ -1,5 +1,5 @@
 import Link from "next/link";
-import LocalPackVisual from "./LocalPackVisual";
+import LocalPackCard from "./LocalPackCard";
 import TrustBar from "./TrustBar";
 import AnimatedSection from "./AnimatedSection";
 
@@ -53,7 +53,7 @@ export default function HeroSection() {
         {/* LocalPackVisual scroll-reveal */}
         <AnimatedSection direction="up" delay={0.3}>
           <div className="w-full max-w-xl">
-            <LocalPackVisual />
+            <LocalPackCard />
           </div>
         </AnimatedSection>
       </div>
