@@ -92,7 +92,7 @@ export default function HowItWorksSection() {
               <div key={step.num} className="group flex flex-col items-center text-center gap-4">
                 {/* Large display number */}
                 <span
-                  className={`text-8xl font-extrabold leading-none ${stepNumColors[index]}`}
+                  className={`text-6xl md:text-8xl font-extrabold leading-none ${stepNumColors[index]}`}
                 >
                   {step.num}
                 </span>
