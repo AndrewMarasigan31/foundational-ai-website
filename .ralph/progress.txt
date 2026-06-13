@@ -1,3 +1,12 @@
+## 2026-06-13 - US-044
+- Replaced the 47-word two-sentence subtext paragraph in HeroSection.tsx with a single line: 'Google top 3 for local businesses. Scoped clearly, executed lean.'
+- Same className (text-lg sm:text-xl text-[#99907b] leading-relaxed) preserved
+- Files changed: components/HeroSection.tsx
+- Typecheck passes; browser testing unavailable (Chrome not installed)
+- **Learnings for future iterations:**
+  - Copy-only changes in JSX are a single Edit on the text node — no structural changes needed
+---
+
 ## 2026-06-13 - US-043
 - Removed `max-w-sm mx-auto` from the root div in components/LocalPackCard.tsx — card now fills its container at full width
 - Removed the `<div className="w-full max-w-xl">` wrapper in HeroSection.tsx right column — LocalPackCard renders directly in the flex container

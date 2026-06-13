@@ -131,7 +131,7 @@
         "Verify in browser using dev-browser skill: confirm the new line reads cleanly below the headline and above the CTA buttons"
       ],
       "priority": 9,
-      "passes": false,
+      "passes": true,
       "notes": "The existing subtext is 47 words across two sentences. The headline already conveys the problem/solution. The replacement adds specificity (top 3, local businesses) and method (scoped, lean) in one readable line."
     },
     {
