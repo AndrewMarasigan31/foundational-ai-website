@@ -75,7 +75,7 @@ export default function HowItWorksSection() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
             Simple Enough to Explain in Four Steps
           </h2>
-          <p className="text-lg text-[#99907b] leading-relaxed max-w-2xl">
+          <p className="text-lg sm:text-xl text-[#99907b] leading-relaxed max-w-2xl">
             No onboarding maze. No kick-off call theater. Here&apos;s exactly what happens when
             you reach out.
           </p>
@@ -107,7 +107,7 @@ export default function HowItWorksSection() {
                 <h3 className="text-xl font-bold text-[#d1e5fb]">{step.title}</h3>
 
                 {/* Description */}
-                <p className="text-[#99907b] text-sm leading-relaxed">{step.description}</p>
+                <p className="text-[#99907b] text-base leading-relaxed">{step.description}</p>
               </div>
             ))}
           </div>

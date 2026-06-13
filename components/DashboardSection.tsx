@@ -11,7 +11,7 @@ export default function DashboardSection() {
           </h2>
 
           {/* Subhead */}
-          <p className="text-lg text-[#99907b] leading-relaxed max-w-2xl">
+          <p className="text-lg sm:text-xl text-[#99907b] leading-relaxed max-w-2xl">
             Here&apos;s exactly what we do when we take over a Google Business Profile:
             four concrete improvements that move the needle on local rankings.
           </p>

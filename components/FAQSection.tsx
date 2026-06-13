@@ -91,7 +91,7 @@ function FAQItem({
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <p className="pl-12 pb-7 text-[#99907b] leading-relaxed text-base max-w-3xl">
+            <p className="pl-12 pb-7 text-[#99907b] leading-relaxed text-lg max-w-3xl">
               {a}
             </p>
           </motion.div>

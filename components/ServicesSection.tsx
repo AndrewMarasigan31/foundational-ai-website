@@ -309,7 +309,7 @@ export default function ServicesSection() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
             Get Found. Convert. <em className="font-serif not-italic text-[#C9A227]">Recover</em> What You Left on the Table.
           </h2>
-          <p className="text-lg text-[#99907b] leading-relaxed max-w-2xl">
+          <p className="text-lg sm:text-xl text-[#99907b] leading-relaxed max-w-2xl">
             From Google rankings and AI search visibility to recovering cold leads.
             every service is scoped clearly, executed lean, and built to produce results you can measure.
           </p>
