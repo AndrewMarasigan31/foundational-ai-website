@@ -1,19 +1,152 @@
+"use client";
+
+import { useRef, useEffect, useState } from "react";
+import { useInView, useMotionValue, animate } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 
-function MockGBPPanel() {
+// ── GBP card: star rating 3.2 → 4.9 ──
+function GBPStarAnimation() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const motionValue = useMotionValue(3.2);
+  const [display, setDisplay] = useState("3.2");
+
+  useEffect(() => {
+    if (!isInView) return;
+    const controls = animate(motionValue, 4.9, {
+      duration: 1.5,
+      ease: "easeOut",
+      onUpdate: (v) => setDisplay(v.toFixed(1)),
+    });
+    return () => controls.stop();
+  }, [isInView, motionValue]);
+
   return (
-    <div className="mt-6 rounded-xl bg-[#021524] border border-white/10 p-4 text-sm">
-      <div className="flex items-center gap-2 mb-3 text-[#C9A227] font-semibold">
-        <span className="material-symbols-outlined text-base">location_on</span>
-        Google Business Profile
+    <div ref={ref} className="mt-6 rounded-xl bg-[#021524] border border-white/10 p-4">
+      <div className="text-xs text-[#99907b] mb-2">Average star rating</div>
+      <div className="flex items-center gap-3">
+        <span className="text-4xl font-extrabold text-[#C9A227]">{display}</span>
+        <div className="text-[#C9A227] text-2xl leading-none">★★★★★</div>
       </div>
-      <div className="space-y-2">
-        {["Complete business info", "100+ 5-star reviews", "#1 in local pack"].map((item) => (
-          <div key={item} className="flex items-center gap-2 text-[#d1e5fb]/80">
-            <span className="material-symbols-outlined text-sm text-[#C9A227]">check_circle</span>
-            {item}
-          </div>
-        ))}
+      <div className="mt-2 text-xs text-[#99907b]">Before: 3.2 ★ → After: 4.9 ★</div>
+    </div>
+  );
+}
+
+// ── Content card: typewriter blog post title ──
+function BlogTypingAnimation() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const fullText = "5 Reasons Chicago Restaurants Need Local SEO";
+  const [displayed, setDisplayed] = useState("");
+  const started = useRef(false);
+
+  useEffect(() => {
+    if (!isInView || started.current) return;
+    started.current = true;
+    let i = 0;
+    const interval = setInterval(() => {
+      i++;
+      setDisplayed(fullText.slice(0, i));
+      if (i >= fullText.length) clearInterval(interval);
+    }, 40);
+    return () => clearInterval(interval);
+  }, [isInView]);
+
+  return (
+    <div ref={ref} className="mt-4 rounded-xl bg-[#021524] border border-white/10 p-4 text-sm">
+      <span className="bg-[#C9A227]/20 text-[#C9A227] text-xs px-2 py-0.5 rounded-full font-medium">
+        Blog Post · Local SEO
+      </span>
+      <p className="mt-3 text-[#d1e5fb]/90 font-medium leading-snug min-h-[2.5rem]">
+        {displayed}
+        <span className="animate-pulse text-[#C9A227]">|</span>
+      </p>
+    </div>
+  );
+}
+
+// ── Website card: Lighthouse score 54 → 98 with color transition ──
+function LighthouseAnimation() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const [score, setScore] = useState(54);
+  const started = useRef(false);
+
+  useEffect(() => {
+    if (!isInView || started.current) return;
+    started.current = true;
+    const start = 54;
+    const target = 98;
+    const duration = 1500;
+    const startTime = performance.now();
+    const frame = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setScore(Math.round(start + (target - start) * eased));
+      if (progress < 1) requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  }, [isInView]);
+
+  const color =
+    score < 70 ? "#ef4444" : score < 90 ? "#f59e0b" : "#22c55e";
+
+  return (
+    <div ref={ref} className="mt-4 rounded-xl bg-[#021524] border border-white/10 p-4">
+      <div className="text-xs text-[#99907b] mb-2">Lighthouse Performance</div>
+      <div className="flex items-center gap-3">
+        <span
+          className="text-4xl font-extrabold transition-colors duration-300"
+          style={{ color }}
+        >
+          {score}
+        </span>
+        <span className="text-xs text-[#99907b]">/ 100</span>
+      </div>
+    </div>
+  );
+}
+
+// ── Tracking card: rank #12 → #3 with gold highlight ──
+function RankTrackingAnimation() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const [rank, setRank] = useState(12);
+  const [done, setDone] = useState(false);
+  const started = useRef(false);
+
+  useEffect(() => {
+    if (!isInView || started.current) return;
+    started.current = true;
+    let current = 12;
+    const target = 3;
+    const interval = setInterval(() => {
+      current--;
+      setRank(current);
+      if (current <= target) {
+        setDone(true);
+        clearInterval(interval);
+      }
+    }, 180);
+    return () => clearInterval(interval);
+  }, [isInView]);
+
+  return (
+    <div ref={ref} className="mt-4 rounded-xl bg-[#021524] border border-white/10 p-4">
+      <div className="text-xs text-[#99907b] mb-2">Local Pack Position</div>
+      <div className="flex items-center gap-3">
+        <span
+          className={`text-4xl font-extrabold transition-colors duration-500 ${
+            done ? "text-[#C9A227]" : "text-[#d1e5fb]"
+          }`}
+        >
+          #{rank}
+        </span>
+        {done && (
+          <span className="text-sm font-semibold text-[#C9A227]">Top 3 ✓</span>
+        )}
       </div>
     </div>
   );
@@ -30,7 +163,7 @@ const services = [
       "Fixes that move your ranking in weeks, not months",
       "Profile built to attract calls, not just views",
     ],
-    mockPanel: <MockGBPPanel />,
+    mockPanel: <GBPStarAnimation />,
     colSpan: "md:col-span-8",
   },
   {
@@ -40,7 +173,7 @@ const services = [
     description:
       "Monthly blog posts, GBP updates, and location-targeted content written to rank in your city. Hands-off and consistent. Cancel any month with no penalties.",
     checklist: null,
-    mockPanel: null,
+    mockPanel: <BlogTypingAnimation />,
     colSpan: "md:col-span-4",
   },
   {
@@ -50,7 +183,7 @@ const services = [
     description:
       "A clean, fast, conversion-focused website, fully built. You review it once, you approve it, it launches. No revision loops, no monthly retainer, no hostage hosting.",
     checklist: null,
-    mockPanel: null,
+    mockPanel: <LighthouseAnimation />,
     colSpan: "md:col-span-4",
   },
   {
@@ -60,7 +193,7 @@ const services = [
     description:
       "We report on ranking movement, profile views, and call volume every month. If something isn't working, we adjust — you don't wait on a quarterly review to find out what happened.",
     checklist: null,
-    mockPanel: null,
+    mockPanel: <RankTrackingAnimation />,
     colSpan: "md:col-span-8",
   },
 ];
@@ -80,7 +213,7 @@ export default function ServicesSection() {
             </h2>
             <p className="text-lg text-[#99907b] leading-relaxed max-w-2xl">
               Most clients start with a call. We review your current Google presence together,
-              identify what's costing you rankings, and figure out the right first step.
+              identify what&apos;s costing you rankings, and figure out the right first step.
             </p>
           </div>
         </AnimatedSection>
@@ -120,7 +253,7 @@ export default function ServicesSection() {
                   </ul>
                 )}
 
-                {/* Optional mock UI panel */}
+                {/* Animation panel */}
                 {service.mockPanel}
               </div>
             ))}
