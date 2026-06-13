@@ -1,3 +1,7 @@
+"use client";
+
+import { useRef, useEffect } from "react";
+import { motion, useInView, useAnimation } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 
 const steps = [
@@ -27,6 +31,42 @@ const steps = [
   },
 ];
 
+const stepDelays = [0, 0.15, 0.3, 0.45];
+
+function AnimatedProcessLine() {
+  const svgRef = useRef<SVGSVGElement>(null);
+  const isInView = useInView(svgRef, { once: true, margin: "-10% 0px" });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start({ pathLength: 1 });
+    }
+  }, [isInView, controls]);
+
+  return (
+    <svg
+      ref={svgRef}
+      className="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] z-0"
+      height="1"
+      style={{ overflow: "visible" }}
+      aria-hidden="true"
+    >
+      <motion.line
+        x1="0"
+        y1="0.5"
+        x2="100%"
+        y2="0.5"
+        stroke="rgba(255,255,255,0.1)"
+        strokeWidth="1"
+        initial={{ pathLength: 0 }}
+        animate={controls}
+        transition={{ duration: 1, delay: 0.2, ease: "easeInOut" }}
+      />
+    </svg>
+  );
+}
+
 export default function HowItWorksSection() {
   return (
     <section className="py-20 md:py-28 px-6 bg-[#021524]">
@@ -48,17 +88,14 @@ export default function HowItWorksSection() {
         </AnimatedSection>
 
         {/* Steps */}
-        <AnimatedSection delay={0.1}>
-          <div className="relative">
-            {/* Horizontal connecting line (desktop only) */}
-            <div className="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-px bg-white/10 z-0" />
+        <div className="relative">
+          {/* Animated SVG connecting line — desktop only */}
+          <AnimatedProcessLine />
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6 relative z-10">
-              {steps.map((step, index) => (
-                <div
-                  key={step.num}
-                  className="group flex flex-col items-center text-center gap-4"
-                >
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6 relative z-10">
+            {steps.map((step, index) => (
+              <AnimatedSection key={step.num} delay={stepDelays[index]}>
+                <div className="group flex flex-col items-center text-center gap-4">
                   {/* Circle */}
                   <div
                     className={`
@@ -80,10 +117,10 @@ export default function HowItWorksSection() {
                   {/* Description */}
                   <p className="text-[#99907b] text-sm leading-relaxed">{step.description}</p>
                 </div>
-              ))}
-            </div>
+              </AnimatedSection>
+            ))}
           </div>
-        </AnimatedSection>
+        </div>
       </div>
     </section>
   );
