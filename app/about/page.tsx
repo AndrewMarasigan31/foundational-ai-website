@@ -12,7 +12,7 @@ const principles = [
     num: "02",
     title: "You stay in control",
     description:
-      "Nothing goes live without your review and approval. Every draft, every update, every change — you see it before your customers do.",
+      "Nothing goes live without your review and approval. Every draft, every update, every change. You see it before your customers do.",
   },
   {
     num: "03",

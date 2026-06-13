@@ -221,7 +221,7 @@ export default function ServicesPage() {
         bg="bg-[#000f1d]"
         icon="article"
         title="Local SEO Content"
-        description="Monthly blog posts, GBP updates, and location-targeted content written to rank in your city. Hands-off and consistent — we handle the research, writing, and publishing. Cancel any month with no penalties."
+        description="Monthly blog posts, GBP updates, and location-targeted content written to rank in your city. Hands-off and consistent. We handle the research, writing, and publishing. Cancel any month with no penalties."
         deliverables={[
           "Monthly blog posts targeting local search queries in your city",
           "Google Business Profile post updates every two weeks",
@@ -259,7 +259,7 @@ export default function ServicesPage() {
         bg="bg-[#021524]"
         icon="travel_explore"
         title="AI Search Visibility"
-        description="ChatGPT, Perplexity, and Google AI Overviews are now where customers start their search. We optimize your structured data, authority signals, and content so your business shows up in AI-generated answers — not just traditional results."
+        description="ChatGPT, Perplexity, and Google AI Overviews are now where customers start their search. We optimize your structured data, authority signals, and content so your business shows up in AI-generated answers, not just traditional results."
         deliverables={[
           "Structured data markup (schema.org) for your business and services",
           "Authority signal building across directories and citations",
@@ -337,9 +337,9 @@ export default function ServicesPage() {
         description="A clean, fast, conversion-focused website, fully built. You review it once, you approve it, it launches. No revision loops, no monthly retainer, no hostage hosting."
         deliverables={[
           "Clean, fast site built to convert local visitors into calls",
-          "One review, one approval, one launch — no drawn-out cycles",
+          "One review, one approval, one launch. No drawn-out cycles.",
           "No monthly retainer required after launch",
-          "Hosted wherever you want — no lock-in",
+          "Hosted wherever you want. No lock-in.",
         ]}
         visual={
           <div className="rounded-2xl bg-[#0e2131] border border-white/10 p-6">
@@ -371,11 +371,11 @@ export default function ServicesPage() {
         bg="bg-[#000f1d]"
         icon="monitoring"
         title="Performance Tracking"
-        description="We report on ranking movement, profile views, and call volume every month. If something isn't working, we adjust. Adjustments are included — not billed as a separate service."
+        description="We report on ranking movement, profile views, and call volume every month. If something isn't working, we adjust. Adjustments are included, not billed as a separate service."
         deliverables={[
           "Monthly report on local rankings, profile views, and call volume",
           "Competitor position tracking included",
-          "Adjustments made when results stall — no extra charge",
+          "Adjustments made when results stall. No extra charge.",
           "Plain-English summary, not a wall of data",
         ]}
         visual={

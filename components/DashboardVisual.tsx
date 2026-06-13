@@ -31,7 +31,7 @@ function StepHeader({ label, index, isInView }: { label: string; index: number; 
         <CheckIcon />
       </motion.span>
       <p className="text-sm font-semibold text-[#d1e5fb]">
-        Step {index + 1} — {label}
+        Step {index + 1}: {label}
       </p>
     </div>
   );
