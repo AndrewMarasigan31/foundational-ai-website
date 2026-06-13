@@ -67,7 +67,7 @@ export function BlogTypingAnimation() {
 }
 
 // ── Website card: Lighthouse score 54 → 98 with color transition ──
-function LighthouseAnimation() {
+export function LighthouseAnimation() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
   const [score, setScore] = useState(54);
@@ -146,7 +146,7 @@ export function AISearchAnimation() {
 }
 
 // ── Lead Reactivation card: SMS replies appearing ──
-function LeadReactivationAnimation() {
+export function LeadReactivationAnimation() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
   const [visibleCount, setVisibleCount] = useState(0);
@@ -193,7 +193,7 @@ function LeadReactivationAnimation() {
 }
 
 // ── Tracking card: rank #12 → #3 with gold highlight ──
-function RankTrackingAnimation() {
+export function RankTrackingAnimation() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
   const [rank, setRank] = useState(12);

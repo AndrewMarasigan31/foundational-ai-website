@@ -3,10 +3,14 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
+import CTABand from "@/components/CTABand";
 import {
   GBPStarAnimation,
   BlogTypingAnimation,
   AISearchAnimation,
+  LeadReactivationAnimation,
+  LighthouseAnimation,
+  RankTrackingAnimation,
 } from "@/components/ServicesSection";
 
 const SERVICE_SECTIONS = [
@@ -289,24 +293,120 @@ export default function ServicesPage() {
         reverse={false}
       />
 
-      {/* Service section placeholders for US-024 */}
-      {[
-        { id: "lead-reactivation", label: "Lead Reactivation Sprint" },
-        { id: "website", label: "Website Built to Convert" },
-        { id: "performance-tracking", label: "Performance Tracking" },
-      ].map((s) => (
-        <section
-          key={s.id}
-          id={s.id}
-          className="py-32 bg-[#000f1d] border-t border-white/5"
-        >
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <p className="text-[#99907b] text-sm">
-              {s.label} — content coming in next iteration
-            </p>
+      {/* Service 4: Lead Reactivation Sprint — visual left / copy right */}
+      <ServiceSectionBlock
+        id="lead-reactivation"
+        bg="bg-[#000f1d]"
+        icon="mark_chat_unread"
+        title="Lead Reactivation Sprint"
+        description="Most businesses have revenue sitting in old contacts and cold leads. We build a 90-day SMS and email follow-up sequence, set up your CRM workflow, and turn a neglected list back into booked appointments. Live in 5 to 7 business days."
+        deliverables={[
+          "90-day SMS and email sequence written and loaded",
+          "CRM workflow setup with automated follow-up triggers",
+          "Contact list cleanup and segmentation",
+          "Review and referral ask sequence included",
+        ]}
+        visual={
+          <div className="rounded-2xl bg-[#0e2131] border border-white/10 p-6">
+            <div className="text-xs text-[#99907b] mb-1 flex items-center gap-1.5">
+              <span className="material-symbols-outlined text-sm text-[#C9A227]">mark_chat_unread</span>
+              Cold leads responding
+            </div>
+            <LeadReactivationAnimation />
+            <div className="mt-4 grid grid-cols-2 gap-2">
+              {[
+                { label: "Go-live", value: "5–7 days" },
+                { label: "Sequence length", value: "90 days" },
+                { label: "Channels", value: "SMS + Email" },
+                { label: "Pricing", value: "No lock-in" },
+              ].map((stat) => (
+                <div key={stat.label} className="bg-[#021524] rounded-lg px-3 py-2 text-center">
+                  <div className="text-[#C9A227] font-bold text-sm">{stat.value}</div>
+                  <div className="text-[#99907b] text-xs mt-0.5">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
-        </section>
-      ))}
+        }
+        reverse={true}
+      />
+
+      {/* Service 5: Website Built to Convert — copy left / visual right */}
+      <ServiceSectionBlock
+        id="website"
+        bg="bg-[#021524]"
+        icon="web"
+        title="Website Built to Convert"
+        description="A clean, fast, conversion-focused website, fully built. You review it once, you approve it, it launches. No revision loops, no monthly retainer, no hostage hosting."
+        deliverables={[
+          "Clean, fast site built to convert local visitors into calls",
+          "One review, one approval, one launch — no drawn-out cycles",
+          "No monthly retainer required after launch",
+          "Hosted wherever you want — no lock-in",
+        ]}
+        visual={
+          <div className="rounded-2xl bg-[#0e2131] border border-white/10 p-6">
+            <div className="text-xs text-[#99907b] mb-1 flex items-center gap-1.5">
+              <span className="material-symbols-outlined text-sm text-[#C9A227]">web</span>
+              Performance score
+            </div>
+            <LighthouseAnimation />
+            <div className="mt-4 space-y-2">
+              {[
+                "Fully responsive across all devices",
+                "Built for speed and Core Web Vitals",
+                "Conversion-optimized layout and copy",
+              ].map((item) => (
+                <div key={item} className="flex items-center gap-2 text-xs text-[#d1e5fb]/70">
+                  <span className="material-symbols-outlined text-[#C9A227] text-xs">check</span>
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        }
+        reverse={false}
+      />
+
+      {/* Service 6: Performance Tracking — visual left / copy right */}
+      <ServiceSectionBlock
+        id="performance-tracking"
+        bg="bg-[#000f1d]"
+        icon="monitoring"
+        title="Performance Tracking"
+        description="We report on ranking movement, profile views, and call volume every month. If something isn't working, we adjust. Adjustments are included — not billed as a separate service."
+        deliverables={[
+          "Monthly report on local rankings, profile views, and call volume",
+          "Competitor position tracking included",
+          "Adjustments made when results stall — no extra charge",
+          "Plain-English summary, not a wall of data",
+        ]}
+        visual={
+          <div className="rounded-2xl bg-[#0e2131] border border-white/10 p-6">
+            <div className="text-xs text-[#99907b] mb-1 flex items-center gap-1.5">
+              <span className="material-symbols-outlined text-sm text-[#C9A227]">monitoring</span>
+              Local pack position
+            </div>
+            <RankTrackingAnimation />
+            <div className="mt-4 grid grid-cols-2 gap-2">
+              {[
+                { label: "Reporting", value: "Monthly" },
+                { label: "Adjustments", value: "Included" },
+                { label: "Tracked metrics", value: "3+" },
+                { label: "Format", value: "Plain English" },
+              ].map((stat) => (
+                <div key={stat.label} className="bg-[#021524] rounded-lg px-3 py-2 text-center">
+                  <div className="text-[#C9A227] font-bold text-sm">{stat.value}</div>
+                  <div className="text-[#99907b] text-xs mt-0.5">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        }
+        reverse={true}
+      />
+
+      <CTABand />
     </main>
   );
 }
