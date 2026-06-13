@@ -424,3 +424,16 @@
   - When swapping body font, apply the new font's `.className` to `<body>`, not just the CSS variable — next/font generates both
   - Decorative elements (faded gold numbers, animated counter spans) should NOT get `font-display` even if they use `font-extrabold`
 ---
+
+## 2026-06-13 - US-028
+- Created app/contact/page.tsx with hero and two-column layout
+- Hero: dot grid background + gold radial glow, H1 with Playfair italic "Audit" accent, subhead
+- Left panel: 4 cover items (Material Symbols icons in gold + muted text), trust signal divider with 3 check_circle rows
+- Right panel: contact-form-slot placeholder div (styled card with min-h for form to fill later)
+- AnimatedSection wraps hero, left panel (direction='left', delay=0.1), right panel (direction='right', delay=0.2)
+- Build passes (475B /contact page); typecheck passes; manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - Contact page is a server component — no "use client" needed since AnimatedSection handles client animation
+  - The `id="contact-form-slot"` div in the right column is the mounting point for ContactForm (US-029)
+  - Grid background pattern reused from about page: `backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)"` + `backgroundSize: "32px 32px"`
+---
