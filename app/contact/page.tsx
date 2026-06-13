@@ -28,9 +28,8 @@ const trustSignals = [
 export default function ContactPage() {
   return (
     <main>
-      {/* Hero */}
       <section
-        className="relative overflow-hidden bg-[#021524] py-24 md:py-32 px-6"
+        className="relative overflow-hidden bg-[#021524] pt-24 md:pt-32 pb-16 md:pb-24 px-6"
         style={{
           backgroundImage:
             "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)",
@@ -46,7 +45,9 @@ export default function ContactPage() {
           }}
         />
 
-        <div className="relative z-10 max-w-3xl mx-auto text-center">
+        <div className="relative z-10 max-w-7xl mx-auto">
+          {/* Headline centred above the grid */}
+          <div className="text-center mb-12 md:mb-16">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
               Book Your Free{" "}
               <em className="font-serif not-italic text-[#C9A227]">Audit</em>{" "}
@@ -56,14 +57,12 @@ export default function ContactPage() {
               No pitch. No pressure. 30 minutes to map exactly where revenue is
               leaking.
             </p>
-        </div>
-      </section>
+          </div>
 
-      {/* Two-column layout */}
-      <section className="bg-[#021524] py-16 md:py-24 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
-          {/* Left — Info panel (below form on mobile) */}
-          <div className="flex flex-col gap-8 order-last md:order-first">
+          {/* Two-column grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+            {/* Left — Info panel (below form on mobile) */}
+            <div className="flex flex-col gap-8 order-last md:order-first">
               <h2 className="font-display font-bold text-xl text-[#d1e5fb]">
                 What We Cover on the Call
               </h2>
@@ -93,11 +92,12 @@ export default function ContactPage() {
                   </div>
                 ))}
               </div>
-          </div>
+            </div>
 
-          {/* Right — Form (first on mobile) */}
-          <div id="contact-form-slot" className="order-first md:order-last">
-            <ContactForm />
+            {/* Right — Form (first on mobile) */}
+            <div id="contact-form-slot" className="order-first md:order-last">
+              <ContactForm />
+            </div>
           </div>
         </div>
       </section>
