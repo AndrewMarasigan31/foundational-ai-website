@@ -39,7 +39,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Depends on US-032 being merged first. LocalPackVisual has its own internal motion.div with initial='hidden' that is independent of the AnimatedSection wrapper — both must be fixed. A flat colour background is acceptable if 21st.dev doesn't produce an SVG map."
     },
     {

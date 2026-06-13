@@ -21,3 +21,18 @@ Started: Sat Jun 13 15:36:08 PST 2026
   - Playwright MCP server requires system Chrome at /Applications/Google Chrome.app. Use Python playwright (from playwright.sync_api) or `playwright screenshot` CLI instead.
   - `npx tsc` resolves to a stale npm package — use `npm run build` or `./node_modules/.bin/tsc` for typechecking
 ---
+
+## 2026-06-13 - US-033
+- Created components/LocalPackCard.tsx as a Server Component (no 'use client') — pure JSX with SVG map + static listing cards
+- Removed all Framer Motion dependencies: replaced motion.div container/card variants with plain divs + Tailwind transition-colors for hover
+- Kept SVG SMIL <animate> pulse rings on gold pins — these are pure SVG animations that work with JS disabled
+- Updated HeroSection.tsx: swapped import LocalPackVisual → import LocalPackCard, updated JSX
+- Deleted components/LocalPackVisual.tsx
+- Files changed: components/LocalPackCard.tsx (new), components/HeroSection.tsx (import + JSX), components/LocalPackVisual.tsx (deleted)
+- SSR check: 0 opacity:0 instances, 0 translateY(24px) instances in curl output
+- Browser screenshot at 1280px confirms card renders with map, gold pins, badge, and all 3 listings visible on first paint
+- **Learnings for future iterations:**
+  - 21st.dev mcp__21st-dev-magic__21st_magic_component_builder returned [object Object] — not usable for this task; hand-craft the component instead
+  - SVG SMIL <animate> elements are purely declarative, work with JS disabled, and are safe in Server Components
+  - To convert a Framer Motion component to SSR-safe: remove 'use client', replace motion.div with div, replace variants+animate with Tailwind CSS classes, keep CSS transitions for hover
+---
