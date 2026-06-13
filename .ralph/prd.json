@@ -100,7 +100,7 @@
         "Verify in browser using dev-browser skill: at 1280px confirm headline and form feel connected with no dead zone; at 375px confirm form is still visible above the fold"
       ],
       "priority": 7,
-      "passes": false,
+      "passes": true,
       "notes": "The dead zone is caused by py-24 md:py-32 bottom padding on the hero section stacking with py-16 md:py-24 top padding on the two-column section. Merging into one section eliminates the double padding structurally."
     },
     {
@@ -117,7 +117,7 @@
         "Verify in browser using dev-browser skill: at 1280px confirm the card fills the right column and reads as a bold visual anchor alongside the headline"
       ],
       "priority": 8,
-      "passes": false,
+      "passes": true,
       "notes": "LocalPackCard uses an SVG with viewBox='0 0 300 260' — it scales correctly at any container width since width is w-full. The listing cards overlay uses absolute positioning inside the SVG container which also scales proportionally."
     },
     {

@@ -1,3 +1,27 @@
+## 2026-06-13 - US-043
+- Removed `max-w-sm mx-auto` from the root div in components/LocalPackCard.tsx — card now fills its container at full width
+- Removed the `<div className="w-full max-w-xl">` wrapper in HeroSection.tsx right column — LocalPackCard renders directly in the flex container
+- Files changed: components/LocalPackCard.tsx, components/HeroSection.tsx
+- Typecheck passes; browser testing unavailable (Chrome not installed)
+- **Learnings for future iterations:**
+  - SVG with viewBox scales proportionally at any container width since width is w-full — removing max-w constraints doesn't break proportions
+  - When a component has `mx-auto` along with `max-w-X`, removing both constraints allows it to fill its grid/flex parent without centering itself independently
+---
+
+## 2026-06-13 - US-042
+- Merged two separate sections (hero + two-column) in app/contact/page.tsx into a single `<section>`
+- Moved headline and subtitle into a centered `div` (mb-12 md:mb-16) at the top of the unified section
+- Preserved dot-grid background pattern and gold radial glow on the unified section
+- Changed padding from `py-24 md:py-32` + `py-16 md:py-24` to `pt-24 md:pt-32 pb-16 md:pb-24` — eliminating the double-padding dead zone
+- Container changed from `max-w-3xl mx-auto` (hero) to `max-w-7xl mx-auto` to match the two-column grid width
+- Mobile order unchanged: form first (`order-first md:order-last`), trust signals below (`order-last md:order-first`)
+- Files changed: app/contact/page.tsx
+- Typecheck passes; browser testing unavailable (Chrome not installed)
+- **Learnings for future iterations:**
+  - Dead zone between two adjacent sections with the same bg color is eliminated by merging into one section and using `pt-X pb-Y` instead of `py-X` on each
+  - Centered heading block above a grid: use `text-center mb-X` div before the `grid` div, both inside the same container
+---
+
 ## 2026-06-13 - US-041
 - Removed AnimatedSection import and all 4 AnimatedSection wrappers from app/about/page.tsx
 - Section 1 hero h1, Section 2 story div, Section 3 principles grid (h2 + grid div), Section 4 don't-do list — all now render without wrappers
