@@ -20,7 +20,7 @@ const grayPins = [
 
 export default function LocalPackCard() {
   return (
-    <div className="relative w-full max-w-sm mx-auto select-none overflow-hidden rounded-2xl">
+    <div className="relative w-full select-none overflow-hidden rounded-2xl">
       {/* SVG Map Background */}
       <svg
         viewBox="0 0 300 260"

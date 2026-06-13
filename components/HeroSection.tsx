@@ -50,9 +50,7 @@ export default function HeroSection() {
 
         {/* Right column: LocalPackCard */}
         <div className="flex items-center justify-center">
-          <div className="w-full max-w-xl">
-            <LocalPackCard />
-          </div>
+          <LocalPackCard />
         </div>
       </div>
     </section>
