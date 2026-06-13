@@ -1,3 +1,17 @@
+## Codebase Patterns
+- This is a Next.js 14 app with Tailwind CSS; components are in /components, pages in /app
+- Tailwind opacity utilities (text-white/60, text-white/30, etc.) are preferred over hardcoded rgba values for consistency
+- stepNumColors array pattern: define per-step class arrays outside the component and index into them in the .map() for clean conditional styling
+
 # Ralph Progress Log
 Started: Sat Jun 13 18:50:20 PST 2026
+---
+
+## 2026-06-13 - US-046
+- Replaced gold/stepper step number treatment with opacity-based progression (white → white/60 → white/30 → white/15)
+- Removed conditional class logic and hover-gold states; added stepNumColors array for clean per-step lookup
+- Files changed: components/HowItWorksSection.tsx
+- **Learnings for future iterations:**
+  - The design-visibility-overhaul branch had all the Next.js components; this branch was branched from main (which lacked them) — had to merge design-visibility-overhaul in first
+  - Tailwind opacity fractions on text work well for progressive fading without custom colors
 ---

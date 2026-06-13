@@ -15,7 +15,7 @@
         "Typecheck passes"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": "Current implementation: step 01 text-[#C9A227], steps 02-04 text-white/10 with hover gold. This looks like a form stepper (current step highlighted, rest greyed out) rather than a bold numbered list. The fix is to make all four numbers share the same visual language."
     },
     {
