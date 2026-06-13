@@ -147,7 +147,7 @@ function AnimatedLine() {
 
 export default function CustomerJourneySection() {
   return (
-    <section className="py-20 md:py-28 px-6 bg-[#000f1d]">
+    <section className="py-20 md:py-28 px-6 bg-[#0e2131]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
