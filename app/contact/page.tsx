@@ -73,7 +73,7 @@ export default function ContactPage() {
                     <span className="material-symbols-outlined text-[#C9A227] text-xl leading-none shrink-0 mt-0.5">
                       {item.icon}
                     </span>
-                    <span className="text-[#99907b] leading-relaxed">
+                    <span className="text-[#d1e5fb] leading-relaxed">
                       {item.text}
                     </span>
                   </li>
