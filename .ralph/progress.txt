@@ -1,3 +1,21 @@
+## 2026-06-13 - US-029
+- Created components/ContactForm.tsx as a 'use client' component
+- 4 text inputs: Name, Email, Business Name (required), Website URL (optional)
+- Inputs styled with #0e2131 bg, white/10 border, gold focus ring, muted placeholder
+- Service selection via toggle pill buttons (5 options) with selected/hover states
+- Submit button: gold CTA with loading spinner (animate-spin) and disabled state while pending
+- Client-side validation on blur and submit — inline red error text per field
+- Success state: replaces form with animated thank-you panel (check_circle icon, heading, subhead, services link)
+- Error state: inline red banner below submit button, form stays visible for retry
+- Also created app/actions/submitContact.ts stub (full implementation is US-030)
+- Updated app/contact/page.tsx to render ContactForm inside #contact-form-slot div
+- Build passes (2.31kB /contact); typecheck passes; manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - Dynamic import of server action (`await import("@/app/actions/submitContact")`) avoids the need for server action to exist at typecheck time for the form component — but the stub must still exist for TSC path resolution
+  - Toggle pill pattern: `type="button"` on pills inside a form prevents accidental form submission
+  - Success/error states can share the card wrapper by conditionally rendering form vs. thank-you panel without AnimatePresence (simpler and still clean)
+---
+
 ## 2026-06-13 - US-026
 - Added Playfair Display italic font to app/layout.tsx via next/font/google (italic style, weights 400/700, variable --font-playfair)
 - Added --font-playfair variable to <html> element alongside Plus Jakarta Sans
