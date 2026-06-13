@@ -60,7 +60,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "Independent of US-032 and US-033 — can be implemented in any order relative to those. TrustBar is currently a Server Component and must stay that way."
     },
     {

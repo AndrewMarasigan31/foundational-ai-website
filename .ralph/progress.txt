@@ -1,9 +1,23 @@
+## 2026-06-13 - US-034
+- Rewrote TrustBar.tsx: added 3-stat callout row (47+, 4.8★, 68%) above the 4 industry pills
+- Two-row layout: grid of 3 stat cards (value + label) then a border-t divider, then flex-wrap pills
+- Root div uses `w-full max-w-lg` so the grid fills the hero's centering flex container; without `w-full` the grid shrinks to content width and the sm:grid-cols-3 breakpoint appears not to trigger
+- Responsive: `grid-cols-1 sm:grid-cols-3` — stacked on mobile (375px), 3-column on desktop (1280px)
+- Component stays a Server Component (no 'use client') — purely static JSX + Tailwind
+- Files changed: components/TrustBar.tsx
+- **Learnings for future iterations:**
+  - When TrustBar/similar component is inside a `flex flex-col items-center` parent, add `w-full` to the component root to prevent it from shrinking to content width (which makes grid breakpoints seem broken)
+  - First Playwright screenshot attempt failed due to CSS not loading (dev server not ready after 4s sleep); wait_until='networkidle' in page.goto() is needed
+  - 21st.dev mcp tool still returning [object Object] — always hand-craft components
+---
+
 ## Codebase Patterns
 - AnimatedSection uses useMounted guard (useState/useEffect) to prevent Framer Motion SSR opacity:0 serialisation; initial={false} on SSR, initial="hidden" on client
 - CustomerJourneySection has its own 6 direct motion.div elements with initial={{ opacity: 0, y: 24 }} — these are NOT wrapped in AnimatedSection
 - Playwright CLI available at /opt/homebrew/bin/playwright; Python playwright also works: `python3 -c "from playwright.sync_api import sync_playwright; ..."`
 - SSR opacity:0 count can be verified with curl + python regex; AnimatedSection's translateY(24px) variant is confirmed NOT present when useMounted guard is active
 - Build check: use `cd /Users/andrew/foundational-ai-website/foundational-ai-website && npm run build` (not `npx tsc`)
+- Components inside `flex flex-col items-center` parent need `w-full` on their root to prevent grid breakpoints from appearing broken (the grid shrinks to content width otherwise)
 ---
 
 # Ralph Progress Log
