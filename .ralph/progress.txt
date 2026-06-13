@@ -1,3 +1,15 @@
+## 2026-06-13 - US-031
+- Added AnimatePresence + motion.div to ContactForm.tsx success state
+- Success panel: motion.div key="success" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, ease: "easeOut" }}
+- Restructured component to return a single AnimatePresence with {success ? <motion.div> : <form>} ternary
+- Form element given key="form" so AnimatePresence tracks both branches for exit animation
+- Error banner, isPending double-submit prevention, and inline validation already in place from US-029
+- Build passes (4.15kB /contact); typecheck passes; manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - AnimatePresence mode="wait" with keyed children (key="success" / key="form") is the cleanest pattern for swapping two views with enter/exit animations
+  - When refactoring from early-return pattern to AnimatePresence ternary, the entire JSX must be inside the AnimatePresence — the component returns one tree, not two
+---
+
 ## 2026-06-13 - US-030
 - Server action at app/actions/submitContact.ts was already fully implemented as part of US-029 (stub was complete)
 - Created .env.local.example with GHL_WEBHOOK_URL=https://your-ghl-webhook-url-here
