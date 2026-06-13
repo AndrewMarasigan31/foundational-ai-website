@@ -50,7 +50,6 @@ export default function HeroSection() {
 
         <TrustBar />
 
-        {/* LocalPackVisual scroll-reveal */}
         <AnimatedSection direction="up" delay={0.3}>
           <div className="w-full max-w-xl">
             <LocalPackCard />
