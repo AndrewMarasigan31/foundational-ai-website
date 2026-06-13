@@ -1,4 +1,3 @@
-import AnimatedSection from "@/components/AnimatedSection";
 import CTABand from "@/components/CTABand";
 
 const principles = [
@@ -42,45 +41,38 @@ export default function AboutPage() {
         }}
       >
         <div className="max-w-3xl mx-auto text-center">
-          <AnimatedSection>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
-              We built this because local businesses keep losing to bigger
-              competitors who simply show up better online.
-            </h1>
-          </AnimatedSection>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
+            We built this because local businesses keep losing to bigger
+            competitors who simply show up better online.
+          </h1>
         </div>
       </section>
 
       {/* Section 2 — Story */}
       <section className="bg-[#000f1d] py-20 md:py-28 px-6">
         <div className="max-w-3xl mx-auto">
-          <AnimatedSection>
-            <div className="flex flex-col gap-6 text-lg text-[#99907b] leading-relaxed">
-              <p>
-                Most local SEO agencies sell bloated retainers and generic advice.
-                We scope clearly, execute lean, and report on what actually moved.
-              </p>
-              <p>
-                We use AI tools to move faster on research and content, but every
-                output is reviewed and approved by a human before it touches your
-                business.
-              </p>
-            </div>
-          </AnimatedSection>
+          <div className="flex flex-col gap-6 text-lg text-[#99907b] leading-relaxed">
+            <p>
+              Most local SEO agencies sell bloated retainers and generic advice.
+              We scope clearly, execute lean, and report on what actually moved.
+            </p>
+            <p>
+              We use AI tools to move faster on research and content, but every
+              output is reviewed and approved by a human before it touches your
+              business.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Section 3 — Principles */}
       <section className="bg-[#021524] py-20 md:py-28 px-6">
         <div className="max-w-7xl mx-auto">
-          <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#d1e5fb] text-center mb-14 tracking-tight">
-              How We Work
-            </h2>
-          </AnimatedSection>
+          <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#d1e5fb] text-center mb-14 tracking-tight">
+            How We Work
+          </h2>
 
-          <AnimatedSection delay={0.1}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {principles.map((p) => (
                 <div
                   key={p.num}
@@ -98,28 +90,25 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-          </AnimatedSection>
         </div>
       </section>
 
       {/* Section 4 — What we don't do */}
       <section className="bg-[#000f1d] py-20 md:py-28 px-6">
         <div className="max-w-3xl mx-auto">
-          <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#d1e5fb] mb-10 tracking-tight">
-              What We Don&apos;t Do
-            </h2>
-            <ul className="flex flex-col gap-4">
-              {dontDos.map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <span className="mt-1 text-red-400/80 material-symbols-outlined text-xl leading-none shrink-0">
-                    close
-                  </span>
-                  <span className="text-lg text-[#99907b] leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </AnimatedSection>
+          <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#d1e5fb] mb-10 tracking-tight">
+            What We Don&apos;t Do
+          </h2>
+          <ul className="flex flex-col gap-4">
+            {dontDos.map((item) => (
+              <li key={item} className="flex items-start gap-3">
+                <span className="mt-1 text-red-400/80 material-symbols-outlined text-xl leading-none shrink-0">
+                  close
+                </span>
+                <span className="text-lg text-[#99907b] leading-relaxed">{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
