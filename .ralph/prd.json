@@ -1,157 +1,93 @@
 {
   "project": "Foundational AI Systems Website",
-  "branchName": "ralph/design-visibility-overhaul",
-  "description": "Design visibility and layout overhaul — remove section-level scroll-gating, refactor hero to two-column layout, apply alternating section backgrounds, fix mobile contact form ordering, make services page fully static, and polish hero/HowItWorks/About/Contact layout.",
+  "branchName": "ralph/landing-page-polish",
+  "description": "Landing page polish pass — fix HowItWorks step number color progression, reduce oversized mobile numbers, widen DashboardSection, sharpen FAQ heading, fix CTA Band line break, and lift contact trust column text color.",
   "userStories": [
     {
-      "id": "US-036",
-      "title": "Remove section-level AnimatedSection wrappers from homepage sections",
-      "description": "As a site visitor, I want all homepage section content to be visible on load so that I can read the page without scrolling or waiting for JavaScript-triggered animations.",
+      "id": "US-046",
+      "title": "Fix HowItWorks step number color progression",
+      "description": "As a site visitor, I want the four process step numbers to feel like a unified visual pattern so that the section reads as a bold progression rather than a broken stepper.",
       "acceptanceCriteria": [
-        "Remove all AnimatedSection wrappers that enclose entire section content blocks (heading + grid/list together) from: DashboardSection, ServicesSection, HowItWorksSection, WhyUsSection, FAQSection, CTABand",
-        "Each section's content renders fully visible on load — no opacity:0 or transform applied to section-level wrappers",
-        "CustomerJourneySection motion.divs (SVG animated lines and funnel elements) are left untouched",
-        "curl http://localhost:3000 | grep 'opacity: 0' returns 0 matches",
+        "Remove the gold-only-on-step-01 treatment where step 01 is #C9A227 and steps 02-04 are text-white/10",
+        "Replace with a consistent opacity-based progression: step 01 at full opacity (#d1e5fb or white), steps 02-04 at decreasing opacity (e.g. white/60, white/30, white/15) OR all four steps at the same muted color (#99907b or white/40)",
+        "The visual result must read as a connected numbered sequence, not a stepper UI",
+        "Hover state (group-hover:text-[#C9A227]) may be preserved or removed — whichever reads cleaner",
         "Typecheck passes"
       ],
       "priority": 1,
-      "passes": true,
-      "notes": ""
+      "passes": false,
+      "notes": "Current implementation: step 01 text-[#C9A227], steps 02-04 text-white/10 with hover gold. This looks like a form stepper (current step highlighted, rest greyed out) rather than a bold numbered list. The fix is to make all four numbers share the same visual language."
     },
     {
-      "id": "US-037",
-      "title": "Remove AnimatedSection from services page",
-      "description": "As a site visitor on the services page, I want each service section's content to be visible immediately when I scroll to it.",
+      "id": "US-047",
+      "title": "Reduce HowItWorks display number size on mobile",
+      "description": "As a mobile visitor, I want the large process step numbers to be visually impactful without overwhelming the viewport width.",
       "acceptanceCriteria": [
-        "Remove the AnimatedSection wrapper from inside the ServiceSection render component in app/services/page.tsx",
-        "StickyServiceNav and IntersectionObserver logic remain intact",
+        "Add a responsive size breakpoint to the display number span: smaller at mobile (text-5xl or text-6xl), keeping text-8xl at md and above",
+        "The number must still be the dominant visual element in each step card on mobile",
+        "Step title and description text sizes are unchanged",
         "Typecheck passes"
       ],
       "priority": 2,
-      "passes": true,
-      "notes": ""
+      "passes": false,
+      "notes": "Current: text-8xl font-extrabold with no mobile override. At 375px this is ~96px — almost the full viewport width for a single character. Use text-5xl md:text-8xl or text-6xl md:text-8xl."
     },
     {
-      "id": "US-038",
-      "title": "Fix mobile contact form order and remove AnimatedSection from contact page",
-      "description": "As a mobile user navigating to /contact, I want the form to be the first thing I see.",
+      "id": "US-048",
+      "title": "Widen DashboardSection content column",
+      "description": "As a desktop visitor, I want the GBP optimization sequence to fill more of the screen so that it doesn't appear to float in empty gutters.",
       "acceptanceCriteria": [
-        "On mobile form appears above trust signals; on desktop trust left / form right unchanged",
-        "All AnimatedSection wrappers removed from app/contact/page.tsx",
+        "Change the GBPOptimizationSequence wrapper from max-w-2xl to max-w-4xl in components/DashboardVisual.tsx",
+        "The section heading and subhead wrapper in DashboardSection.tsx may also be widened from max-w-3xl/max-w-2xl if it improves alignment",
+        "The four step cards should still stack vertically (space-y-4) — no layout change to the cards themselves",
+        "On mobile the column remains full width (no change needed)",
         "Typecheck passes"
       ],
       "priority": 3,
-      "passes": true,
-      "notes": ""
+      "passes": false,
+      "notes": "Current: max-w-2xl mx-auto in GBPOptimizationSequence root div. At 1440px this creates ~500px of empty space on each side. Widening to max-w-4xl (896px) keeps it readable while filling the section better."
     },
     {
-      "id": "US-039",
-      "title": "Refactor hero section to two-column layout",
-      "description": "As a site visitor, I want to see the local pack widget alongside the hero headline without scrolling.",
+      "id": "US-049",
+      "title": "Replace FAQ section heading with punchier copy",
+      "description": "As a site visitor, I want the FAQ section heading to be as direct and confident as the other headings on the page.",
       "acceptanceCriteria": [
-        "Two-column grid at md breakpoint: text/CTAs/TrustBar left, LocalPackCard right",
-        "Both columns visible on load with no AnimatedSection wrapper",
+        "Replace the current FAQ heading 'Things Worth Asking Before You Hire Anyone' with a shorter, more direct heading",
+        "Recommended replacement: 'Questions We Get Every Time' or 'What People Ask Before They Book' — choose whichever fits the brand voice (direct, confident, no fluff)",
+        "The heading className (font-display font-extrabold text-[#d1e5fb] tracking-tight) is unchanged",
         "Typecheck passes"
       ],
       "priority": 4,
-      "passes": true,
-      "notes": ""
+      "passes": false,
+      "notes": "Current heading is 8 words and reads like a listicle subheading. Compare to other page headings: 'Your Competitors Rank Higher. That's Fixable.' — confident and short. The FAQ heading should match that energy."
     },
     {
-      "id": "US-040",
-      "title": "Apply alternating section backgrounds across homepage",
-      "description": "As a site visitor, I want visually distinct section backgrounds as I scroll down the homepage.",
+      "id": "US-050",
+      "title": "Fix CTA Band heading line break",
+      "description": "As a site visitor, I want the CTA Band headline to break cleanly across lines without creating a short orphaned word on the last line.",
       "acceptanceCriteria": [
-        "Sections alternate #021524 / #0e2131 in correct order",
+        "Add a max-w constraint to the CTA Band heading (e.g. max-w-xl or max-w-2xl) so the text wraps at a natural point",
+        "The heading 'Start with a free audit call. No pitch, no pressure.' should break after 'call.' leaving 'No pitch, no pressure.' on its own line — or wrap earlier if the viewport is narrow",
+        "Do not change the copy or the italic/font treatment on 'free'",
         "Typecheck passes"
       ],
       "priority": 5,
-      "passes": true,
-      "notes": ""
+      "passes": false,
+      "notes": "The orphan happens because the heading has no max-w and stretches to fill the section width. A max-w-xl or max-w-2xl centered on the heading element will force a clean break."
     },
     {
-      "id": "US-041",
-      "title": "Remove AnimatedSection from About page",
-      "description": "As a site visitor on /about, I want all page content to be visible immediately on load so that I can read the story, principles, and what-we-don't-do sections without scrolling.",
+      "id": "US-051",
+      "title": "Lift contact page trust column text to primary color",
+      "description": "As a site visitor on the contact page, I want the 'What We Cover on the Call' bullet points to read as selling points rather than fine print.",
       "acceptanceCriteria": [
-        "Remove AnimatedSection import and all AnimatedSection wrappers from app/about/page.tsx",
-        "All four sections (hero quote, story paragraphs, principles grid, don't-do list) render fully visible on load",
-        "No opacity:0 or transform inline styles appear in the SSR HTML for /about",
-        "The principles grid (3 cards with large background numbers) remains correctly styled after wrapper removal",
-        "Typecheck passes",
-        "Verify in browser using dev-browser skill: navigate to /about and confirm all sections are visible without scrolling"
+        "In app/contact/page.tsx, change the trust column bullet text color from text-[#99907b] (muted) to text-[#d1e5fb] (primary light)",
+        "The bullet icon color (text-[#C9A227]) remains unchanged",
+        "The section label ('What We Cover on the Call') color remains unchanged",
+        "Typecheck passes"
       ],
       "priority": 6,
-      "passes": true,
-      "notes": "All four content sections in app/about/page.tsx use AnimatedSection wrappers — this is why sections 2-4 appear as blank space in screenshots. The fix is identical to what was done for the homepage in US-036."
-    },
-    {
-      "id": "US-042",
-      "title": "Merge contact page hero into one unified section",
-      "description": "As a site visitor on /contact, I want the headline and form to feel like one unified layout with no dead zone between them.",
-      "acceptanceCriteria": [
-        "The contact page uses a single <section> instead of two separate sections (hero + two-column)",
-        "The headline 'Book Your Free Audit Call.' and subtitle appear at the top of the unified section, centred above the two-column grid",
-        "The two-column grid (trust signals left, form right) sits directly below the headline with no excessive gap",
-        "The dot-grid background pattern from the original hero is preserved on the unified section",
-        "The gold radial glow from the original hero is preserved",
-        "Mobile layout: headline stacks above form which stacks above trust signals (form-first order preserved)",
-        "Typecheck passes",
-        "Verify in browser using dev-browser skill: at 1280px confirm headline and form feel connected with no dead zone; at 375px confirm form is still visible above the fold"
-      ],
-      "priority": 7,
-      "passes": true,
-      "notes": "The dead zone is caused by py-24 md:py-32 bottom padding on the hero section stacking with py-16 md:py-24 top padding on the two-column section. Merging into one section eliminates the double padding structurally."
-    },
-    {
-      "id": "US-043",
-      "title": "Make LocalPackCard fill the full hero right column",
-      "description": "As a site visitor, I want the local pack widget in the hero to be large and visually commanding so that it reads as the visual centrepiece of the page.",
-      "acceptanceCriteria": [
-        "Remove max-w-sm from the root div in components/LocalPackCard.tsx so the card can fill its container",
-        "Remove the max-w-xl constraint from the HeroSection right column wrapper so the card fills the full column width",
-        "On desktop (md+) the LocalPackCard fills the full right column of the two-column hero grid",
-        "On mobile the card still renders correctly at full width below the text column",
-        "The SVG map, gold pins, pulse rings, and listing cards all remain correctly proportioned at larger sizes",
-        "Typecheck passes",
-        "Verify in browser using dev-browser skill: at 1280px confirm the card fills the right column and reads as a bold visual anchor alongside the headline"
-      ],
-      "priority": 8,
-      "passes": true,
-      "notes": "LocalPackCard uses an SVG with viewBox='0 0 300 260' — it scales correctly at any container width since width is w-full. The listing cards overlay uses absolute positioning inside the SVG container which also scales proportionally."
-    },
-    {
-      "id": "US-044",
-      "title": "Replace hero subtext with one punchy line",
-      "description": "As a site visitor reading the hero, I want a concise supporting line that tells me the outcome and method so I know immediately if this is for me.",
-      "acceptanceCriteria": [
-        "Replace the existing two-sentence subtext paragraph in HeroSection with a single line: 'Google top 3 for local businesses. Scoped clearly, executed lean.'",
-        "The replacement text uses the same className as the existing paragraph (text-lg sm:text-xl text-[#99907b] leading-relaxed)",
-        "Typecheck passes",
-        "Verify in browser using dev-browser skill: confirm the new line reads cleanly below the headline and above the CTA buttons"
-      ],
-      "priority": 9,
-      "passes": true,
-      "notes": "The existing subtext is 47 words across two sentences. The headline already conveys the problem/solution. The replacement adds specificity (top 3, local businesses) and method (scoped, lean) in one readable line."
-    },
-    {
-      "id": "US-045",
-      "title": "Redesign HowItWorksSection with large display numbers",
-      "description": "As a site visitor, I want the four process steps to have bold visual weight so that the section feels premium and makes me stop scrolling.",
-      "acceptanceCriteria": [
-        "Replace the w-16 h-16 circle badges with large display numbers (text-7xl or text-8xl font-extrabold) as the primary visual element for each step",
-        "Step 01 number is rendered in #C9A227 (gold); steps 02-04 numbers are rendered in white/10 or #99907b (muted) to create progression",
-        "Step title (h3) sits below the large number in text-xl font-bold text-[#d1e5fb]",
-        "Step description sits below the title in text-sm or text-base text-[#99907b]",
-        "The 4-column grid layout on desktop is preserved (grid-cols-1 md:grid-cols-4)",
-        "The AnimatedProcessLine SVG connecting line between steps is preserved",
-        "The section heading 'Simple Enough to Explain in Four Steps' and subtitle are unchanged",
-        "Typecheck passes",
-        "Verify in browser using dev-browser skill: at 1280px confirm the large numbers create a bold visual rhythm across the four steps"
-      ],
-      "priority": 10,
-      "passes": true,
-      "notes": "The circle badges (w-16 h-16 rounded-full) are replaced entirely. The stepDelays array and AnimatedProcessLine component are untouched. The hover state (group-hover:text-[#C9A227]) can be preserved on the number element."
+      "passes": false,
+      "notes": "Current: bullet text uses text-[#99907b] which is the muted/secondary color used for supporting copy. These bullets are persuasive selling points (Your GBP and local search pages, AI search visibility, etc.) and should use the primary text color to match their importance."
     }
   ]
 }
