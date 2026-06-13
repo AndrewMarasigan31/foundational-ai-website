@@ -1,3 +1,18 @@
+## 2026-06-13 - US-025
+- Created app/about/page.tsx with 5 sections: hero, story, principles, what we don't do, CTABand
+- Section 1: centered hero with dot grid background, bold H1 statement, no CTA
+- Section 2: two-paragraph story block on bg-[#000f1d]
+- Section 3: 3-card principles grid reusing WhyUsSection card style (bg-[#0e2131], white/10 border, faded gold number)
+- Section 4: 4-item "What We Don't Do" list with Material Symbols `close` icon in red/muted tint
+- Section 5: reused CTABand component
+- AnimatedSection wraps each section; all sections single column on mobile
+- Typecheck passes, build passes (490B /about page); manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - Material Symbols `close` icon is the correct name for an X icon (not `x` or `cross`)
+  - About page is a server component — no "use client" needed since all interactivity is in child components (AnimatedSection, CTABand)
+  - Card style from WhyUsSection is copy-pasteable: `relative overflow-hidden bg-[#0e2131] border border-white/10 rounded-2xl p-8 flex flex-col gap-4` + absolute faded number + `relative z-10` on content
+---
+
 ## 2026-06-13 - US-024
 - Built last three service sections in app/services/page.tsx: Lead Reactivation Sprint, Website Built to Convert, Performance Tracking
 - Exported LighthouseAnimation, LeadReactivationAnimation, RankTrackingAnimation from components/ServicesSection.tsx (were function-private, added export keyword)
