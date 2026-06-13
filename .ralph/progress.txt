@@ -246,3 +246,17 @@
   - Two separate AnimatedSection wrappers with staggered delay give heading + visual independent entrance animations
   - Background #000f1d for this section creates visible contrast against adjacent #021524 sections
 ---
+
+## 2026-06-13 - US-017
+- Built components/TrustBar.tsx: stateless presentational component with 4 category pills
+- Pills: 'Restaurants', 'Law Firms', 'Home Services', 'Dental' — surface bg (#0e2131), white/10 border, muted text (#99907b)
+- Small muted label above: 'Trusted by local businesses including' at 70% opacity
+- flex-wrap ensures natural wrapping on mobile
+- No Framer Motion — enters as part of hero flow
+- Integrated into components/HeroSection.tsx below CTA buttons
+- Typecheck passes; manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - TrustBar is purely presentational — no "use client" needed
+  - Color pattern for non-competing UI elements: use #99907b (outline/muted) instead of gold
+  - flex-wrap gap-2 is sufficient for pill wrapping across breakpoints
+---
