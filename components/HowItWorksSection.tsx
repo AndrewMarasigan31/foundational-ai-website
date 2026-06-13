@@ -2,7 +2,6 @@
 
 import { useRef, useEffect } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
-import AnimatedSection from "./AnimatedSection";
 
 const steps = [
   {
@@ -72,17 +71,15 @@ export default function HowItWorksSection() {
     <section className="py-20 md:py-28 px-6 bg-[#021524]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <AnimatedSection>
-          <div className="flex flex-col items-center text-center gap-6 mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
-              Simple Enough to Explain in Four Steps
-            </h2>
-            <p className="text-lg text-[#99907b] leading-relaxed max-w-2xl">
-              No onboarding maze. No kick-off call theater. Here&apos;s exactly what happens when
-              you reach out.
-            </p>
-          </div>
-        </AnimatedSection>
+        <div className="flex flex-col items-center text-center gap-6 mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
+            Simple Enough to Explain in Four Steps
+          </h2>
+          <p className="text-lg text-[#99907b] leading-relaxed max-w-2xl">
+            No onboarding maze. No kick-off call theater. Here&apos;s exactly what happens when
+            you reach out.
+          </p>
+        </div>
 
         {/* Steps */}
         <div className="relative">
@@ -91,30 +88,28 @@ export default function HowItWorksSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6 relative z-10">
             {steps.map((step, index) => (
-              <AnimatedSection key={step.num} delay={stepDelays[index]}>
-                <div className="group flex flex-col items-center text-center gap-4">
-                  {/* Circle */}
-                  <div
-                    className={`
-                      w-16 h-16 rounded-full flex items-center justify-center text-xl font-extrabold
-                      border-2 transition-all duration-300
-                      ${
-                        index === 0
-                          ? "bg-[#C9A227] border-[#C9A227] text-[#021524] shadow-[0_0_24px_rgba(201,162,39,0.45)]"
-                          : "bg-[#0e2131] border-white/20 text-[#99907b] group-hover:border-[#C9A227] group-hover:text-[#C9A227]"
-                      }
-                    `}
-                  >
-                    {step.num}
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-lg font-bold text-[#d1e5fb]">{step.title}</h3>
-
-                  {/* Description */}
-                  <p className="text-[#99907b] text-sm leading-relaxed">{step.description}</p>
+              <div key={step.num} className="group flex flex-col items-center text-center gap-4">
+                {/* Circle */}
+                <div
+                  className={`
+                    w-16 h-16 rounded-full flex items-center justify-center text-xl font-extrabold
+                    border-2 transition-all duration-300
+                    ${
+                      index === 0
+                        ? "bg-[#C9A227] border-[#C9A227] text-[#021524] shadow-[0_0_24px_rgba(201,162,39,0.45)]"
+                        : "bg-[#0e2131] border-white/20 text-[#99907b] group-hover:border-[#C9A227] group-hover:text-[#C9A227]"
+                    }
+                  `}
+                >
+                  {step.num}
                 </div>
-              </AnimatedSection>
+
+                {/* Title */}
+                <h3 className="text-lg font-bold text-[#d1e5fb]">{step.title}</h3>
+
+                {/* Description */}
+                <p className="text-[#99907b] text-sm leading-relaxed">{step.description}</p>
+              </div>
             ))}
           </div>
         </div>

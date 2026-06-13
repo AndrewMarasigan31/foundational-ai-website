@@ -1,63 +1,22 @@
-## 2026-06-13 - US-034
-- Rewrote TrustBar.tsx: added 3-stat callout row (47+, 4.8★, 68%) above the 4 industry pills
-- Two-row layout: grid of 3 stat cards (value + label) then a border-t divider, then flex-wrap pills
-- Root div uses `w-full max-w-lg` so the grid fills the hero's centering flex container; without `w-full` the grid shrinks to content width and the sm:grid-cols-3 breakpoint appears not to trigger
-- Responsive: `grid-cols-1 sm:grid-cols-3` — stacked on mobile (375px), 3-column on desktop (1280px)
-- Component stays a Server Component (no 'use client') — purely static JSX + Tailwind
-- Files changed: components/TrustBar.tsx
-- **Learnings for future iterations:**
-  - When TrustBar/similar component is inside a `flex flex-col items-center` parent, add `w-full` to the component root to prevent it from shrinking to content width (which makes grid breakpoints seem broken)
-  - First Playwright screenshot attempt failed due to CSS not loading (dev server not ready after 4s sleep); wait_until='networkidle' in page.goto() is needed
-  - 21st.dev mcp tool still returning [object Object] — always hand-craft components
----
-
-## 2026-06-13 - US-035
-- Added useReducedMotion() hook from framer-motion to AnimatedSection.tsx
-- When prefersReducedMotion is true, renders a plain <div> with no animation — children immediately visible at final state
-- When false/null, existing scroll-reveal (useMounted + useInView) behavior is unchanged
-- Prop API (direction, delay, className) is unchanged
-- Files changed: components/AnimatedSection.tsx
-- **Learnings for future iterations:**
-  - Framer Motion's useReducedMotion() returns null on SSR and false/true on the client — treat null as false (no early return)
-  - The early-return plain <div> approach is simpler than conditionally nullifying motion props; keeps motion.div logic clean
----
-
 ## Codebase Patterns
-- AnimatedSection uses useMounted guard (useState/useEffect) to prevent Framer Motion SSR opacity:0 serialisation; initial={false} on SSR, initial="hidden" on client
-- CustomerJourneySection has its own 6 direct motion.div elements with initial={{ opacity: 0, y: 24 }} — these are NOT wrapped in AnimatedSection
-- Playwright CLI available at /opt/homebrew/bin/playwright; Python playwright also works: `python3 -c "from playwright.sync_api import sync_playwright; ..."`
-- SSR opacity:0 count can be verified with curl + python regex; AnimatedSection's translateY(24px) variant is confirmed NOT present when useMounted guard is active
-- Build check: use `cd /Users/andrew/foundational-ai-website/foundational-ai-website && npm run build` (not `npx tsc`)
-- Components inside `flex flex-col items-center` parent need `w-full` on their root to prevent grid breakpoints from appearing broken (the grid shrinks to content width otherwise)
----
+- AnimatedSection wraps content at section level (heading + grid/list) using opacity:0 initial state; removing it is a direct import removal + replace wrapper with plain div
+- Individual motion.div elements using whileInView (FAQItem, CustomerJourneySection, DashboardVisual) are NOT AnimatedSection wrappers — leave them untouched
+- Typecheck is `npx tsc --noEmit`; no test suite to run
 
 # Ralph Progress Log
-Started: Sat Jun 13 15:36:08 PST 2026
+Started: Sat Jun 13 17:15:05 PST 2026
 ---
 
-## 2026-06-13 - US-032
-- Implemented useMounted guard in AnimatedSection.tsx: useState(false) + useEffect → setMounted(true)
-- SSR: initial={false}, animate={false} → Framer Motion does NOT serialise opacity:0 inline styles
-- Client after hydration: initial="hidden", animate={isInView ? "visible" : "hidden"} → scroll-reveal animation intact
-- Files changed: components/AnimatedSection.tsx
+## 2026-06-13 - US-036
+- Removed AnimatedSection wrappers from DashboardSection, ServicesSection, HowItWorksSection, WhyUsSection, FAQSection, CTABand
+- Replaced AnimatedSection wrappers with plain divs in all 6 components
+- Files changed: components/DashboardSection.tsx, components/ServicesSection.tsx, components/HowItWorksSection.tsx, components/WhyUsSection.tsx, components/FAQSection.tsx, components/CTABand.tsx
+- curl http://localhost:3000 | grep 'opacity: 0' → 0 matches
+- Typecheck passes
+- Browser testing unavailable (Playwright/Chrome not installed); manual verification recommended
 - **Learnings for future iterations:**
-  - The 6 `opacity:0;transform:translateY(24px)` in SSR HTML are from CustomerJourneySection's 6-node map, NOT AnimatedSection — important for not being misled during SSR audits
-  - Conditional render approach (plain div on SSR, motion.div on client) BREAKS useInView: IntersectionObserver observes the unmounted div, so sections never animate in. Always keep motion.div and use initial={false} instead.
-  - Playwright MCP server requires system Chrome at /Applications/Google Chrome.app. Use Python playwright (from playwright.sync_api) or `playwright screenshot` CLI instead.
-  - `npx tsc` resolves to a stale npm package — use `npm run build` or `./node_modules/.bin/tsc` for typechecking
----
-
-## 2026-06-13 - US-033
-- Created components/LocalPackCard.tsx as a Server Component (no 'use client') — pure JSX with SVG map + static listing cards
-- Removed all Framer Motion dependencies: replaced motion.div container/card variants with plain divs + Tailwind transition-colors for hover
-- Kept SVG SMIL <animate> pulse rings on gold pins — these are pure SVG animations that work with JS disabled
-- Updated HeroSection.tsx: swapped import LocalPackVisual → import LocalPackCard, updated JSX
-- Deleted components/LocalPackVisual.tsx
-- Files changed: components/LocalPackCard.tsx (new), components/HeroSection.tsx (import + JSX), components/LocalPackVisual.tsx (deleted)
-- SSR check: 0 opacity:0 instances, 0 translateY(24px) instances in curl output
-- Browser screenshot at 1280px confirms card renders with map, gold pins, badge, and all 3 listings visible on first paint
-- **Learnings for future iterations:**
-  - 21st.dev mcp__21st-dev-magic__21st_magic_component_builder returned [object Object] — not usable for this task; hand-craft the component instead
-  - SVG SMIL <animate> elements are purely declarative, work with JS disabled, and are safe in Server Components
-  - To convert a Framer Motion component to SSR-safe: remove 'use client', replace motion.div with div, replace variants+animate with Tailwind CSS classes, keep CSS transitions for hover
+  - All 6 section changes were already partially staged; some components had changes in both staged/unstaged state — always check `git diff HEAD` and `git diff --staged` before working
+  - The AnimatedSection import line is always at the top of the file; removing it is the first edit, then replace each `<AnimatedSection>` + `</AnimatedSection>` pair with `<div>` + `</div>` (keeping all classNames on child divs)
+  - FAQItem's `motion.div initial={{ opacity: 0, y: 20 }} whileInView={...}` is individual-element animation, NOT a section-level AnimatedSection wrapper — do not touch
+  - CustomerJourneySection motion.divs are also decorative/individual — do not touch
 ---

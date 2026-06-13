@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import AnimatedSection from "./AnimatedSection";
-
 const faqs = [
   {
     num: "01",
@@ -108,18 +106,16 @@ export default function FAQSection() {
     <section className="py-20 md:py-28 px-6 bg-[#021524]">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
-        <AnimatedSection>
-          <div className="flex flex-col gap-4 mb-4">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
-              Things Worth Asking{" "}
-              <em className="font-serif not-italic text-[#C9A227]">Before</em>{" "}
-              You Hire Anyone
-            </h2>
-            <p className="text-[#99907b] text-lg">
-              Honest answers. If the truth makes us the wrong fit, better to know now.
-            </p>
-          </div>
-        </AnimatedSection>
+        <div className="flex flex-col gap-4 mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
+            Things Worth Asking{" "}
+            <em className="font-serif not-italic text-[#C9A227]">Before</em>{" "}
+            You Hire Anyone
+          </h2>
+          <p className="text-[#99907b] text-lg">
+            Honest answers. If the truth makes us the wrong fit, better to know now.
+          </p>
+        </div>
 
         {/* FAQ List */}
         <div className="mt-10">

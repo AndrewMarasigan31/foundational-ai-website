@@ -1,83 +1,97 @@
 {
   "project": "Foundational AI Systems Website",
-  "branchName": "ralph/ssr-visual-fixes",
-  "description": "SSR visual fixes and 21st.dev component upgrades — fix AnimatedSection invisible below-fold bug, replace LocalPackVisual with SSR-safe 21st.dev component, upgrade TrustBar with stat callouts via 21st.dev, and add useReducedMotion accessibility guard",
+  "branchName": "ralph/design-visibility-overhaul",
+  "description": "Design visibility and layout overhaul — remove section-level scroll-gating, refactor hero to two-column layout, apply alternating section backgrounds, fix mobile contact form ordering, and make services page fully static.",
   "userStories": [
     {
-      "id": "US-032",
-      "title": "Fix AnimatedSection SSR visibility bug",
-      "description": "As a site visitor, I want all page content to be visible on first paint so that I can read the page regardless of JavaScript execution state.",
+      "id": "US-036",
+      "title": "Remove section-level AnimatedSection wrappers from homepage sections",
+      "description": "As a site visitor, I want all homepage section content to be visible on load so that I can read the page without scrolling or waiting for JavaScript-triggered animations.",
       "acceptanceCriteria": [
-        "Add a useMounted guard to AnimatedSection.tsx: useState(false) that flips true in useEffect",
-        "Gate the initial prop on mounted: initial={mounted ? 'hidden' : false} so SSR HTML carries no opacity/transform inline styles",
-        "Gate animate prop: animate={isInView ? 'visible' : (mounted ? 'hidden' : false)}",
-        "All three pages (/, /services, /about) show fully visible below-fold sections when JS is disabled (verify with curl or browser devtools)",
-        "Framer Motion entrance animation (fade + slide) still plays on scroll when JS is enabled",
-        "The direction and delay prop API is unchanged — no callers require updates",
-        "Do NOT remove the 'use client' directive",
+        "Remove all AnimatedSection wrappers that enclose entire section content blocks (heading + grid/list together) from: DashboardSection, ServicesSection, HowItWorksSection, WhyUsSection, FAQSection, CTABand",
+        "Each section's content renders fully visible on load — no opacity:0 or transform applied to section-level wrappers",
+        "AnimatedSection is NOT removed from HeroSection's LocalPackCard — that is handled in US-039",
+        "CustomerJourneySection motion.divs (SVG animated lines and funnel elements) are left untouched — they animate individual decorative elements, not content blocks",
+        "All section content remains structurally correct and styled correctly after wrapper removal",
+        "curl http://localhost:3000 | grep 'opacity: 0' returns 0 matches",
         "Typecheck passes",
-        "Verify in browser using dev-browser skill"
+        "Verify in browser using dev-browser skill: scroll homepage and confirm all sections are visible without scrolling to trigger them"
       ],
       "priority": 1,
       "passes": true,
-      "notes": "Root cause: Framer Motion serialises initial='hidden' variant styles (opacity:0, translateY:24px) as inline styles in SSR HTML. useMounted guard ensures SSR HTML renders at opacity:1/y:0 while preserving the scroll-reveal animation after hydration."
+      "notes": "AnimatedSection is NOT deleted — it stays in the codebase for future individual-element use. Only its usage as a section-level content gate is removed. The useMounted + useReducedMotion guards in AnimatedSection.tsx stay intact."
     },
     {
-      "id": "US-033",
-      "title": "Replace LocalPackVisual with SSR-safe component via 21st.dev",
-      "description": "As a site visitor, I want to see a recognisable Google local pack mockup in the Hero section on first paint so that I immediately understand what Foundational AI Systems delivers for clients.",
+      "id": "US-037",
+      "title": "Remove AnimatedSection from services page",
+      "description": "As a site visitor on the services page, I want each service section's content to be visible immediately when I scroll to it, so that I don't see blank space before content appears.",
       "acceptanceCriteria": [
-        "Use mcp__21st-dev-magic__21st_magic_component_builder with this prompt: 'Generate a Google local pack search result mockup card component for a dark-themed Next.js marketing site. The card should show a stylised city map background with pin markers, and a list of 3 ranked local business listings each with a rank number badge, business name, star rating, and review count. No Framer Motion — use CSS transitions only for hover states. Background: #021524. Accent/gold colour: #C9A227. Text colours: primary #d1e5fb, muted #99907b, border/outline #99907b at 30% opacity. Fully static, no animation on mount — must render correctly with JavaScript disabled.'",
-        "Save generated output as components/LocalPackCard.tsx",
-        "Wire in the three listings: Apex Plumbing Co. (4.9 stars, 312 reviews), BlueLine HVAC (4.8 stars, 187 reviews), Summit Electric (4.7 stars, 241 reviews)",
-        "In HeroSection.tsx swap import LocalPackVisual to import LocalPackCard and update JSX — the AnimatedSection wrapper stays",
-        "Component must be a Server Component (no 'use client') unless the generated output requires it",
-        "LocalPackCard renders fully visible on first paint — no opacity:0 or transform inline styles in SSR HTML",
-        "Playwright screenshot at 1280px shows the card rendered in the hero — not dark or blank",
-        "Delete components/LocalPackVisual.tsx after all criteria pass",
+        "Remove the AnimatedSection wrapper from inside the ServiceSection render component in app/services/page.tsx",
+        "Each service section's content (heading, description, feature list) renders fully visible as soon as the section enters the viewport — no opacity:0 gating",
+        "The StickyServiceNav component and its IntersectionObserver scroll-tracking logic remain completely intact and functional",
+        "The sticky nav correctly highlights the active service section as the user scrolls",
         "Typecheck passes",
-        "Verify in browser using dev-browser skill"
+        "Verify in browser using dev-browser skill: navigate to /services and confirm all service section content is visible on scroll without animation delay"
       ],
       "priority": 2,
-      "passes": true,
-      "notes": "Depends on US-032 being merged first. LocalPackVisual has its own internal motion.div with initial='hidden' that is independent of the AnimatedSection wrapper — both must be fixed. A flat colour background is acceptable if 21st.dev doesn't produce an SVG map."
+      "passes": false,
+      "notes": "The services page is scroll-based with a sticky nav — not a tab system. The IntersectionObserver that drives the sticky nav must not be touched. Only the AnimatedSection wrapper inside the ServiceSection render component is removed."
     },
     {
-      "id": "US-034",
-      "title": "Upgrade TrustBar with stat callouts via 21st.dev",
-      "description": "As a prospective client, I want to see concrete social proof figures alongside the industry pills in the trust bar so that I have immediate evidence of Foundational AI Systems' track record.",
+      "id": "US-038",
+      "title": "Fix mobile contact form order and remove AnimatedSection from contact page",
+      "description": "As a mobile user navigating to /contact to book a call, I want the form to be the first thing I see, so that I can start filling it out immediately without scrolling past trust content.",
       "acceptanceCriteria": [
-        "Use mcp__21st-dev-magic__21st_magic_component_builder with this prompt: 'Generate a trust bar component for a dark-themed Next.js landing page. It should have two rows: a top row of 3 stat callouts (large bold number + short label beneath it), and a second row of 4 industry pill tags. Fully static, no animations, no JavaScript required. Background transparent (inherits parent). Stat number colour: #C9A227. Stat label colour: #99907b. Pill background: #0e2131. Pill border: white at 10% opacity. Pill text: #99907b. Add a faint divider between rows. Mobile-first: stats stack 1-column on mobile (375px), 3-column on desktop (1280px).'",
-        "Save as components/TrustBar.tsx (overwrite existing)",
-        "Wire in stats as a const array at top of file: [{value: '47+', label: 'Local businesses ranked'}, {value: '4.8★', label: 'Average client rating'}, {value: '68%', label: 'Leads recovered'}]",
-        "Wire in pills as a const array: ['Restaurants', 'Law Firms', 'Home Services', 'Dental']",
-        "No props needed — all data hardcoded",
-        "Component must be a Server Component (no 'use client' directive)",
-        "Three stat callouts visible: 47+, 4.8★, 68% with correct labels",
-        "Stat numbers rendered in #C9A227",
-        "No layout shift on mobile (375px) and desktop (1280px)",
+        "On mobile (< md breakpoint), the booking form column appears above the trust signals column",
+        "On desktop (>= md breakpoint), trust signals remain on the left and the form remains on the right — no change to desktop layout",
+        "Implement using CSS order utilities: add order-first md:order-last to the form column div, add order-last md:order-first to the trust signals column div",
+        "Remove all AnimatedSection wrappers from app/contact/page.tsx (both the hero section and the two-column section)",
+        "The contact form fields, service toggle pills, and submit button all render visible on mobile without scrolling",
         "Typecheck passes",
-        "Verify in browser using dev-browser skill"
+        "Verify in browser using dev-browser skill: resize browser to 375px, navigate to /contact, confirm form is visible above the fold without scrolling"
       ],
       "priority": 3,
-      "passes": true,
-      "notes": "Independent of US-032 and US-033 — can be implemented in any order relative to those. TrustBar is currently a Server Component and must stay that way."
+      "passes": false,
+      "notes": "The two-column grid (grid-cols-1 md:grid-cols-2) stays as-is. Only the column order changes on mobile. The ContactForm component itself does not need to change."
     },
     {
-      "id": "US-035",
-      "title": "Add useReducedMotion guard to AnimatedSection",
-      "description": "As a user with 'Reduce Motion' enabled in OS accessibility settings, I want page animations suppressed so I am not at risk of motion-triggered discomfort.",
+      "id": "US-039",
+      "title": "Refactor hero section to two-column layout",
+      "description": "As a site visitor, I want to see the Google local pack widget alongside the hero headline without scrolling, so that I immediately understand the value Foundational AI Systems delivers.",
       "acceptanceCriteria": [
-        "AnimatedSection.tsx calls Framer Motion's useReducedMotion() hook",
-        "When prefersReducedMotion is true, children render immediately at their final visible state — no fade, no translate, no delay",
-        "When prefersReducedMotion is false or null, existing scroll-reveal behaviour is unchanged",
-        "The direction and delay prop API is unchanged",
+        "HeroSection refactored from a single centered column to a two-column layout at the md breakpoint",
+        "Left column contains: headline (h1), subtext paragraph, CTA buttons, TrustBar",
+        "Right column contains: LocalPackCard, visible on load with no AnimatedSection wrapper",
+        "On mobile (< md): single column, text first, LocalPackCard below — both fully visible",
+        "On desktop (>= md): left column is text/CTAs, right column is the LocalPackCard — both visible immediately on load",
+        "The AnimatedSection wrapper around LocalPackCard in HeroSection is removed",
+        "LocalPackCard is still visible and correctly styled in both breakpoints",
+        "TrustBar remains visible below the CTAs in the left column",
+        "The existing grid background (gold grid lines) remains intact",
         "Typecheck passes",
-        "Manually verified by enabling Reduce Motion in macOS System Settings > Accessibility and reloading the page — sections appear instantly with no motion"
+        "Verify in browser using dev-browser skill: at 1280px confirm LocalPackCard is visible alongside the headline without scrolling; at 375px confirm text is above LocalPackCard and both are visible"
       ],
       "priority": 4,
-      "passes": true,
-      "notes": "Depends on US-032 being merged first. Do not change the AnimatedSection prop API. Do not gate behind a feature flag."
+      "passes": false,
+      "notes": "The min-h-[90vh] constraint on the hero section should be re-evaluated — the two-column layout is shorter vertically and may not need it. Adjust or remove if the layout looks cramped. The LocalPackCard SVG SMIL animations (gold pin pulse rings) continue to work as they are pure SVG with no JS dependency."
+    },
+    {
+      "id": "US-040",
+      "title": "Apply alternating section backgrounds across homepage",
+      "description": "As a site visitor, I want visually distinct section backgrounds as I scroll down the homepage, so that I can orient myself and feel clear progress through the page.",
+      "acceptanceCriteria": [
+        "Homepage sections alternate between #021524 and #0e2131 backgrounds in this order: HeroSection (#021524), CustomerJourneySection (#0e2131), ServicesSection (#021524), HowItWorksSection (#0e2131), WhyUsSection (#021524), FAQSection (#0e2131), CTABand (#021524)",
+        "Background color is applied to the <section> element's className in each component file — not injected from page.tsx",
+        "The CTABand retains its existing gold glow/accent styling on top of the #021524 background",
+        "No section has a visible seam or gap between it and the adjacent section",
+        "The visual distinction between #021524 and #0e2131 is visible but subtle — no jarring contrast",
+        "All other section styles (padding, text colors, card backgrounds) remain unchanged",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill: scroll the full homepage and confirm alternating backgrounds create clear visual section breaks"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": "Both colors already exist in the design token set and are used throughout the site (cards, pills, form backgrounds use #0e2131). This change only touches the section-level background. No new colors are introduced."
     }
   ]
 }
