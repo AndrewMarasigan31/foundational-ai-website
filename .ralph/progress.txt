@@ -1,3 +1,19 @@
+## 2026-06-13 - US-039
+- Refactored HeroSection from single centered column to two-column grid (grid-cols-1 md:grid-cols-2)
+- Left column: h1, subtext paragraph, CTA buttons, TrustBar
+- Right column: LocalPackCard (no AnimatedSection wrapper)
+- Removed AnimatedSection import and wrapper from HeroSection.tsx entirely
+- Removed min-h-[90vh] and flex items-center (replaced by grid with items-center on the grid container)
+- Adjusted padding from py-24 md:py-32 to py-20 md:py-28 to account for shorter vertical layout
+- Files changed: components/HeroSection.tsx
+- HTML verified: grid grid-cols-1 md:grid-cols-2 rendered in SSR output; no AnimatedSection in output
+- Browser testing unavailable (Chrome not installed); manual verification recommended
+- **Learnings for future iterations:**
+  - Two-column grid layout replaces flexbox centering: use `grid grid-cols-1 md:grid-cols-2 gap-X items-center` on the container
+  - When dropping min-h-[90vh] + flex items-center, the vertical rhythm comes from padding on the grid container instead
+  - LocalPackCard works directly in a grid cell — no wrapper div for max-w-xl needed, can use flex justify-center on the right column
+---
+
 ## 2026-06-13 - US-038
 - Removed AnimatedSection import and all three AnimatedSection wrappers from app/contact/page.tsx (hero section and both two-column panel wrappers)
 - Added order-last md:order-first to the trust signals (left) column div

@@ -72,7 +72,7 @@
         "Verify in browser using dev-browser skill: at 1280px confirm LocalPackCard is visible alongside the headline without scrolling; at 375px confirm text is above LocalPackCard and both are visible"
       ],
       "priority": 4,
-      "passes": false,
+      "passes": true,
       "notes": "The min-h-[90vh] constraint on the hero section should be re-evaluated — the two-column layout is shorter vertically and may not need it. Adjust or remove if the layout looks cramped. The LocalPackCard SVG SMIL animations (gold pin pulse rings) continue to work as they are pure SVG with no JS dependency."
     },
     {
