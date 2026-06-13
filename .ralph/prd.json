@@ -1,7 +1,7 @@
 {
   "project": "Foundational AI Systems Website",
   "branchName": "ralph/design-visibility-overhaul",
-  "description": "Design visibility and layout overhaul — remove section-level scroll-gating, refactor hero to two-column layout, apply alternating section backgrounds, fix mobile contact form ordering, and make services page fully static.",
+  "description": "Design visibility and layout overhaul — remove section-level scroll-gating, refactor hero to two-column layout, apply alternating section backgrounds, fix mobile contact form ordering, make services page fully static, and polish hero/HowItWorks/About/Contact layout.",
   "userStories": [
     {
       "id": "US-036",
@@ -10,88 +10,148 @@
       "acceptanceCriteria": [
         "Remove all AnimatedSection wrappers that enclose entire section content blocks (heading + grid/list together) from: DashboardSection, ServicesSection, HowItWorksSection, WhyUsSection, FAQSection, CTABand",
         "Each section's content renders fully visible on load — no opacity:0 or transform applied to section-level wrappers",
-        "AnimatedSection is NOT removed from HeroSection's LocalPackCard — that is handled in US-039",
-        "CustomerJourneySection motion.divs (SVG animated lines and funnel elements) are left untouched — they animate individual decorative elements, not content blocks",
-        "All section content remains structurally correct and styled correctly after wrapper removal",
+        "CustomerJourneySection motion.divs (SVG animated lines and funnel elements) are left untouched",
         "curl http://localhost:3000 | grep 'opacity: 0' returns 0 matches",
-        "Typecheck passes",
-        "Verify in browser using dev-browser skill: scroll homepage and confirm all sections are visible without scrolling to trigger them"
+        "Typecheck passes"
       ],
       "priority": 1,
       "passes": true,
-      "notes": "AnimatedSection is NOT deleted — it stays in the codebase for future individual-element use. Only its usage as a section-level content gate is removed. The useMounted + useReducedMotion guards in AnimatedSection.tsx stay intact."
+      "notes": ""
     },
     {
       "id": "US-037",
       "title": "Remove AnimatedSection from services page",
-      "description": "As a site visitor on the services page, I want each service section's content to be visible immediately when I scroll to it, so that I don't see blank space before content appears.",
+      "description": "As a site visitor on the services page, I want each service section's content to be visible immediately when I scroll to it.",
       "acceptanceCriteria": [
         "Remove the AnimatedSection wrapper from inside the ServiceSection render component in app/services/page.tsx",
-        "Each service section's content (heading, description, feature list) renders fully visible as soon as the section enters the viewport — no opacity:0 gating",
-        "The StickyServiceNav component and its IntersectionObserver scroll-tracking logic remain completely intact and functional",
-        "The sticky nav correctly highlights the active service section as the user scrolls",
-        "Typecheck passes",
-        "Verify in browser using dev-browser skill: navigate to /services and confirm all service section content is visible on scroll without animation delay"
+        "StickyServiceNav and IntersectionObserver logic remain intact",
+        "Typecheck passes"
       ],
       "priority": 2,
       "passes": true,
-      "notes": "The services page is scroll-based with a sticky nav — not a tab system. The IntersectionObserver that drives the sticky nav must not be touched. Only the AnimatedSection wrapper inside the ServiceSection render component is removed."
+      "notes": ""
     },
     {
       "id": "US-038",
       "title": "Fix mobile contact form order and remove AnimatedSection from contact page",
-      "description": "As a mobile user navigating to /contact to book a call, I want the form to be the first thing I see, so that I can start filling it out immediately without scrolling past trust content.",
+      "description": "As a mobile user navigating to /contact, I want the form to be the first thing I see.",
       "acceptanceCriteria": [
-        "On mobile (< md breakpoint), the booking form column appears above the trust signals column",
-        "On desktop (>= md breakpoint), trust signals remain on the left and the form remains on the right — no change to desktop layout",
-        "Implement using CSS order utilities: add order-first md:order-last to the form column div, add order-last md:order-first to the trust signals column div",
-        "Remove all AnimatedSection wrappers from app/contact/page.tsx (both the hero section and the two-column section)",
-        "The contact form fields, service toggle pills, and submit button all render visible on mobile without scrolling",
-        "Typecheck passes",
-        "Verify in browser using dev-browser skill: resize browser to 375px, navigate to /contact, confirm form is visible above the fold without scrolling"
+        "On mobile form appears above trust signals; on desktop trust left / form right unchanged",
+        "All AnimatedSection wrappers removed from app/contact/page.tsx",
+        "Typecheck passes"
       ],
       "priority": 3,
       "passes": true,
-      "notes": "The two-column grid (grid-cols-1 md:grid-cols-2) stays as-is. Only the column order changes on mobile. The ContactForm component itself does not need to change."
+      "notes": ""
     },
     {
       "id": "US-039",
       "title": "Refactor hero section to two-column layout",
-      "description": "As a site visitor, I want to see the Google local pack widget alongside the hero headline without scrolling, so that I immediately understand the value Foundational AI Systems delivers.",
+      "description": "As a site visitor, I want to see the local pack widget alongside the hero headline without scrolling.",
       "acceptanceCriteria": [
-        "HeroSection refactored from a single centered column to a two-column layout at the md breakpoint",
-        "Left column contains: headline (h1), subtext paragraph, CTA buttons, TrustBar",
-        "Right column contains: LocalPackCard, visible on load with no AnimatedSection wrapper",
-        "On mobile (< md): single column, text first, LocalPackCard below — both fully visible",
-        "On desktop (>= md): left column is text/CTAs, right column is the LocalPackCard — both visible immediately on load",
-        "The AnimatedSection wrapper around LocalPackCard in HeroSection is removed",
-        "LocalPackCard is still visible and correctly styled in both breakpoints",
-        "TrustBar remains visible below the CTAs in the left column",
-        "The existing grid background (gold grid lines) remains intact",
-        "Typecheck passes",
-        "Verify in browser using dev-browser skill: at 1280px confirm LocalPackCard is visible alongside the headline without scrolling; at 375px confirm text is above LocalPackCard and both are visible"
+        "Two-column grid at md breakpoint: text/CTAs/TrustBar left, LocalPackCard right",
+        "Both columns visible on load with no AnimatedSection wrapper",
+        "Typecheck passes"
       ],
       "priority": 4,
       "passes": true,
-      "notes": "The min-h-[90vh] constraint on the hero section should be re-evaluated — the two-column layout is shorter vertically and may not need it. Adjust or remove if the layout looks cramped. The LocalPackCard SVG SMIL animations (gold pin pulse rings) continue to work as they are pure SVG with no JS dependency."
+      "notes": ""
     },
     {
       "id": "US-040",
       "title": "Apply alternating section backgrounds across homepage",
-      "description": "As a site visitor, I want visually distinct section backgrounds as I scroll down the homepage, so that I can orient myself and feel clear progress through the page.",
+      "description": "As a site visitor, I want visually distinct section backgrounds as I scroll down the homepage.",
       "acceptanceCriteria": [
-        "Homepage sections alternate between #021524 and #0e2131 backgrounds in this order: HeroSection (#021524), CustomerJourneySection (#0e2131), ServicesSection (#021524), HowItWorksSection (#0e2131), WhyUsSection (#021524), FAQSection (#0e2131), CTABand (#021524)",
-        "Background color is applied to the <section> element's className in each component file — not injected from page.tsx",
-        "The CTABand retains its existing gold glow/accent styling on top of the #021524 background",
-        "No section has a visible seam or gap between it and the adjacent section",
-        "The visual distinction between #021524 and #0e2131 is visible but subtle — no jarring contrast",
-        "All other section styles (padding, text colors, card backgrounds) remain unchanged",
-        "Typecheck passes",
-        "Verify in browser using dev-browser skill: scroll the full homepage and confirm alternating backgrounds create clear visual section breaks"
+        "Sections alternate #021524 / #0e2131 in correct order",
+        "Typecheck passes"
       ],
       "priority": 5,
+      "passes": true,
+      "notes": ""
+    },
+    {
+      "id": "US-041",
+      "title": "Remove AnimatedSection from About page",
+      "description": "As a site visitor on /about, I want all page content to be visible immediately on load so that I can read the story, principles, and what-we-don't-do sections without scrolling.",
+      "acceptanceCriteria": [
+        "Remove AnimatedSection import and all AnimatedSection wrappers from app/about/page.tsx",
+        "All four sections (hero quote, story paragraphs, principles grid, don't-do list) render fully visible on load",
+        "No opacity:0 or transform inline styles appear in the SSR HTML for /about",
+        "The principles grid (3 cards with large background numbers) remains correctly styled after wrapper removal",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill: navigate to /about and confirm all sections are visible without scrolling"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "All four content sections in app/about/page.tsx use AnimatedSection wrappers — this is why sections 2-4 appear as blank space in screenshots. The fix is identical to what was done for the homepage in US-036."
+    },
+    {
+      "id": "US-042",
+      "title": "Merge contact page hero into one unified section",
+      "description": "As a site visitor on /contact, I want the headline and form to feel like one unified layout with no dead zone between them.",
+      "acceptanceCriteria": [
+        "The contact page uses a single <section> instead of two separate sections (hero + two-column)",
+        "The headline 'Book Your Free Audit Call.' and subtitle appear at the top of the unified section, centred above the two-column grid",
+        "The two-column grid (trust signals left, form right) sits directly below the headline with no excessive gap",
+        "The dot-grid background pattern from the original hero is preserved on the unified section",
+        "The gold radial glow from the original hero is preserved",
+        "Mobile layout: headline stacks above form which stacks above trust signals (form-first order preserved)",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill: at 1280px confirm headline and form feel connected with no dead zone; at 375px confirm form is still visible above the fold"
+      ],
+      "priority": 7,
       "passes": false,
-      "notes": "Both colors already exist in the design token set and are used throughout the site (cards, pills, form backgrounds use #0e2131). This change only touches the section-level background. No new colors are introduced."
+      "notes": "The dead zone is caused by py-24 md:py-32 bottom padding on the hero section stacking with py-16 md:py-24 top padding on the two-column section. Merging into one section eliminates the double padding structurally."
+    },
+    {
+      "id": "US-043",
+      "title": "Make LocalPackCard fill the full hero right column",
+      "description": "As a site visitor, I want the local pack widget in the hero to be large and visually commanding so that it reads as the visual centrepiece of the page.",
+      "acceptanceCriteria": [
+        "Remove max-w-sm from the root div in components/LocalPackCard.tsx so the card can fill its container",
+        "Remove the max-w-xl constraint from the HeroSection right column wrapper so the card fills the full column width",
+        "On desktop (md+) the LocalPackCard fills the full right column of the two-column hero grid",
+        "On mobile the card still renders correctly at full width below the text column",
+        "The SVG map, gold pins, pulse rings, and listing cards all remain correctly proportioned at larger sizes",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill: at 1280px confirm the card fills the right column and reads as a bold visual anchor alongside the headline"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": "LocalPackCard uses an SVG with viewBox='0 0 300 260' — it scales correctly at any container width since width is w-full. The listing cards overlay uses absolute positioning inside the SVG container which also scales proportionally."
+    },
+    {
+      "id": "US-044",
+      "title": "Replace hero subtext with one punchy line",
+      "description": "As a site visitor reading the hero, I want a concise supporting line that tells me the outcome and method so I know immediately if this is for me.",
+      "acceptanceCriteria": [
+        "Replace the existing two-sentence subtext paragraph in HeroSection with a single line: 'Google top 3 for local businesses. Scoped clearly, executed lean.'",
+        "The replacement text uses the same className as the existing paragraph (text-lg sm:text-xl text-[#99907b] leading-relaxed)",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill: confirm the new line reads cleanly below the headline and above the CTA buttons"
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": "The existing subtext is 47 words across two sentences. The headline already conveys the problem/solution. The replacement adds specificity (top 3, local businesses) and method (scoped, lean) in one readable line."
+    },
+    {
+      "id": "US-045",
+      "title": "Redesign HowItWorksSection with large display numbers",
+      "description": "As a site visitor, I want the four process steps to have bold visual weight so that the section feels premium and makes me stop scrolling.",
+      "acceptanceCriteria": [
+        "Replace the w-16 h-16 circle badges with large display numbers (text-7xl or text-8xl font-extrabold) as the primary visual element for each step",
+        "Step 01 number is rendered in #C9A227 (gold); steps 02-04 numbers are rendered in white/10 or #99907b (muted) to create progression",
+        "Step title (h3) sits below the large number in text-xl font-bold text-[#d1e5fb]",
+        "Step description sits below the title in text-sm or text-base text-[#99907b]",
+        "The 4-column grid layout on desktop is preserved (grid-cols-1 md:grid-cols-4)",
+        "The AnimatedProcessLine SVG connecting line between steps is preserved",
+        "The section heading 'Simple Enough to Explain in Four Steps' and subtitle are unchanged",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill: at 1280px confirm the large numbers create a bold visual rhythm across the four steps"
+      ],
+      "priority": 10,
+      "passes": false,
+      "notes": "The circle badges (w-16 h-16 rounded-full) are replaced entirely. The stepDelays array and AnimatedProcessLine component are untouched. The hover state (group-hover:text-[#C9A227]) can be preserved on the number element."
     }
   ]
 }

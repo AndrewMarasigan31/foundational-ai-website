@@ -1,3 +1,27 @@
+## 2026-06-13 - US-041
+- Removed AnimatedSection import and all 4 AnimatedSection wrappers from app/about/page.tsx
+- Section 1 hero h1, Section 2 story div, Section 3 principles grid (h2 + grid div), Section 4 don't-do list — all now render without wrappers
+- Gotcha: two AnimatedSection wrappers in Section 3 (heading + grid) required careful removal — the second wrapper opened a div that was already being replaced by the inner grid div, leaving an extra closing `</div>` that caused a typecheck error; removed the extra closing tag
+- Files changed: app/about/page.tsx
+- Typecheck passes; browser testing unavailable (Chrome not installed)
+- **Learnings for future iterations:**
+  - When two AnimatedSection wrappers are adjacent (heading + grid), removing both requires counting closing tags carefully — each wrapper removal eliminates one opening+closing pair, so the final div count should only reflect actual structural divs
+---
+
+## 2026-06-13 - US-040
+- Applied alternating section backgrounds across homepage
+- CustomerJourneySection: changed bg-[#000f1d] → bg-[#0e2131]
+- HowItWorksSection: changed bg-[#021524] → bg-[#0e2131]
+- FAQSection: changed bg-[#021524] → bg-[#0e2131]
+- HeroSection, ServicesSection, WhyUsSection, CTABand were already #021524 — no change needed
+- Files changed: components/CustomerJourneySection.tsx, components/HowItWorksSection.tsx, components/FAQSection.tsx
+- Typecheck passes; manual browser verification recommended
+- **Learnings for future iterations:**
+  - Background alternation pattern: odd sections use #021524, even sections use #0e2131 — both colors already existed in the design token set
+  - CustomerJourneySection used a third color (#000f1d) that was not in the alternating scheme — replaced with #0e2131
+  - Change is purely className-level on the `<section>` element; no CSS variables or global styles needed
+---
+
 ## 2026-06-13 - US-039
 - Refactored HeroSection from single centered column to two-column grid (grid-cols-1 md:grid-cols-2)
 - Left column: h1, subtext paragraph, CTA buttons, TrustBar
