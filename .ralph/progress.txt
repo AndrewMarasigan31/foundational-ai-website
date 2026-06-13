@@ -1,3 +1,21 @@
+## 2026-06-13 - US-026
+- Added Playfair Display italic font to app/layout.tsx via next/font/google (italic style, weights 400/700, variable --font-playfair)
+- Added --font-playfair variable to <html> element alongside Plus Jakarta Sans
+- Added `fontFamily.serif` to tailwind.config.ts: ['var(--font-playfair)', 'Georgia', 'serif']
+- Applied `<em className="font-serif not-italic text-[#C9A227]">` accent to:
+  - HeroSection: "Fixable." in the H1
+  - ServicesSection: "Recover" in the heading
+  - CustomerJourneySection: "Lose" in the heading
+  - WhyUsSection: "Lean." in the heading
+  - CTABand: "free" in the heading
+- Typecheck passes, build passes (all pages)
+- Manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - `not-italic` overrides the browser default italic rendering for `<em>` — required when using <em> purely as a semantic wrapper without italics
+  - Playfair Display italic import requires `style: ["italic"]` in next/font/google config — omitting `style` defaults to normal only
+  - Font variable must be added to both the `<html>` className AND tailwind.config.ts for CSS var to be available as a utility class
+---
+
 ## 2026-06-13 - US-025
 - Created app/about/page.tsx with 5 sections: hero, story, principles, what we don't do, CTABand
 - Section 1: centered hero with dot grid background, bold H1 statement, no CTA
