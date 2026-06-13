@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const SERVICES = [
   "GBP Optimization",
@@ -108,37 +109,39 @@ export default function ContactForm() {
     }
   }
 
-  if (success) {
-    return (
-      <div className="bg-[#0e2131] border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center gap-6 text-center min-h-[400px]">
-        <span className="material-symbols-outlined text-[#C9A227] text-5xl">
-          check_circle
-        </span>
-        <div>
-          <h3 className="font-display font-extrabold text-[#d1e5fb] text-2xl">
-            You&apos;re all set.
-          </h3>
-          <p className="mt-2 text-[#99907b]">
-            We&apos;ll confirm your audit call time within one business day.
-            Check your inbox.
-          </p>
-        </div>
-        <a
-          href="/services"
-          className="text-[#C9A227] hover:underline text-sm"
-        >
-          Explore our services while you wait →
-        </a>
-      </div>
-    );
-  }
-
   return (
-    <form
-      onSubmit={handleSubmit}
-      noValidate
-      className="bg-[#0e2131] border border-white/10 rounded-2xl p-8 flex flex-col gap-5"
-    >
+    <AnimatePresence mode="wait">
+      {success ? (
+        <motion.div
+          key="success"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="bg-[#0e2131] border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center gap-6 text-center min-h-[400px]"
+        >
+          <span className="material-symbols-outlined text-[#C9A227] text-5xl">
+            check_circle
+          </span>
+          <div>
+            <h3 className="font-display font-extrabold text-[#d1e5fb] text-2xl">
+              You&apos;re all set.
+            </h3>
+            <p className="mt-2 text-[#99907b]">
+              We&apos;ll confirm your audit call time within one business day.
+              Check your inbox.
+            </p>
+          </div>
+          <a href="/services" className="text-[#C9A227] hover:underline text-sm">
+            Explore our services while you wait →
+          </a>
+        </motion.div>
+      ) : (
+        <form
+          key="form"
+          onSubmit={handleSubmit}
+          noValidate
+          className="bg-[#0e2131] border border-white/10 rounded-2xl p-8 flex flex-col gap-5"
+        >
       {/* Name */}
       <div>
         <label htmlFor="name" className={labelClass}>
@@ -269,6 +272,8 @@ export default function ContactForm() {
           "Book My Free Audit Call"
         )}
       </button>
-    </form>
+        </form>
+      )}
+    </AnimatePresence>
   );
 }
