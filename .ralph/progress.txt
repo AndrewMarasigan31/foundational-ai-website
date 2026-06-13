@@ -1,3 +1,19 @@
+## 2026-06-13 - US-019
+- Animated SVG process line in HowItWorksSection replacing the static `bg-white/10` div
+- Added "use client" to HowItWorksSection (required for useRef/useInView/useAnimation hooks)
+- Created AnimatedProcessLine sub-component: SVG with motion.line using pathLength 0→1, useInView + useAnimation, 0.2s delay, 1s ease-in-out
+- Each of the 4 step columns now wrapped in its own AnimatedSection with stagger delays: 0s, 0.15s, 0.3s, 0.45s
+- SVG line is hidden on mobile (hidden md:block), desktop only
+- Step 1 circle retains gold fill + glow; steps 2-4 transition to gold on hover (group/group-hover pattern preserved)
+- Typecheck passes, build passes; manual browser verification needed (no dev-browser MCP)
+- **Learnings for future iterations:**
+  - Framer Motion `pathLength` on `motion.line` handles strokeDasharray/strokeDashoffset automatically — cleaner than manual dash calculations
+  - `useAnimation()` + `useInView()` + `useEffect` pattern: store controls, trigger `controls.start()` when `isInView` flips true
+  - SVG with `height="1"` and `overflow: visible` style is the right way to create a hairline SVG connector that doesn't clip
+  - When wrapping grid children in AnimatedSection (motion.div), group/group-hover still works since group is on the inner div
+  - Section components can add "use client" when hooks are needed inline — the pattern of keeping sections server-only is a preference, not a requirement
+---
+
 ## 2026-06-13 - US-018
 - Refactored components/HeroSection.tsx from md:grid-cols-2 split layout to single centered column
 - Added eyebrow pill: 'Local SEO for US Small Businesses' with bolt icon (was missing from prior implementation)
