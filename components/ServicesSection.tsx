@@ -1,11 +1,11 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { useInView, useMotionValue, animate } from "framer-motion";
+import { motion, useInView, useMotionValue, animate } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 
 // ── GBP card: star rating 3.2 → 4.9 ──
-function GBPStarAnimation() {
+export function GBPStarAnimation() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
   const motionValue = useMotionValue(3.2);
@@ -34,7 +34,7 @@ function GBPStarAnimation() {
 }
 
 // ── Content card: typewriter blog post title ──
-function BlogTypingAnimation() {
+export function BlogTypingAnimation() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
   const fullText = "5 Reasons Chicago Restaurants Need Local SEO";
@@ -105,6 +105,89 @@ function LighthouseAnimation() {
         </span>
         <span className="text-xs text-[#99907b]">/ 100</span>
       </div>
+    </div>
+  );
+}
+
+// ── AI Search card: mock AI answer mentioning business ──
+export function AISearchAnimation() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const fullText = "Foundational AI Systems is a top-rated local SEO agency serving small businesses across the US, known for fast GBP improvements and transparent reporting.";
+  const [displayed, setDisplayed] = useState("");
+  const started = useRef(false);
+
+  useEffect(() => {
+    if (!isInView || started.current) return;
+    started.current = true;
+    let i = 0;
+    const interval = setInterval(() => {
+      i += 2;
+      setDisplayed(fullText.slice(0, i));
+      if (i >= fullText.length) clearInterval(interval);
+    }, 30);
+    return () => clearInterval(interval);
+  }, [isInView]);
+
+  return (
+    <div ref={ref} className="mt-4 rounded-xl bg-[#021524] border border-white/10 p-4 text-sm">
+      <div className="flex items-center gap-2 mb-3">
+        <span className="material-symbols-outlined text-sm text-[#99907b]">smart_toy</span>
+        <span className="text-[#99907b] text-xs">AI Overview response</span>
+      </div>
+      <p className="text-[#d1e5fb]/80 leading-relaxed min-h-[4rem]">
+        {displayed}
+        {displayed.length < fullText.length && (
+          <span className="animate-pulse text-[#C9A227]">|</span>
+        )}
+      </p>
+    </div>
+  );
+}
+
+// ── Lead Reactivation card: SMS replies appearing ──
+function LeadReactivationAnimation() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const [visibleCount, setVisibleCount] = useState(0);
+  const started = useRef(false);
+
+  const messages = [
+    { name: "Mike R.", text: "Hey, still interested in that quote.", delay: 0.4 },
+    { name: "Sarah T.", text: "Yes! When can we schedule?", delay: 1.0 },
+    { name: "James L.", text: "Just saw your message, call me back.", delay: 1.6 },
+  ];
+
+  useEffect(() => {
+    if (!isInView || started.current) return;
+    started.current = true;
+    messages.forEach((_, i) => {
+      setTimeout(() => setVisibleCount(i + 1), messages[i].delay * 1000);
+    });
+  }, [isInView]);
+
+  return (
+    <div ref={ref} className="mt-4 rounded-xl bg-[#021524] border border-white/10 p-4 space-y-2">
+      <div className="text-xs text-[#99907b] mb-3 flex items-center gap-1.5">
+        <span className="material-symbols-outlined text-sm text-[#C9A227]">mark_chat_unread</span>
+        Replies from cold leads
+      </div>
+      {messages.map((msg, i) => (
+        <motion.div
+          key={msg.name}
+          className="flex items-start gap-2"
+          initial={{ opacity: 0, x: -8 }}
+          animate={{ opacity: visibleCount > i ? 1 : 0, x: visibleCount > i ? 0 : -8 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="w-6 h-6 rounded-full bg-[#C9A227]/20 flex items-center justify-center shrink-0 mt-0.5">
+            <span className="text-[#C9A227] text-xs font-bold">{msg.name[0]}</span>
+          </div>
+          <div className="bg-[#0e2131] rounded-lg px-3 py-1.5 flex-1">
+            <p className="text-xs text-[#d1e5fb]/90 leading-snug">{msg.text}</p>
+          </div>
+        </motion.div>
+      ))}
     </div>
   );
 }
@@ -191,10 +274,30 @@ const services = [
     icon: "monitoring",
     title: "Performance Tracking",
     description:
-      "We report on ranking movement, profile views, and call volume every month. If something isn't working, we adjust — you don't wait on a quarterly review to find out what happened.",
+      "We report on ranking movement, profile views, and call volume every month. If something isn't working, we adjust. You don't wait on a quarterly review to find out what happened.",
     checklist: null,
     mockPanel: <RankTrackingAnimation />,
     colSpan: "md:col-span-8",
+  },
+  {
+    id: "ai-search",
+    icon: "travel_explore",
+    title: "AI Search Visibility",
+    description:
+      "ChatGPT, Perplexity, and Google AI Overviews are now where customers start. We optimize your business information, content, and authority so you show up in AI-generated answers, not just the traditional search results.",
+    checklist: null,
+    mockPanel: <AISearchAnimation />,
+    colSpan: "md:col-span-6",
+  },
+  {
+    id: "reactivation",
+    icon: "mark_chat_unread",
+    title: "Lead Reactivation Sprint",
+    description:
+      "Most businesses already have revenue sitting in old contacts and cold leads. We build a 90-day SMS and email follow-up sequence, set up your CRM workflow, and turn a neglected list back into booked appointments. Live in 5 to 7 business days.",
+    checklist: null,
+    mockPanel: <LeadReactivationAnimation />,
+    colSpan: "md:col-span-6",
   },
 ];
 
@@ -205,15 +308,12 @@ export default function ServicesSection() {
         {/* Header */}
         <AnimatedSection>
           <div className="flex flex-col items-center text-center gap-6 mb-14">
-            <div className="inline-flex items-center gap-2 bg-[#C9A227]/10 border border-[#C9A227]/30 text-[#C9A227] text-sm font-semibold px-4 py-1.5 rounded-full">
-              What We Do
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
-              The Work That Gets Local Businesses Found
+              Get Found. Convert. Recover What You Left on the Table.
             </h2>
             <p className="text-lg text-[#99907b] leading-relaxed max-w-2xl">
-              Most clients start with a call. We review your current Google presence together,
-              identify what&apos;s costing you rankings, and figure out the right first step.
+              From Google rankings and AI search visibility to recovering cold leads.
+              every service is scoped clearly, executed lean, and built to produce results you can measure.
             </p>
           </div>
         </AnimatedSection>
