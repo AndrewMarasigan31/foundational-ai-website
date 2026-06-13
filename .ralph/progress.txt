@@ -1,3 +1,14 @@
+## 2026-06-13 - US-030
+- Server action at app/actions/submitContact.ts was already fully implemented as part of US-029 (stub was complete)
+- Created .env.local.example with GHL_WEBHOOK_URL=https://your-ghl-webhook-url-here
+- Also committed user's manual changes: font swap from Syne/Inter to Bricolage_Grotesque/DM_Sans in app/layout.tsx, and DashboardSection removal + CustomerJourneySection reorder in app/page.tsx
+- Typecheck passes
+- **Learnings for future iterations:**
+  - When a "stub" server action is created in a prior story, check if it was already made complete — no need to re-implement
+  - .env.local.example belongs in the repo root (not .ralph/ or app/)
+  - Manual user edits to tracked files should be included in the next Ralph commit to keep the branch clean
+---
+
 ## 2026-06-13 - US-029
 - Created components/ContactForm.tsx as a 'use client' component
 - 4 text inputs: Name, Email, Business Name (required), Website URL (optional)
