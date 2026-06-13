@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import LocalPackVisual from "./LocalPackVisual";
+import TrustBar from "./TrustBar";
 
 export default function HeroSection() {
   return (
@@ -48,6 +49,8 @@ export default function HeroSection() {
               See the Services
             </Link>
           </div>
+
+          <TrustBar />
         </div>
 
         {/* Right: visual */}
