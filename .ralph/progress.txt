@@ -77,6 +77,18 @@ Started: Sun Jun 14 11:18:36 PST 2026
   - The Services H2 uses an inline em for the gold accent word — follow same pattern for other copy rewrites
 ---
 
+## 2026-06-14 - US-083
+- Restructured CTABand from centered single-column to md:grid-cols-2 split layout
+- Left: h2 + subtext paragraph (left-aligned, existing animation preserved)
+- Right: CTA card (bg-[#0e2131] rounded-2xl p-8) with primary button, 3 trust signals, secondary link
+- Trust signals: "No contract required", "Results in weeks", "Direct access to the team"
+- Right card wrapped in AnimatedSection direction=up delay=0.2
+- Gold radial glow and both prefersReducedMotion branches preserved
+- Files changed: components/CTABand.tsx (full rewrite)
+- **Learnings for future iterations:**
+  - AnimatedSection can be used for the right-column card instead of manual motion.div
+---
+
 ## 2026-06-14 - US-082
 - Changed grid from grid-cols-4 to grid-cols-2 (2x2 layout)
 - Removed AnimatedProcessLine SVG component and its useRef/useEffect/useInView/useAnimation imports
