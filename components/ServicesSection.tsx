@@ -310,7 +310,7 @@ export default function ServicesSection() {
         <div className="flex flex-col items-center text-center gap-6 mb-14">
           <p className="text-xs uppercase tracking-[0.2em] text-[#99907b] mb-3">02 — SERVICES</p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-light text-[#d1e5fb] leading-tight tracking-[-0.04em] max-w-3xl">
-            Get Found. Convert. <em className="font-serif not-italic text-[#C9A227]">Recover</em> What You Left on the Table.
+            Get Found. <em className="font-serif not-italic text-[#C9A227]">Get Paid.</em>
           </h2>
           <p className="text-lg sm:text-xl text-[#99907b] leading-relaxed max-w-2xl">
             From Google rankings and AI search visibility to recovering cold leads.
