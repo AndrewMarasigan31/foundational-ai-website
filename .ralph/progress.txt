@@ -52,3 +52,14 @@ Started: Sun Jun 14 11:18:36 PST 2026
   - The inner `div.relative.z-10` grid container is the correct anchor for absolutely-positioned decorative layers
   - Section already has overflow-hidden so overflow from large text-[20vw] elements is safely clipped
 ---
+
+## 2026-06-14 - US-075
+- Changed H2 typography in ServicesSection, WhyUsSection, HowItWorksSection, FAQSection, CustomerJourneySection
+- All top-level section H2s: font-extrabold → font-light, tracking-tight → tracking-[-0.04em]
+- Card H3 titles and step number spans (font-extrabold) are unchanged as required
+- CustomerJourneySection has two H2 instances (reduced-motion branch and animated branch) — both updated via replace_all
+- Files changed: components/ServicesSection.tsx, WhyUsSection.tsx, HowItWorksSection.tsx, FAQSection.tsx, CustomerJourneySection.tsx
+- **Learnings for future iterations:**
+  - CustomerJourneySection duplicates H2 markup inside a prefersReducedMotion conditional — always check for duplicate elements there
+  - The consistent pattern `text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold ... tracking-tight` appears in 5 sections; replace_all is safe within a single file but must be verified
+---
