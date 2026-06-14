@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, DM_Sans, Playfair_Display } from "next/font/google";
 import Footer from "../components/Footer";
 import Nav from "../components/Nav";
+import PageTransition from "../components/PageTransition";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -43,7 +44,7 @@ export default function RootLayout({
       </head>
       <body className={dmSans.className}>
         <Nav />
-        {children}
+        <PageTransition>{children}</PageTransition>
         <Footer />
       </body>
     </html>
