@@ -41,3 +41,14 @@ Started: Sun Jun 14 11:18:36 PST 2026
   - Eyebrow elements follow the same reduced-motion dual-branch pattern used for all animated elements in HeroSection
   - motion.p is the correct element for animated paragraph eyebrows (not motion.div wrapping a p)
 ---
+
+## 2026-06-14 - US-074
+- Added ghost watermark 'RANK' div as first child of the relative z-10 grid container in HeroSection
+- Styled: absolute select-none pointer-events-none text-[20vw] font-black text-white/[0.03] leading-none top-0 -left-4 aria-hidden="true"
+- No animation needed (criteria explicitly states plain static div is correct)
+- The section already has overflow-hidden so no layout shift or scrollbar issues
+- Files changed: components/HeroSection.tsx
+- **Learnings for future iterations:**
+  - The inner `div.relative.z-10` grid container is the correct anchor for absolutely-positioned decorative layers
+  - Section already has overflow-hidden so overflow from large text-[20vw] elements is safely clipped
+---
