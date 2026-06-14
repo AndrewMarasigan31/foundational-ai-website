@@ -7,6 +7,15 @@ Started: Sun Jun 14 08:48:04 PST 2026
 - For reduced motion: render plain divs, no animate props.
 - 'use client' is required on any component using Framer Motion hooks.
 
+## 2026-06-14 - US-054
+- Added staggered motion.div entrance animations to HowItWorks step columns (delay: 0.5 + index * 0.15)
+- Added useReducedMotion check — renders plain divs when true
+- Files changed: components/HowItWorksSection.tsx
+- **Learnings for future iterations:**
+  - Pattern: conditional render between motion.div (animated) and div (static) based on prefersReducedMotion
+  - useReducedMotion is imported from framer-motion; add to existing import
+---
+
 ## 2026-06-14 - US-053
 - Wrapped HowItWorks heading+subheading block in AnimatedSection direction='up'
 - Files changed: components/HowItWorksSection.tsx
