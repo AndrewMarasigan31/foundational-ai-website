@@ -1,3 +1,6 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 
 const reasons = [
@@ -22,6 +25,8 @@ const reasons = [
 ];
 
 export default function WhyUsSection() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section className="py-20 md:py-28 px-6 bg-[#021524]">
       <div className="max-w-7xl mx-auto">
@@ -34,20 +39,35 @@ export default function WhyUsSection() {
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {reasons.map((reason) => (
-            <div
-              key={reason.num}
-              className="relative overflow-hidden bg-[#0e2131] border border-white/10 rounded-2xl p-8 flex flex-col gap-4"
-            >
-              {/* Faded number */}
-              <span className="absolute top-4 right-6 text-8xl font-extrabold text-[#C9A227]/[0.35] leading-none select-none pointer-events-none">
-                {reason.num}
-              </span>
-
-              <h3 className="text-xl font-bold text-[#d1e5fb] relative z-10">{reason.title}</h3>
-              <p className="text-[#99907b] leading-relaxed relative z-10">{reason.description}</p>
-            </div>
-          ))}
+          {reasons.map((reason, i) =>
+            prefersReducedMotion ? (
+              <div
+                key={reason.num}
+                className="relative overflow-hidden bg-[#0e2131] border border-white/10 rounded-2xl p-8 flex flex-col gap-4"
+              >
+                <span className="absolute top-4 right-6 text-8xl font-extrabold text-[#C9A227]/[0.35] leading-none select-none pointer-events-none">
+                  {reason.num}
+                </span>
+                <h3 className="text-xl font-bold text-[#d1e5fb] relative z-10">{reason.title}</h3>
+                <p className="text-[#99907b] leading-relaxed relative z-10">{reason.description}</p>
+              </div>
+            ) : (
+              <motion.div
+                key={reason.num}
+                className="relative overflow-hidden bg-[#0e2131] border border-white/10 rounded-2xl p-8 flex flex-col gap-4"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
+              >
+                <span className="absolute top-4 right-6 text-8xl font-extrabold text-[#C9A227]/[0.35] leading-none select-none pointer-events-none">
+                  {reason.num}
+                </span>
+                <h3 className="text-xl font-bold text-[#d1e5fb] relative z-10">{reason.title}</h3>
+                <p className="text-[#99907b] leading-relaxed relative z-10">{reason.description}</p>
+              </motion.div>
+            )
+          )}
         </div>
       </div>
     </section>
