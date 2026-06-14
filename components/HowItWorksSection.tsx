@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { motion, useInView, useAnimation, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 
 const steps = [
@@ -32,41 +31,6 @@ const steps = [
 ];
 
 const stepDelays = [0, 0.15, 0.3, 0.45];
-const stepNumColors = ["text-white", "text-white/60", "text-white/30", "text-white/15"];
-
-function AnimatedProcessLine() {
-  const svgRef = useRef<SVGSVGElement>(null);
-  const isInView = useInView(svgRef, { once: true, margin: "-10% 0px" });
-  const controls = useAnimation();
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start({ pathLength: 1 });
-    }
-  }, [isInView, controls]);
-
-  return (
-    <svg
-      ref={svgRef}
-      className="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] z-0"
-      height="1"
-      style={{ overflow: "visible" }}
-      aria-hidden="true"
-    >
-      <motion.line
-        x1="0"
-        y1="0.5"
-        x2="100%"
-        y2="0.5"
-        stroke="rgba(255,255,255,0.1)"
-        strokeWidth="1"
-        initial={{ pathLength: 0 }}
-        animate={controls}
-        transition={{ duration: 1, delay: 0.2, ease: "easeInOut" }}
-      />
-    </svg>
-  );
-}
 
 export default function HowItWorksSection() {
   const prefersReducedMotion = useReducedMotion();
@@ -86,39 +50,37 @@ export default function HowItWorksSection() {
           </p>
         </AnimatedSection>
 
-        {/* Steps */}
-        <div className="relative">
-          {/* Animated SVG connecting line — desktop only */}
-          <AnimatedProcessLine />
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6 relative z-10">
-            {steps.map((step, index) =>
-              prefersReducedMotion ? (
-                <div key={step.num} className="group flex flex-col items-center text-center gap-4">
-                  <span className={`text-6xl md:text-8xl font-extrabold leading-none ${stepNumColors[index]}`}>
-                    {step.num}
-                  </span>
-                  <h3 className="text-xl font-bold text-[#d1e5fb]">{step.title}</h3>
-                  <p className="text-[#99907b] text-base leading-relaxed">{step.description}</p>
-                </div>
-              ) : (
-                <motion.div
-                  key={step.num}
-                  className="group flex flex-col items-center text-center gap-4"
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.5 + index * 0.15 }}
-                >
-                  <span className={`text-6xl md:text-8xl font-extrabold leading-none ${stepNumColors[index]}`}>
-                    {step.num}
-                  </span>
-                  <h3 className="text-xl font-bold text-[#d1e5fb]">{step.title}</h3>
-                  <p className="text-[#99907b] text-base leading-relaxed">{step.description}</p>
-                </motion.div>
-              )
-            )}
-          </div>
+        {/* 2×2 grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+          {steps.map((step, index) =>
+            prefersReducedMotion ? (
+              <div
+                key={step.num}
+                className="border-l-2 border-[#C9A227]/30 pl-8 py-2 flex flex-col gap-4"
+              >
+                <span className="text-8xl md:text-9xl font-extrabold text-[#C9A227]/[0.20] leading-none select-none">
+                  {step.num}
+                </span>
+                <h3 className="text-xl font-bold text-[#d1e5fb]">{step.title}</h3>
+                <p className="text-[#99907b] text-base leading-relaxed">{step.description}</p>
+              </div>
+            ) : (
+              <motion.div
+                key={step.num}
+                className="border-l-2 border-[#C9A227]/30 pl-8 py-2 flex flex-col gap-4"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: stepDelays[index] }}
+              >
+                <span className="text-8xl md:text-9xl font-extrabold text-[#C9A227]/[0.20] leading-none select-none">
+                  {step.num}
+                </span>
+                <h3 className="text-xl font-bold text-[#d1e5fb]">{step.title}</h3>
+                <p className="text-[#99907b] text-base leading-relaxed">{step.description}</p>
+              </motion.div>
+            )
+          )}
         </div>
       </div>
     </section>
