@@ -77,6 +77,15 @@ Started: Sun Jun 14 11:18:36 PST 2026
   - The Services H2 uses an inline em for the gold accent word — follow same pattern for other copy rewrites
 ---
 
+## 2026-06-14 - US-080
+- Added border-t border-white/10 to WhyUsSection, HowItWorksSection, FAQSection
+- ServicesSection skipped (already has distinct dark bg-[#0e2131] that contrasts clearly)
+- All three were single-line className changes on the outermost <section> tag
+- Files changed: components/WhyUsSection.tsx (line 31), HowItWorksSection.tsx (line 75), FAQSection.tsx (line 117)
+- **Learnings for future iterations:**
+  - Section border additions are trivial — each section has a single <section> tag as outer wrapper
+---
+
 ## 2026-06-14 - US-079
 - Changed CTABand H2 from 'Start with a free audit call. No pitch, no pressure.' to 'Rank. Convert. Grow.'
 - 'Grow.' wrapped in gold em accent (font-serif not-italic text-[#C9A227])
