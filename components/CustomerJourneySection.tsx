@@ -62,19 +62,10 @@ const nodes: Node[] = [
   },
 ];
 
-const cardStyles: Record<Node["state"], string> = {
-  neutral:
-    "bg-[#0e2131] border border-white/10 hover:border-white/20",
-  leak:
-    "bg-[#1a0a0a] border border-red-500/40 hover:border-red-500/60",
-  recovery:
-    "bg-[#0a1208] border border-[#C9A227]/50 shadow-[0_0_32px_rgba(201,162,39,0.15)] hover:shadow-[0_0_48px_rgba(201,162,39,0.25)]",
-};
-
-const iconBgStyles: Record<Node["state"], string> = {
-  neutral: "bg-white/5 text-[#99907b]",
-  leak: "bg-red-500/10 text-red-400",
-  recovery: "bg-[#C9A227]/15 text-[#C9A227]",
+const checkpointStyles: Record<Node["state"], string> = {
+  neutral: "border-white/20 bg-[#0e2131] text-[#99907b]",
+  leak: "border-red-500/40 bg-[#1a0a0a] text-red-400",
+  recovery: "border-[#C9A227]/50 bg-[#0a1208] text-[#C9A227] shadow-[0_0_20px_rgba(201,162,39,0.2)]",
 };
 
 const labelStyles: Record<Node["state"], string> = {
@@ -109,7 +100,7 @@ function AnimatedLine() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div ref={ref} className="hidden md:block absolute inset-x-0 top-[52px] h-px z-0 pointer-events-none">
+    <div ref={ref} className="hidden md:block absolute inset-x-0 top-6 h-px z-0 pointer-events-none">
       {/* Solid neutral line */}
       <div className="absolute inset-y-0 overflow-hidden" style={{ left: "4.16%", width: "58.33%" }}>
         {prefersReducedMotion ? (
@@ -211,30 +202,28 @@ export default function CustomerJourneySection() {
             {nodes.map((node, i) => {
               const nodeContent = (
                 <>
-                  {/* Icon */}
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${iconBgStyles[node.state]}`}>
-                    <span className="material-symbols-outlined text-2xl leading-none">
+                  {/* Checkpoint box — sits on the connector line */}
+                  <div className={`relative z-10 mb-4 flex size-12 items-center justify-center border ${checkpointStyles[node.state]}`}>
+                    <span className="material-symbols-outlined text-xl leading-none">
                       {node.icon}
                     </span>
                   </div>
 
                   {/* Label */}
-                  <div className="flex flex-col gap-1">
-                    <span className={`text-sm font-bold leading-tight ${labelStyles[node.state]}`}>
-                      {node.label}
-                    </span>
-                    <span className={`text-xs leading-snug ${sublabelStyles[node.state]}`}>
-                      {node.sublabel}
-                    </span>
-                  </div>
+                  <span className={`text-sm font-bold leading-tight ${labelStyles[node.state]}`}>
+                    {node.label}
+                  </span>
+                  <span className={`text-xs leading-snug mt-1 ${sublabelStyles[node.state]}`}>
+                    {node.sublabel}
+                  </span>
 
                   {/* Tags */}
                   {node.tags.length > 0 && (
-                    <div className="flex flex-col gap-1.5 w-full mt-auto pt-2 border-t border-white/5">
+                    <div className="flex flex-col gap-1.5 w-full mt-3">
                       {node.tags.map((tag) => (
                         <span
                           key={tag.label}
-                          className={`text-xs px-2 py-1 rounded-lg border text-center ${
+                          className={`text-xs px-2 py-1 border text-center ${
                             tag.gold
                               ? "border-[#C9A227]/50 text-[#C9A227] bg-[#C9A227]/5"
                               : "border-white/10 text-[#99907b] bg-white/5"
@@ -246,25 +235,19 @@ export default function CustomerJourneySection() {
                     </div>
                   )}
 
-                  {/* Recovery badge */}
+                  {/* State badges */}
                   {node.state === "recovery" && (
-                    <div className="mt-auto pt-2 border-t border-[#C9A227]/20 w-full flex justify-center">
+                    <div className="mt-3 w-full flex justify-center">
                       <span className="text-xs text-[#C9A227]/80 flex items-center gap-1">
-                        <span className="material-symbols-outlined text-sm leading-none">
-                          trending_up
-                        </span>
+                        <span className="material-symbols-outlined text-sm leading-none">trending_up</span>
                         Revenue recovered
                       </span>
                     </div>
                   )}
-
-                  {/* Leak badge */}
                   {node.state === "leak" && (
-                    <div className="mt-auto pt-2 border-t border-red-500/20 w-full flex justify-center">
+                    <div className="mt-3 w-full flex justify-center">
                       <span className="text-xs text-red-400/70 flex items-center gap-1">
-                        <span className="material-symbols-outlined text-sm leading-none">
-                          warning
-                        </span>
+                        <span className="material-symbols-outlined text-sm leading-none">warning</span>
                         Most stop here
                       </span>
                     </div>
@@ -273,16 +256,13 @@ export default function CustomerJourneySection() {
               );
 
               return prefersReducedMotion ? (
-                <div
-                  key={node.label}
-                  className={`rounded-2xl p-4 flex flex-col items-center text-center gap-3 transition-all duration-300 ${cardStyles[node.state]}`}
-                >
+                <div key={node.label} className="relative flex flex-col items-center text-center gap-0">
                   {nodeContent}
                 </div>
               ) : (
                 <motion.div
                   key={node.label}
-                  className={`rounded-2xl p-4 flex flex-col items-center text-center gap-3 transition-all duration-300 ${cardStyles[node.state]}`}
+                  className="relative flex flex-col items-center text-center gap-0"
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -325,11 +305,7 @@ export default function CustomerJourneySection() {
               <div key={node.label} className="flex items-stretch gap-4">
                 {/* Left: connector column */}
                 <div className="flex flex-col items-center shrink-0 w-10">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${iconBgStyles[node.state]} border ${
-                    node.state === "leak" ? "border-red-500/30" :
-                    node.state === "recovery" ? "border-[#C9A227]/40" :
-                    "border-white/10"
-                  }`}>
+                  <div className={`w-10 h-10 flex items-center justify-center shrink-0 border ${checkpointStyles[node.state]}`}>
                     <span className="material-symbols-outlined text-lg leading-none">{node.icon}</span>
                   </div>
                   {i < nodes.length - 1 && (

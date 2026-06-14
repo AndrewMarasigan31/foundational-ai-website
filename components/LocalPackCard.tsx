@@ -20,7 +20,7 @@ const grayPins = [
 
 export default function LocalPackCard() {
   return (
-    <div className="relative w-full select-none overflow-hidden rounded-2xl">
+    <div className="relative w-full select-none overflow-hidden">
       {/* SVG Map Background */}
       <svg
         viewBox="0 0 300 260"
@@ -119,7 +119,7 @@ export default function LocalPackCard() {
       {/* Overlay: badge + listing cards */}
       <div className="absolute inset-0 flex flex-col justify-end px-3 pb-3">
         <div className="flex justify-center mb-2">
-          <span className="bg-[#C9A227]/20 border border-[#C9A227]/50 text-[#C9A227] text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
+          <span className="bg-[#C9A227]/20 border border-[#C9A227]/50 text-[#C9A227] text-xs font-semibold px-3 py-1 uppercase tracking-wide">
             Top 3 Local Pack
           </span>
         </div>
@@ -128,10 +128,10 @@ export default function LocalPackCard() {
           {listings.map((listing, i) => (
             <div
               key={listing.name}
-              className="bg-[#0e2131]/80 backdrop-blur-md border border-[#99907b]/30 rounded-xl px-3 py-2 flex items-center justify-between transition-colors hover:border-[#C9A227]/50"
+              className="bg-[#0e2131]/80 backdrop-blur-md border border-[#99907b]/30 px-3 py-2 flex items-center justify-between transition-colors hover:border-[#C9A227]/50"
             >
               <div className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-[#C9A227]/10 border border-[#C9A227]/40 text-[#C9A227] text-xs font-bold flex items-center justify-center shrink-0">
+                <span className="w-5 h-5 bg-[#C9A227]/10 border border-[#C9A227]/40 text-[#C9A227] text-xs font-bold flex items-center justify-center shrink-0">
                   {i + 1}
                 </span>
                 <span className="text-[#d1e5fb] text-xs font-medium">{listing.name}</span>
