@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
+import AnimatedSection from "./AnimatedSection";
 
 const steps = [
   {
@@ -72,7 +73,7 @@ export default function HowItWorksSection() {
     <section className="py-20 md:py-28 px-6 bg-[#0e2131]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col items-center text-center gap-6 mb-16">
+        <AnimatedSection direction="up" className="flex flex-col items-center text-center gap-6 mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
             Simple Enough to Explain in Four Steps
           </h2>
@@ -80,7 +81,7 @@ export default function HowItWorksSection() {
             No onboarding maze. No kick-off call theater. Here&apos;s exactly what happens when
             you reach out.
           </p>
-        </div>
+        </AnimatedSection>
 
         {/* Steps */}
         <div className="relative">
