@@ -1,3 +1,5 @@
+import AnimatedSection from "./AnimatedSection";
+
 const reasons = [
   {
     num: "01",
@@ -24,11 +26,11 @@ export default function WhyUsSection() {
     <section className="py-20 md:py-28 px-6 bg-[#021524]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col items-center text-center gap-6 mb-16">
+        <AnimatedSection direction="up" className="flex flex-col items-center text-center gap-6 mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
             Built <em className="font-serif not-italic text-[#C9A227]">Lean.</em> Scoped Clearly.
           </h2>
-        </div>
+        </AnimatedSection>
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
