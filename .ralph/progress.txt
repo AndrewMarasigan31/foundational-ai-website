@@ -7,6 +7,57 @@ Started: Sun Jun 14 08:48:04 PST 2026
 - For reduced motion: render plain divs, no animate props.
 - 'use client' is required on any component using Framer Motion hooks.
 
+## 2026-06-14 - US-068/069/070
+- Converted Contact page to 'use client', added motion.h1/p on load with useReducedMotion guard (US-068)
+- Added motion.li stagger (x: -16→0, delay: i * 0.06) for cover items with reduced motion guard (US-069)
+- Wrapped form column in AnimatedSection direction='up' delay={0.15} (US-070)
+- Files changed: app/contact/page.tsx
+---
+
+## 2026-06-14 - US-066/067
+- Converted About page to 'use client', added masked line-lift headline with useReducedMotion guard
+- Wrapped all body sections in AnimatedSection direction='up' with staggered delays
+- Files changed: app/about/page.tsx
+---
+
+## 2026-06-14 - US-065
+- Created PageTransition client component using AnimatePresence keyed to pathname
+- Added to app/layout.tsx wrapping {children}
+- Files changed: components/PageTransition.tsx, app/layout.tsx
+---
+
+## 2026-06-14 - US-064
+- Added useReducedMotion to FAQItem; extracted inner JSX; renders plain div vs motion.div on entrance; AnimatePresence accordion kept regardless
+- Files changed: components/FAQSection.tsx
+---
+
+## 2026-06-14 - US-063
+- Added useReducedMotion guards throughout CustomerJourneySection: AnimatedLine segments, desktop card motion.divs, mobile content motion.divs, header
+- Files changed: components/CustomerJourneySection.tsx
+---
+
+## 2026-06-14 - US-062
+- Added useReducedMotion to HeroSection: aurora orbs render as plain divs, ScrambleWord skips interval, headline spans render final state
+- Files changed: components/HeroSection.tsx
+---
+
+## 2026-06-14 - US-060/061
+- Converted CTABand to 'use client'; added motion.h2/p/div entrance animations with useReducedMotion guard
+- Added breathing pulse (opacity [0.6, 1, 0.6] 12s loop) on gold glow div
+- Files changed: components/CTABand.tsx
+---
+
+## 2026-06-14 - US-059
+- Changed CustomerJourney card whileInView delay from i * 0.1 to 0.5 + i * 0.1
+- Files changed: components/CustomerJourneySection.tsx
+---
+
+## 2026-06-14 - US-058
+- Added staggered motion.div entrance to Services bento cards (delay: i * 0.07), useReducedMotion guard
+- Extracted card content to variable to avoid duplication
+- Files changed: components/ServicesSection.tsx
+---
+
 ## 2026-06-14 - US-057
 - Added hover:-translate-y-1 hover:border-white/20 transition-all duration-300 to WhyUs card classNames (both animated and static variants)
 - Files changed: components/WhyUsSection.tsx
