@@ -77,6 +77,19 @@ Started: Sun Jun 14 11:18:36 PST 2026
   - The Services H2 uses an inline em for the gold accent word — follow same pattern for other copy rewrites
 ---
 
+## 2026-06-14 - US-081
+- Restructured WhyUs into asymmetric bento: card 1 = md:col-span-2 (wide), cards 2+3 stacked in remaining col
+- Wide card (card 1): flex-row on desktop with large number (6rem) on left, title+description on right
+- Cards 2+3: stacked in a flex-col gap-6 wrapper, keep existing absolute watermark number pattern
+- Mobile: all cards collapse to full-width stacked (grid-cols-1)
+- Hover effects and staggered entrance animations preserved (delay by index)
+- Replaced .map() with explicit wide card + slice(1).map() for the right column
+- Files changed: components/WhyUsSection.tsx (full rewrite)
+- **Learnings for future iterations:**
+  - When cards have different layouts, split out of a single .map() — render card 1 explicitly, then slice(1).map() for rest
+  - flex-1 on small cards inside flex-col wrapper ensures they fill equal height
+---
+
 ## 2026-06-14 - US-080
 - Added border-t border-white/10 to WhyUsSection, HowItWorksSection, FAQSection
 - ServicesSection skipped (already has distinct dark bg-[#0e2131] that contrasts clearly)
