@@ -67,7 +67,7 @@
         "Typecheck passes"
       ],
       "priority": 5,
-      "passes": false
+      "passes": true
     },
     {
       "id": "US-057",
@@ -80,7 +80,7 @@
         "Typecheck passes"
       ],
       "priority": 6,
-      "passes": false
+      "passes": true
     },
     {
       "id": "US-058",

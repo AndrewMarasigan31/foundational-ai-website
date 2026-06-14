@@ -7,6 +7,16 @@ Started: Sun Jun 14 08:48:04 PST 2026
 - For reduced motion: render plain divs, no animate props.
 - 'use client' is required on any component using Framer Motion hooks.
 
+## 2026-06-14 - US-057
+- Added hover:-translate-y-1 hover:border-white/20 transition-all duration-300 to WhyUs card classNames (both animated and static variants)
+- Files changed: components/WhyUsSection.tsx
+---
+
+## 2026-06-14 - US-056
+- Converted WhyUsSection to 'use client', added motion.div staggered entrance (delay: i * 0.1) with useReducedMotion guard
+- Files changed: components/WhyUsSection.tsx
+---
+
 ## 2026-06-14 - US-055
 - Wrapped WhyUs heading in AnimatedSection direction='up'
 - Added import to server component (no 'use client' needed — AnimatedSection is already client)
