@@ -56,7 +56,7 @@ export default function AboutPage() {
         }}
       >
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-light text-[#d1e5fb] leading-tight tracking-[-0.05em]">
             {headlineLines.map(({ text, delay }) => (
               <span key={text} className="block overflow-hidden">
                 {prefersReducedMotion ? (
@@ -98,7 +98,7 @@ export default function AboutPage() {
       <section className="bg-[#021524] py-20 md:py-28 px-6">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection direction="up">
-            <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#d1e5fb] text-center mb-14 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-display font-light text-[#d1e5fb] text-center mb-14 tracking-[-0.04em]">
               How We Work
             </h2>
           </AnimatedSection>
@@ -127,7 +127,7 @@ export default function AboutPage() {
       <section className="bg-[#000f1d] py-20 md:py-28 px-6">
         <div className="max-w-3xl mx-auto">
           <AnimatedSection direction="up">
-            <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#d1e5fb] mb-10 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-display font-light text-[#d1e5fb] mb-10 tracking-[-0.04em]">
               What We Don&apos;t Do
             </h2>
           </AnimatedSection>
