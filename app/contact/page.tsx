@@ -144,6 +144,17 @@ export default function ContactPage() {
                   </div>
                 ))}
               </div>
+
+              <div className="border-t border-white/10 pt-6">
+                <p className="text-[#99907b] text-sm mb-3">Prefer to email directly?</p>
+                <a
+                  href="mailto:info@foundationalaisystem.com"
+                  className="inline-flex items-center gap-2 text-[#C9A227] hover:text-[#d1e5fb] text-sm font-medium transition-colors"
+                >
+                  <span className="material-symbols-outlined text-base leading-none">mail</span>
+                  info@foundationalaisystem.com
+                </a>
+              </div>
             </div>
 
             {/* Right — Form (first on mobile) */}

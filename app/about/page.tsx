@@ -48,7 +48,7 @@ export default function AboutPage() {
     <main>
       {/* Section 1 — Founder statement hero */}
       <section
-        className="relative overflow-hidden bg-[#021524] py-28 md:py-36 px-6"
+        className="relative overflow-hidden bg-[#021524] py-20 md:py-36 px-6"
         style={{
           backgroundImage:
             "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)",
