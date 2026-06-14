@@ -77,6 +77,17 @@ Started: Sun Jun 14 11:18:36 PST 2026
   - The Services H2 uses an inline em for the gold accent word — follow same pattern for other copy rewrites
 ---
 
+## 2026-06-14 - US-079
+- Changed CTABand H2 from 'Start with a free audit call. No pitch, no pressure.' to 'Rank. Convert. Grow.'
+- 'Grow.' wrapped in gold em accent (font-serif not-italic text-[#C9A227])
+- H2 typography updated: font-extrabold → font-light, tracking-tight → tracking-[-0.04em], leading-tight → leading-none
+- Both prefersReducedMotion (static h2) and animated (motion.h2) branches updated
+- Subtext paragraph, buttons, and gold radial glow animation are all unchanged
+- Files changed: components/CTABand.tsx (lines 37-40, 63-72)
+- **Learnings for future iterations:**
+  - CTABand has same dual-branch pattern (prefersReducedMotion ? static : animated) — always update both
+---
+
 ## 2026-06-14 - US-078
 - Changed WhyUs card 2 title from 'Built for How Search Actually Works Now' to 'Built for Modern Search'
 - Other two card titles (AI-Assisted, Human-Reviewed / No Bloated Layers) and all descriptions unchanged
