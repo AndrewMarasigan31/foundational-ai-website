@@ -144,6 +144,22 @@ export default function HeroSection() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
         {/* Left column */}
         <div className="flex flex-col gap-6">
+          {/* Eyebrow label */}
+          {prefersReducedMotion ? (
+            <p className="text-xs uppercase tracking-[0.2em] text-[#99907b]">
+              LOCAL SEO · AI SEARCH · RESULTS
+            </p>
+          ) : (
+            <motion.p
+              className="text-xs uppercase tracking-[0.2em] text-[#99907b]"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0, ease: "easeOut" }}
+            >
+              LOCAL SEO · AI SEARCH · RESULTS
+            </motion.p>
+          )}
+
           {/* Headline: masked line-lift per line (editorial technique) */}
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-light text-[#d1e5fb] leading-none tracking-[-0.05em]">
             <span className="block overflow-hidden">
