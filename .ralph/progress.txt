@@ -77,6 +77,18 @@ Started: Sun Jun 14 11:18:36 PST 2026
   - The Services H2 uses an inline em for the gold accent word — follow same pattern for other copy rewrites
 ---
 
+## 2026-06-14 - US-082
+- Changed grid from grid-cols-4 to grid-cols-2 (2x2 layout)
+- Removed AnimatedProcessLine SVG component and its useRef/useEffect/useInView/useAnimation imports
+- Replaced SVG connecting line with border-l-2 border-[#C9A227]/30 per-card left accent
+- Step cards now left-aligned (removed items-center text-center)
+- Step numbers enlarged to text-8xl md:text-9xl (from text-6xl md:text-8xl) and made non-absolute (normal flow)
+- Staggered animations preserved via stepDelays array
+- Files changed: components/HowItWorksSection.tsx (full rewrite)
+- **Learnings for future iterations:**
+  - HowItWorksSection had a custom AnimatedProcessLine component using framer-motion hooks — safe to remove if replacing the SVG line
+---
+
 ## 2026-06-14 - US-081
 - Restructured WhyUs into asymmetric bento: card 1 = md:col-span-2 (wide), cards 2+3 stacked in remaining col
 - Wide card (card 1): flex-row on desktop with large number (6rem) on left, title+description on right
