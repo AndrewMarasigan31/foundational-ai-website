@@ -44,7 +44,7 @@ export default function AnimatedSection({
       initial={mounted ? "hidden" : false}
       animate={isInView ? "visible" : mounted ? "hidden" : false}
       variants={variants[direction]}
-      transition={{ duration: 0.5, ease: "easeOut", delay }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay }}
     >
       {children}
     </motion.div>
