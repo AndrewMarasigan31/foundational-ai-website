@@ -1,4 +1,10 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import ContactForm from "@/components/ContactForm";
+import AnimatedSection from "@/components/AnimatedSection";
+
+const ease = [0.16, 1, 0.3, 1] as const;
 
 const coverItems = [
   {
@@ -26,6 +32,8 @@ const trustSignals = [
 ];
 
 export default function ContactPage() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <main>
       <section
@@ -48,15 +56,41 @@ export default function ContactPage() {
         <div className="relative z-10 max-w-7xl mx-auto">
           {/* Headline centred above the grid */}
           <div className="text-center mb-12 md:mb-16">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
-              Book Your Free{" "}
-              <em className="font-serif not-italic text-[#C9A227]">Audit</em>{" "}
-              Call.
-            </h1>
-            <p className="mt-6 text-lg sm:text-xl text-[#99907b] leading-relaxed">
-              No pitch. No pressure. 30 minutes to map exactly where revenue is
-              leaking.
-            </p>
+            {prefersReducedMotion ? (
+              <>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
+                  Book Your Free{" "}
+                  <em className="font-serif not-italic text-[#C9A227]">Audit</em>{" "}
+                  Call.
+                </h1>
+                <p className="mt-6 text-lg sm:text-xl text-[#99907b] leading-relaxed">
+                  No pitch. No pressure. 30 minutes to map exactly where revenue is
+                  leaking.
+                </p>
+              </>
+            ) : (
+              <>
+                <motion.h1
+                  className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight"
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease }}
+                >
+                  Book Your Free{" "}
+                  <em className="font-serif not-italic text-[#C9A227]">Audit</em>{" "}
+                  Call.
+                </motion.h1>
+                <motion.p
+                  className="mt-6 text-lg sm:text-xl text-[#99907b] leading-relaxed"
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease, delay: 0.1 }}
+                >
+                  No pitch. No pressure. 30 minutes to map exactly where revenue is
+                  leaking.
+                </motion.p>
+              </>
+            )}
           </div>
 
           {/* Two-column grid */}
@@ -68,16 +102,34 @@ export default function ContactPage() {
               </h2>
 
               <ul className="flex flex-col gap-5">
-                {coverItems.map((item) => (
-                  <li key={item.icon} className="flex items-start gap-3">
-                    <span className="material-symbols-outlined text-[#C9A227] text-xl leading-none shrink-0 mt-0.5">
-                      {item.icon}
-                    </span>
-                    <span className="text-[#d1e5fb] leading-relaxed">
-                      {item.text}
-                    </span>
-                  </li>
-                ))}
+                {coverItems.map((item, i) =>
+                  prefersReducedMotion ? (
+                    <li key={item.icon} className="flex items-start gap-3">
+                      <span className="material-symbols-outlined text-[#C9A227] text-xl leading-none shrink-0 mt-0.5">
+                        {item.icon}
+                      </span>
+                      <span className="text-[#d1e5fb] leading-relaxed">
+                        {item.text}
+                      </span>
+                    </li>
+                  ) : (
+                    <motion.li
+                      key={item.icon}
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -16 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, ease, delay: i * 0.06 }}
+                    >
+                      <span className="material-symbols-outlined text-[#C9A227] text-xl leading-none shrink-0 mt-0.5">
+                        {item.icon}
+                      </span>
+                      <span className="text-[#d1e5fb] leading-relaxed">
+                        {item.text}
+                      </span>
+                    </motion.li>
+                  )
+                )}
               </ul>
 
               <div className="border-t border-white/10 pt-6 flex flex-col gap-4">
@@ -95,9 +147,11 @@ export default function ContactPage() {
             </div>
 
             {/* Right — Form (first on mobile) */}
-            <div id="contact-form-slot" className="order-first md:order-last">
-              <ContactForm />
-            </div>
+            <AnimatedSection direction="up" delay={0.15} className="order-first md:order-last">
+              <div id="contact-form-slot">
+                <ContactForm />
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
