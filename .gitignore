@@ -10,3 +10,5 @@ tsconfig.tsbuildinfo
 .superpowers/
 .tours/
 tasks/
+.vercel
+.env*.local
