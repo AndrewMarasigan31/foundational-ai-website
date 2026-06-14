@@ -53,6 +53,30 @@ Started: Sun Jun 14 11:18:36 PST 2026
   - Section already has overflow-hidden so overflow from large text-[20vw] elements is safely clipped
 ---
 
+## 2026-06-14 - US-076
+- Added eyebrow labels to all 5 major homepage sections
+- CustomerJourneySection: '01 — HOW IT WORKS' (both prefersReducedMotion and animated branches)
+- ServicesSection: '02 — SERVICES' (plain div header, no AnimatedSection)
+- WhyUsSection: '03 — WHY US' (inside AnimatedSection)
+- HowItWorksSection: '04 — PROCESS' (inside AnimatedSection)
+- FAQSection: '05 — FAQ' (plain div header)
+- All eyebrows: text-xs uppercase tracking-[0.2em] text-[#99907b] mb-3
+- Files changed: components/CustomerJourneySection.tsx, ServicesSection.tsx, WhyUsSection.tsx, HowItWorksSection.tsx, FAQSection.tsx
+- **Learnings for future iterations:**
+  - ServicesSection and FAQSection use plain divs (no AnimatedSection) — eyebrow is a plain <p> inside the existing div
+  - CustomerJourneySection has both branches (prefersReducedMotion div + motion.div) — always update both
+  - Numbering follows PRD spec, not strict page order (03=WhyUs, 04=HowItWorks despite HowItWorks appearing before WhyUs on page)
+---
+
+## 2026-06-14 - US-077
+- Changed Services H2 from 'Get Found. Convert. Recover What You Left on the Table.' to 'Get Found. Get Paid.'
+- 'Get Paid.' wrapped in gold em accent (font-serif not-italic text-[#C9A227]) per pattern
+- Subtext paragraph below heading is unchanged
+- Files changed: components/ServicesSection.tsx (line 313)
+- **Learnings for future iterations:**
+  - The Services H2 uses an inline em for the gold accent word — follow same pattern for other copy rewrites
+---
+
 ## 2026-06-14 - US-075
 - Changed H2 typography in ServicesSection, WhyUsSection, HowItWorksSection, FAQSection, CustomerJourneySection
 - All top-level section H2s: font-extrabold → font-light, tracking-tight → tracking-[-0.04em]
