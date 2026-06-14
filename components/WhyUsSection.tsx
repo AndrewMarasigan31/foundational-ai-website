@@ -43,7 +43,7 @@ export default function WhyUsSection() {
             prefersReducedMotion ? (
               <div
                 key={reason.num}
-                className="relative overflow-hidden bg-[#0e2131] border border-white/10 rounded-2xl p-8 flex flex-col gap-4"
+                className="relative overflow-hidden bg-[#0e2131] border border-white/10 rounded-2xl p-8 flex flex-col gap-4 hover:-translate-y-1 hover:border-white/20 transition-all duration-300"
               >
                 <span className="absolute top-4 right-6 text-8xl font-extrabold text-[#C9A227]/[0.35] leading-none select-none pointer-events-none">
                   {reason.num}
@@ -54,7 +54,7 @@ export default function WhyUsSection() {
             ) : (
               <motion.div
                 key={reason.num}
-                className="relative overflow-hidden bg-[#0e2131] border border-white/10 rounded-2xl p-8 flex flex-col gap-4"
+                className="relative overflow-hidden bg-[#0e2131] border border-white/10 rounded-2xl p-8 flex flex-col gap-4 hover:-translate-y-1 hover:border-white/20 transition-all duration-300"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
