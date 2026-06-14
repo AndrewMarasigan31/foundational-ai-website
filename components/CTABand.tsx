@@ -34,9 +34,8 @@ export default function CTABand() {
       <div className="relative z-10 max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-6">
         {prefersReducedMotion ? (
           <>
-            <h2 className="max-w-xl text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
-              Start with a <em className="font-serif not-italic text-[#C9A227]">free</em> audit call.{" "}
-              <span className="text-[#C9A227]">No pitch, no pressure.</span>
+            <h2 className="max-w-xl text-3xl sm:text-4xl lg:text-5xl font-display font-light text-[#d1e5fb] leading-none tracking-[-0.04em]">
+              Rank. Convert. <em className="font-serif not-italic text-[#C9A227]">Grow.</em>
             </h2>
             <p className="text-lg sm:text-xl text-[#99907b] leading-relaxed max-w-xl">
               We review your Google and AI search visibility, your existing lead list, and your
@@ -61,14 +60,13 @@ export default function CTABand() {
         ) : (
           <>
             <motion.h2
-              className="max-w-xl text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight"
+              className="max-w-xl text-3xl sm:text-4xl lg:text-5xl font-display font-light text-[#d1e5fb] leading-none tracking-[-0.04em]"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease, delay: 0 }}
             >
-              Start with a <em className="font-serif not-italic text-[#C9A227]">free</em> audit call.{" "}
-              <span className="text-[#C9A227]">No pitch, no pressure.</span>
+              Rank. Convert. <em className="font-serif not-italic text-[#C9A227]">Grow.</em>
             </motion.h2>
 
             <motion.p
