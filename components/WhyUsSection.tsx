@@ -12,7 +12,7 @@ const reasons = [
   },
   {
     num: "02",
-    title: "Built for How Search Actually Works Now",
+    title: "Built for Modern Search",
     description:
       "Customers now find businesses through Google, ChatGPT, Perplexity, and AI Overviews. We optimize for the full search landscape, not just the version of local SEO that existed three years ago.",
   },
