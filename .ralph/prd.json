@@ -1,264 +1,227 @@
 {
   "project": "Foundational AI Systems Website",
-  "branchName": "ralph/animation-system-overhaul",
-  "description": "Establish a unified animation system across the entire site: standardize easing, fill animation gaps in HowItWorks/WhyUs/CTABand/ServicesSection, add entrance animations to Contact and About pages, add a page transition, synchronize CustomerJourney card timing, and add useReducedMotion guards consistently.",
+  "branchName": "ralph/editorial-formatting-rewrite",
+  "description": "Apply an aura-inspired editorial formatting system to the homepage: light-weight display headings with tight negative letter-spacing, eyebrow labels above every major section, punchy headline copy rewrites, a ghost watermark in the hero, section border dividers, and a display-scale CTABand footer statement. Color palette (navy/gold) is unchanged.",
   "userStories": [
     {
-      "id": "US-052",
-      "title": "Standardize entrance easing to [0.16, 1, 0.3, 1] in AnimatedSection",
-      "description": "As a site visitor, I want all scroll-triggered entrance animations to share the same easing curve, so that motion feels like one brand rather than three separate implementations.",
+      "id": "US-071",
+      "title": "Refactor Hero H1 to light-weight display typography with tight tracking",
+      "description": "As a site visitor, I want the hero headline to feel editorial and confident at large display sizes rather than loud and heavy, so that the brand reads as expert rather than salesy.",
       "acceptanceCriteria": [
-        "In AnimatedSection.tsx, change transition.ease from 'easeOut' to [0.16, 1, 0.3, 1]",
-        "Duration remains 0.5s",
-        "The existing useReducedMotion guard is preserved unchanged",
+        "Hero H1 changes from font-extrabold to font-light",
+        "Letter-spacing changes to tracking-[-0.05em] or equivalent negative value",
+        "Font size targets text-5xl sm:text-6xl lg:text-7xl",
+        "Line height is leading-none or leading-tight",
+        "The existing ScrambleWord and line-lift animation logic is preserved unchanged",
+        "useReducedMotion guard is preserved",
         "Typecheck passes"
       ],
       "priority": 1,
       "passes": true
     },
     {
-      "id": "US-053",
-      "title": "Add entrance animations to HowItWorks section heading and subheading",
-      "description": "As a site visitor, I want the HowItWorks heading and subheading to animate in on scroll, so that the section entrance is consistent with every other section on the page.",
+      "id": "US-072",
+      "title": "Rewrite Hero H1 copy to short punchy display statement",
+      "description": "As a site visitor, I want the hero headline to communicate the brand promise in under 5 words so I understand what this business does at a glance.",
       "acceptanceCriteria": [
-        "Wrap the heading and subheading block in an AnimatedSection direction='up' component",
-        "Animation fires on scroll into view, once only",
-        "Section still renders correctly with no AnimatedSection if useReducedMotion is true",
+        "Hero headline text changes to 'Rank First. Win Local.' (or equivalent approved short form)",
+        "The italic/em gold accent is preserved on a key word",
+        "Subtext paragraph below the headline is unchanged",
         "Typecheck passes"
       ],
       "priority": 2,
-      "passes": true
+      "passes": false
     },
     {
-      "id": "US-054",
-      "title": "Add staggered entrance animations to HowItWorks step columns",
-      "description": "As a site visitor, I want the four process step columns to animate in sequentially as I scroll to the section, so that the numbered process feels revealed step by step.",
+      "id": "US-073",
+      "title": "Add eyebrow label to Hero section",
+      "description": "As a site visitor, I want a small uppercase label above the hero headline so that I have a visual anchor before reading the main statement.",
       "acceptanceCriteria": [
-        "Each step column gets a motion.div with initial={{ opacity: 0, y: 24 }}, whileInView={{ opacity: 1, y: 0 }}, viewport={{ once: true }}",
-        "Delay per step: 0.5 + index * 0.15 so columns stagger in after the SVG line has started drawing",
-        "Easing uses [0.16, 1, 0.3, 1], duration 0.5s",
-        "Add useReducedMotion check: if true, render columns as plain divs with no animation",
+        "A <p> or <span> element is added immediately above the H1 with text 'LOCAL SEO · AI SEARCH · RESULTS'",
+        "Styling: text-xs uppercase tracking-[0.2em] text-[#99907b]",
+        "Element is included inside the existing AnimatedSection/motion wrapper so it enters with the heading",
         "Typecheck passes"
       ],
       "priority": 3,
-      "passes": true
+      "passes": false
     },
     {
-      "id": "US-055",
-      "title": "Add entrance animations to WhyUs section heading",
-      "description": "As a site visitor, I want the WhyUs heading to animate in on scroll, so that the section feels intentionally revealed.",
+      "id": "US-074",
+      "title": "Add ghost watermark word behind Hero headline",
+      "description": "As a site visitor, I want an oversized near-invisible background word behind the hero to add visual depth without competing with the headline.",
       "acceptanceCriteria": [
-        "Wrap the heading block in AnimatedSection direction='up'",
-        "Animation fires on scroll into view, once only",
+        "A div with text 'RANK' or 'LOCAL' is positioned absolutely behind the headline content",
+        "Styling: absolute select-none pointer-events-none text-[20vw] font-black text-white/[0.03] leading-none aria-hidden=true",
+        "When useReducedMotion is true, the element is rendered as a plain static div (no motion props needed — it is already static)",
+        "Does not cause layout shift or overflow",
         "Typecheck passes"
       ],
       "priority": 4,
-      "passes": true
+      "passes": false
     },
     {
-      "id": "US-056",
-      "title": "Add staggered entrance animations to WhyUs cards",
-      "description": "As a site visitor, I want the WhyUs reason cards to animate in with a staggered entrance as I scroll to them, so that the section feels as polished as CustomerJourney and FAQ.",
+      "id": "US-075",
+      "title": "Refactor all section H2s to light-weight display typography",
+      "description": "As a site visitor, I want all major section headings to match the hero's editorial weight and tracking so that the typography system feels cohesive across the page.",
       "acceptanceCriteria": [
-        "Each reason card gets motion.div with initial={{ opacity: 0, y: 24 }}, whileInView={{ opacity: 1, y: 0 }}, delay: i * 0.1, viewport={{ once: true }}",
-        "Easing uses [0.16, 1, 0.3, 1], duration 0.5s",
-        "Add useReducedMotion check: if true, render cards as plain divs",
-        "WhyUsSection must be converted to 'use client' if not already",
+        "ServicesSection, WhyUsSection, HowItWorksSection, FAQSection, CustomerJourneySection H2s change from font-extrabold to font-light",
+        "Letter-spacing on each changes to a negative value (tracking-[-0.04em] or similar)",
+        "Font sizes stay at or increase slightly from current values",
+        "Card H3 titles and step titles remain at their current bold weights — only top-level H2s change",
         "Typecheck passes"
       ],
       "priority": 5,
-      "passes": true
+      "passes": false
     },
     {
-      "id": "US-057",
-      "title": "Add hover lift and border highlight to WhyUs cards",
-      "description": "As a site visitor, I want the WhyUs cards to respond to hover with a subtle lift and border highlight, so that the interactive feel is consistent with the Services bento cards.",
+      "id": "US-076",
+      "title": "Add eyebrow labels to all major homepage sections",
+      "description": "As a site visitor scrolling the page, I want small uppercase labels above each section heading so that I can orient myself and each section has a clear visual anchor.",
       "acceptanceCriteria": [
-        "Add hover:-translate-y-1 hover:border-white/20 transition-all duration-300 to each reason card className",
-        "The existing border border-white/10 class remains as the default state",
-        "Hover effect is CSS only — no Framer Motion needed",
+        "ServicesSection gets eyebrow '02 — SERVICES'",
+        "WhyUsSection gets eyebrow '03 — WHY US'",
+        "HowItWorksSection gets eyebrow '04 — PROCESS'",
+        "FAQSection gets eyebrow '05 — FAQ'",
+        "CustomerJourneySection gets eyebrow '01 — HOW IT WORKS' or similar (use judgement based on page order)",
+        "All eyebrows use class: text-xs uppercase tracking-[0.2em] text-[#99907b] mb-3",
+        "Each eyebrow is placed inside the existing heading AnimatedSection wrapper so it enters with the heading",
         "Typecheck passes"
       ],
       "priority": 6,
-      "passes": true
+      "passes": false
     },
     {
-      "id": "US-058",
-      "title": "Add staggered entrance animations to Services bento cards",
-      "description": "As a site visitor, I want the Services bento cards to animate in on scroll, so that they arrive consistently with every other animated card grid on the page.",
+      "id": "US-077",
+      "title": "Rewrite Services section heading to short display copy",
+      "description": "As a site visitor, I want the Services section heading to be short and benefit-oriented so I immediately know what the section is about.",
       "acceptanceCriteria": [
-        "Each bento card div gets motion.div with initial={{ opacity: 0, y: 24 }}, whileInView={{ opacity: 1, y: 0 }}, viewport={{ once: true }}, delay: i * 0.07",
-        "Easing uses [0.16, 1, 0.3, 1], duration 0.5s",
-        "In-card micro-animations (GBP star, typing, Lighthouse, rank, SMS) are unchanged",
-        "Add useReducedMotion check: if true, render cards as plain divs",
+        "Services H2 changes from 'Get Found. Convert. Recover What You Left on the Table.' to 'Get Found. Get Paid.'",
+        "The gold em accent is preserved on a key word if applicable",
+        "Subtext paragraph below heading is unchanged",
         "Typecheck passes"
       ],
       "priority": 7,
-      "passes": true
+      "passes": false
     },
     {
-      "id": "US-059",
-      "title": "Fix CustomerJourney card delay to trail the line draw",
-      "description": "As a site visitor, I want the CustomerJourney cards to not appear before the connecting line has started drawing toward them, so that the animated line narrative is coherent.",
+      "id": "US-078",
+      "title": "Shorten WhyUs card title 'Built for How Search Actually Works Now'",
+      "description": "As a site visitor scanning the Why Us cards, I want all three card titles to be short enough to read at a glance.",
       "acceptanceCriteria": [
-        "Change the card whileInView transition delay from i * 0.1 to 0.5 + i * 0.1",
-        "The first card now appears at 0.5s, by which point the neutral line segment is visibly drawing",
-        "Tag whileInView delays (0.8 + i * 0.1) are unchanged",
+        "Card title 'Built for How Search Actually Works Now' changes to 'Built for Modern Search'",
+        "The other two card titles are unchanged",
+        "Card body description text is unchanged",
         "Typecheck passes"
       ],
       "priority": 8,
-      "passes": true
+      "passes": false
     },
     {
-      "id": "US-060",
-      "title": "Add entrance animations to CTABand heading, subheading, and buttons",
-      "description": "As a site visitor, I want the CTABand heading, subheading, and button group to animate in on scroll with a stagger, so that the conversion moment feels confident and alive.",
+      "id": "US-079",
+      "title": "Rewrite CTABand heading to 3-verb display statement",
+      "description": "As a site visitor reaching the bottom of the page, I want the CTA section to open with a bold short display statement so that the final conversion moment has authority and momentum.",
       "acceptanceCriteria": [
-        "CTABand is converted to a 'use client' component",
-        "Heading becomes motion.h2 with initial={{ opacity: 0, y: 24 }}, whileInView={{ opacity: 1, y: 0 }}, delay: 0, viewport={{ once: true }}",
-        "Subheading becomes motion.p with delay: 0.1",
-        "Button group wrapper becomes motion.div with delay: 0.2",
-        "All use easing [0.16, 1, 0.3, 1], duration 0.5s",
-        "Add useReducedMotion check: if true render all as plain elements",
+        "CTABand H2 changes from 'Start with a free audit call. No pitch, no pressure.' to 'Rank. Convert. Grow.'",
+        "The existing subtext paragraph ('30 minutes to map exactly where revenue is leaking' or similar) is kept below as detail copy",
+        "The H2 uses the new display typography (font-light, tight tracking, large size) consistent with other section H2s",
+        "Existing gold glow animation and button layout are preserved",
         "Typecheck passes"
       ],
       "priority": 9,
-      "passes": true
+      "passes": false
     },
     {
-      "id": "US-061",
-      "title": "Add breathing pulse to CTABand gold radial glow",
-      "description": "As a site visitor, I want the CTABand background glow to slowly pulse in opacity, so that the section feels warm and inviting rather than a flat static background.",
+      "id": "US-080",
+      "title": "Add section border-top dividers between homepage sections",
+      "description": "As a site visitor, I want thin divider lines between sections so that content zones are clearly separated as I scroll.",
       "acceptanceCriteria": [
-        "Convert the static gold radial gradient div to a motion.div",
-        "Add animate={{ opacity: [0.6, 1, 0.6] }} with transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}",
-        "The pulse is very slow — almost imperceptible as motion, functioning as atmospheric warmth",
-        "Add useReducedMotion check: if true, render as a static div with no animate prop",
+        "A border-t border-white/10 is added to the top of sections that transition between surface colors",
+        "Applied to at minimum: WhyUsSection, HowItWorksSection, FAQSection",
+        "Does not add a border where the section already has a visually distinct background color break (e.g. the dark #0e2131 ServicesSection already contrasts clearly)",
         "Typecheck passes"
       ],
       "priority": 10,
-      "passes": true
+      "passes": false
     },
     {
-      "id": "US-062",
-      "title": "Add useReducedMotion guard to HeroSection aurora orbs and ScrambleWord",
-      "description": "As a site visitor with motion sensitivity, I want the hero aurora orbs and scramble text animation to be suppressed when I have reduce motion enabled.",
+      "id": "US-081",
+      "title": "Restructure WhyUs section into asymmetric bento layout",
+      "description": "As a site visitor, I want the Why Us cards to have different sizes and internal layouts so that each differentiator feels individually considered rather than stamped from a uniform 3-column template.",
       "acceptanceCriteria": [
-        "Add useReducedMotion() hook in HeroSection",
-        "If prefersReducedMotion is true: render the two aurora motion.div orbs as plain divs (no animate prop)",
-        "If prefersReducedMotion is true: ScrambleWord renders the final text string immediately without running the scramble interval",
-        "The headline line-lift motion.spans render their final y: '0%' state immediately when reduced motion is on",
+        "Grid changes from grid-cols-3 equal to grid-cols-3 where card 1 spans md:col-span-2 and cards 2-3 each span md:col-span-1",
+        "Cards 2 and 3 stack vertically within their column (using flex-col gap between them)",
+        "The wide card (card 1) uses a horizontal internal layout on desktop: icon/number on one side, title + description on the other",
+        "All existing card content (title, description, number watermark) is preserved",
+        "Mobile collapses all three to full width stacked",
+        "Existing hover effects and entrance animations are preserved",
         "Typecheck passes"
       ],
       "priority": 11,
-      "passes": true
+      "passes": false
     },
     {
-      "id": "US-063",
-      "title": "Add useReducedMotion guard to CustomerJourneySection",
-      "description": "As a site visitor with motion sensitivity, I want the CustomerJourney line draw and card entrances to render statically when reduce motion is enabled.",
+      "id": "US-082",
+      "title": "Restructure HowItWorks section into 2x2 offset grid",
+      "description": "As a site visitor, I want the process steps to use a 2x2 grid with more breathing room per step so the section feels deliberately designed rather than 4 equal columns.",
       "acceptanceCriteria": [
-        "Add useReducedMotion() in CustomerJourneySection",
-        "If prefersReducedMotion: AnimatedLine renders its three motion.div segments as plain divs at full opacity (no animate/initial props)",
-        "If prefersReducedMotion: desktop node cards render as plain divs without whileInView motion props",
-        "Mobile content (motion.div with x slide) also renders as plain div when reduced motion on",
+        "Grid changes from grid-cols-1 md:grid-cols-4 to grid-cols-1 md:grid-cols-2",
+        "Steps 1 and 2 are in row 1, steps 3 and 4 are in row 2",
+        "Each step card has increased padding and the step number can increase to text-8xl or text-9xl",
+        "The horizontal SVG connecting line is removed or replaced with a simpler per-card left-border accent (border-l-2 border-[#C9A227]/30) to maintain visual connection between steps",
+        "Step title and description are left-aligned within each card (not centered)",
+        "Existing entrance animations (staggered motion.div) are preserved on the cards",
         "Typecheck passes"
       ],
       "priority": 12,
-      "passes": true
+      "passes": false
     },
     {
-      "id": "US-064",
-      "title": "Add useReducedMotion guard to FAQSection stagger entrance",
-      "description": "As a site visitor with motion sensitivity, I want the FAQ items to not fly in on scroll when reduce motion is enabled.",
+      "id": "US-083",
+      "title": "Restructure CTABand into split layout with right-side CTA card",
+      "description": "As a site visitor reaching the bottom of the page, I want the CTA section to have a split layout — display statement left, action card right — so the final scroll position feels like a real page destination rather than a centered banner.",
       "acceptanceCriteria": [
-        "Add useReducedMotion() in FAQSection (or FAQItem)",
-        "If prefersReducedMotion: each FAQItem renders as a plain div instead of motion.div (no stagger entrance)",
-        "The AnimatePresence accordion expand/collapse is kept regardless — it is an interaction, not an entrance",
+        "CTABand switches from max-w-3xl mx-auto text-center to a full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center",
+        "Left column: display heading (Rank. Convert. Grow.) + subtext paragraph, left-aligned",
+        "Right column: a card (bg-[#0e2131] border border-white/10 rounded-2xl p-8) containing the primary CTA button, 3 trust signal lines (No contract required / Results in weeks / Direct access to the team), and the secondary link below",
+        "The gold radial glow animation sits behind the full section width",
+        "On mobile the columns stack: display text on top, CTA card below",
+        "Existing entrance animations are preserved on the left column elements; the right card gets its own AnimatedSection direction=up delay=0.2",
         "Typecheck passes"
       ],
       "priority": 13,
-      "passes": true
+      "passes": false
     },
     {
-      "id": "US-065",
-      "title": "Add page transition to app layout",
-      "description": "As a site visitor navigating between pages, I want a brief 200ms opacity fade transition so that moving between pages feels smooth rather than an abrupt hard cut.",
+      "id": "US-084",
+      "title": "Make ServicesSection full-bleed to viewport edges",
+      "description": "As a site visitor, I want the dark Services section to bleed to the full viewport width so it creates a clear visual rupture in the scroll and feels like a deliberate design moment.",
       "acceptanceCriteria": [
-        "Create a PageTransition client component that wraps children with AnimatePresence and a motion.div keyed to pathname",
-        "Animation: initial={{ opacity: 0 }}, animate={{ opacity: 1 }}, exit={{ opacity: 0 }}, transition={{ duration: 0.2 }}",
-        "Import PageTransition in app/layout.tsx and wrap {children} with it",
-        "If useReducedMotion is true inside PageTransition, render children directly without the motion.div",
-        "Navigation between /, /services, /contact, /about all show the fade",
+        "ServicesSection outer wrapper gets negative horizontal margins: -mx-6 sm:-mx-12 lg:-mx-24",
+        "Matching positive padding added to preserve inner content alignment: px-6 sm:px-12 lg:px-24",
+        "Inner content stays inside a max-w-7xl mx-auto container",
+        "The dark background (bg-[#0e2131]) now visibly extends to both viewport edges on all screen sizes",
+        "No horizontal scrollbar is introduced (parent layout must have overflow-x-hidden — verify this is already set in app/layout.tsx or add it)",
         "Typecheck passes"
       ],
       "priority": 14,
-      "passes": true
+      "passes": false
     },
     {
-      "id": "US-066",
-      "title": "Add entrance animations to About page headline",
-      "description": "As a site visitor arriving on the About page, I want the large editorial headline to animate in with a masked line-lift, so that it feels intentional and brand-consistent with the homepage hero.",
+      "id": "US-085",
+      "title": "Apply variable vertical padding across all homepage sections",
+      "description": "As a site visitor scrolling the page, I want sections to vary in vertical density so the page has rhythm and doesn't feel like uniform padding repeated from a template.",
       "acceptanceCriteria": [
-        "The About page headline uses the same masked line-lift pattern as HeroSection: each line wrapped in span.block.overflow-hidden > motion.span.block with initial={{ y: '105%' }} animate={{ y: '0%' }}",
-        "Easing [0.16, 1, 0.3, 1], duration 0.7s, staggered delays per line",
-        "Add useReducedMotion check: if true, render headline lines statically",
+        "ServicesSection: increase to py-24 md:py-32 (full-bleed deserves more air)",
+        "HowItWorksSection: increase to py-24 md:py-32 (2x2 grid needs space)",
+        "CustomerJourneySection: tighten to py-16 md:py-24",
+        "FAQSection: tighten to py-16 md:py-20 (dense content, less padding)",
+        "CTABand: increase to py-28 md:py-40 (final destination, most generous)",
+        "Hero and TrustBar padding unchanged",
+        "WhyUsSection padding unchanged",
         "Typecheck passes"
       ],
       "priority": 15,
-      "passes": true
-    },
-    {
-      "id": "US-067",
-      "title": "Add scroll entrance animations to About page body sections",
-      "description": "As a site visitor scrolling the About page, I want each body text block to fade and rise into view, so that the page feels alive rather than a static wall of text.",
-      "acceptanceCriteria": [
-        "Each distinct content block below the headline gets wrapped in AnimatedSection direction='up' with staggered delays",
-        "Animation fires on scroll into view, once only",
-        "Typecheck passes"
-      ],
-      "priority": 16,
-      "passes": true
-    },
-    {
-      "id": "US-068",
-      "title": "Add entrance animations to Contact page heading and subheading",
-      "description": "As a site visitor arriving on the Contact page, I want the heading and subheading to animate in on load, so that the page feels as considered as the homepage.",
-      "acceptanceCriteria": [
-        "Contact page heading gets motion.h1 (or AnimatedSection wrapper) with opacity 0→1 and y 24→0 on mount",
-        "Subheading gets the same with a 0.1s delay",
-        "Animations fire on load (not whileInView — these are above the fold)",
-        "Add useReducedMotion check: if true render statically",
-        "Typecheck passes"
-      ],
-      "priority": 17,
-      "passes": true
-    },
-    {
-      "id": "US-069",
-      "title": "Add staggered entrance to Contact page trust bullet points",
-      "description": "As a site visitor on the Contact page, I want the 'What We Cover on the Call' bullet points to stagger in sequentially, so that each selling point lands with emphasis.",
-      "acceptanceCriteria": [
-        "Each bullet item gets motion.div or motion.li with whileInView, initial={{ opacity: 0, x: -16 }}, animate={{ opacity: 1, x: 0 }}, delay: i * 0.06",
-        "Viewport once: true",
-        "Add useReducedMotion check: if true render as plain elements",
-        "Typecheck passes"
-      ],
-      "priority": 18,
-      "passes": true
-    },
-    {
-      "id": "US-070",
-      "title": "Add entrance animation to Contact page form column",
-      "description": "As a site visitor on the Contact page, I want the form to fade in on load, so that the primary conversion element feels like a confident arrival.",
-      "acceptanceCriteria": [
-        "The form column gets AnimatedSection direction='up' delay={0.15} (or equivalent motion.div)",
-        "Animation fires on mount",
-        "Add useReducedMotion check: if true render statically",
-        "Typecheck passes"
-      ],
-      "priority": 19,
-      "passes": true
+      "passes": false
     }
   ]
 }

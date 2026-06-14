@@ -1,101 +1,22 @@
 # Ralph Progress Log
-Started: Sun Jun 14 08:48:04 PST 2026
+Started: Sun Jun 14 11:18:36 PST 2026
 ---
 
 ## Codebase Patterns
-- AnimatedSection.tsx is the shared scroll-triggered entrance animation wrapper (uses Framer Motion's useInView + variants). Brand easing is [0.16, 1, 0.3, 1] at 0.5s duration.
-- For reduced motion: render plain divs, no animate props.
-- 'use client' is required on any component using Framer Motion hooks.
+- Hero and all section components are in /components/*.tsx (no src/ directory)
+- Tailwind arbitrary values use bracket notation: tracking-[-0.05em], text-[#C9A227] etc.
+- useReducedMotion from framer-motion is used throughout — always preserve reduced-motion guards
+- AnimatedSection wrapper is in components/AnimatedSection.tsx
+- Typecheck: run `npx tsc --noEmit` from project root
 
-## 2026-06-14 - US-068/069/070
-- Converted Contact page to 'use client', added motion.h1/p on load with useReducedMotion guard (US-068)
-- Added motion.li stagger (x: -16→0, delay: i * 0.06) for cover items with reduced motion guard (US-069)
-- Wrapped form column in AnimatedSection direction='up' delay={0.15} (US-070)
-- Files changed: app/contact/page.tsx
----
-
-## 2026-06-14 - US-066/067
-- Converted About page to 'use client', added masked line-lift headline with useReducedMotion guard
-- Wrapped all body sections in AnimatedSection direction='up' with staggered delays
-- Files changed: app/about/page.tsx
----
-
-## 2026-06-14 - US-065
-- Created PageTransition client component using AnimatePresence keyed to pathname
-- Added to app/layout.tsx wrapping {children}
-- Files changed: components/PageTransition.tsx, app/layout.tsx
----
-
-## 2026-06-14 - US-064
-- Added useReducedMotion to FAQItem; extracted inner JSX; renders plain div vs motion.div on entrance; AnimatePresence accordion kept regardless
-- Files changed: components/FAQSection.tsx
----
-
-## 2026-06-14 - US-063
-- Added useReducedMotion guards throughout CustomerJourneySection: AnimatedLine segments, desktop card motion.divs, mobile content motion.divs, header
-- Files changed: components/CustomerJourneySection.tsx
----
-
-## 2026-06-14 - US-062
-- Added useReducedMotion to HeroSection: aurora orbs render as plain divs, ScrambleWord skips interval, headline spans render final state
-- Files changed: components/HeroSection.tsx
----
-
-## 2026-06-14 - US-060/061
-- Converted CTABand to 'use client'; added motion.h2/p/div entrance animations with useReducedMotion guard
-- Added breathing pulse (opacity [0.6, 1, 0.6] 12s loop) on gold glow div
-- Files changed: components/CTABand.tsx
----
-
-## 2026-06-14 - US-059
-- Changed CustomerJourney card whileInView delay from i * 0.1 to 0.5 + i * 0.1
-- Files changed: components/CustomerJourneySection.tsx
----
-
-## 2026-06-14 - US-058
-- Added staggered motion.div entrance to Services bento cards (delay: i * 0.07), useReducedMotion guard
-- Extracted card content to variable to avoid duplication
-- Files changed: components/ServicesSection.tsx
----
-
-## 2026-06-14 - US-057
-- Added hover:-translate-y-1 hover:border-white/20 transition-all duration-300 to WhyUs card classNames (both animated and static variants)
-- Files changed: components/WhyUsSection.tsx
----
-
-## 2026-06-14 - US-056
-- Converted WhyUsSection to 'use client', added motion.div staggered entrance (delay: i * 0.1) with useReducedMotion guard
-- Files changed: components/WhyUsSection.tsx
----
-
-## 2026-06-14 - US-055
-- Wrapped WhyUs heading in AnimatedSection direction='up'
-- Added import to server component (no 'use client' needed — AnimatedSection is already client)
-- Files changed: components/WhyUsSection.tsx
----
-
-## 2026-06-14 - US-054
-- Added staggered motion.div entrance animations to HowItWorks step columns (delay: 0.5 + index * 0.15)
-- Added useReducedMotion check — renders plain divs when true
-- Files changed: components/HowItWorksSection.tsx
+## 2026-06-14 - US-071
+- Changed Hero H1 from font-extrabold to font-light
+- Updated letter-spacing from tracking-tight to tracking-[-0.05em]
+- Updated font sizes from text-4xl sm:text-5xl lg:text-6xl to text-5xl sm:text-6xl lg:text-7xl
+- Updated line height from leading-tight to leading-none
+- ScrambleWord, line-lift animation, and useReducedMotion guard all preserved
+- Files changed: components/HeroSection.tsx (line 148)
 - **Learnings for future iterations:**
-  - Pattern: conditional render between motion.div (animated) and div (static) based on prefersReducedMotion
-  - useReducedMotion is imported from framer-motion; add to existing import
----
-
-## 2026-06-14 - US-053
-- Wrapped HowItWorks heading+subheading block in AnimatedSection direction='up'
-- Files changed: components/HowItWorksSection.tsx
-- **Learnings for future iterations:**
-  - HowItWorksSection already has 'use client' + framer-motion imports — safe to add AnimatedSection import
-  - AnimatedSection handles the useReducedMotion guard internally; no need to add it in the consuming component
----
-
-## 2026-06-14 - US-052
-- Changed transition ease in AnimatedSection.tsx from 'easeOut' to [0.16, 1, 0.3, 1]
-- Files changed: components/AnimatedSection.tsx
-- **Learnings for future iterations:**
-  - AnimatedSection is in /components/AnimatedSection.tsx and already has useReducedMotion guard
-  - The brand easing curve [0.16, 1, 0.3, 1] is a custom cubic bezier (fast-out, slow-in feel)
-  - Duration is 0.5s throughout the system
+  - H1 is on a single line (line 148), easy to find
+  - All animation logic is inline in HeroSection.tsx, not in a separate file
 ---
