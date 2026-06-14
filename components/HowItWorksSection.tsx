@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+import { motion, useInView, useAnimation, useReducedMotion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 
 const steps = [
@@ -69,6 +69,8 @@ function AnimatedProcessLine() {
 }
 
 export default function HowItWorksSection() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section className="py-20 md:py-28 px-6 bg-[#0e2131]">
       <div className="max-w-7xl mx-auto">
@@ -89,22 +91,32 @@ export default function HowItWorksSection() {
           <AnimatedProcessLine />
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6 relative z-10">
-            {steps.map((step, index) => (
-              <div key={step.num} className="group flex flex-col items-center text-center gap-4">
-                {/* Large display number */}
-                <span
-                  className={`text-6xl md:text-8xl font-extrabold leading-none ${stepNumColors[index]}`}
+            {steps.map((step, index) =>
+              prefersReducedMotion ? (
+                <div key={step.num} className="group flex flex-col items-center text-center gap-4">
+                  <span className={`text-6xl md:text-8xl font-extrabold leading-none ${stepNumColors[index]}`}>
+                    {step.num}
+                  </span>
+                  <h3 className="text-xl font-bold text-[#d1e5fb]">{step.title}</h3>
+                  <p className="text-[#99907b] text-base leading-relaxed">{step.description}</p>
+                </div>
+              ) : (
+                <motion.div
+                  key={step.num}
+                  className="group flex flex-col items-center text-center gap-4"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.5 + index * 0.15 }}
                 >
-                  {step.num}
-                </span>
-
-                {/* Title */}
-                <h3 className="text-xl font-bold text-[#d1e5fb]">{step.title}</h3>
-
-                {/* Description */}
-                <p className="text-[#99907b] text-base leading-relaxed">{step.description}</p>
-              </div>
-            ))}
+                  <span className={`text-6xl md:text-8xl font-extrabold leading-none ${stepNumColors[index]}`}>
+                    {step.num}
+                  </span>
+                  <h3 className="text-xl font-bold text-[#d1e5fb]">{step.title}</h3>
+                  <p className="text-[#99907b] text-base leading-relaxed">{step.description}</p>
+                </motion.div>
+              )
+            )}
           </div>
         </div>
       </div>
