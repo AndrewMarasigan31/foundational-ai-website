@@ -77,6 +77,16 @@ Started: Sun Jun 14 11:18:36 PST 2026
   - The Services H2 uses an inline em for the gold accent word — follow same pattern for other copy rewrites
 ---
 
+## 2026-06-14 - US-084
+- Added overflow-x-hidden to body in app/layout.tsx (required to prevent scrollbar from negative margins)
+- Added -mx-6 sm:-mx-12 lg:-mx-24 and matching px-6 sm:px-12 lg:px-24 to ServicesSection outer <section>
+- Inner max-w-7xl mx-auto container unchanged — content alignment preserved
+- Files changed: app/layout.tsx (body className), components/ServicesSection.tsx (line 307)
+- **Learnings for future iterations:**
+  - Full-bleed technique requires overflow-x-hidden on body — add it when first full-bleed section is added
+  - The page container doesn't have a fixed padding; sections control their own px, so negative margins extend naturally
+---
+
 ## 2026-06-14 - US-083
 - Restructured CTABand from centered single-column to md:grid-cols-2 split layout
 - Left: h2 + subtext paragraph (left-aligned, existing animation preserved)
