@@ -31,3 +31,13 @@ Started: Sun Jun 14 11:18:36 PST 2026
   - H1 had 3 lines: 2 in an array loop + 1 special line with ScrambleWord — refactored to 2 explicit spans
   - ScrambleWord component lives at top of HeroSection.tsx and is straightforward to reuse
 ---
+
+## 2026-06-14 - US-073
+- Added eyebrow label '<p>LOCAL SEO · AI SEARCH · RESULTS</p>' immediately above the H1 in HeroSection.tsx
+- Used motion.p (with reduced-motion fallback as plain <p>) — fade-in from opacity 0 + y 6 with delay 0
+- Styling: text-xs uppercase tracking-[0.2em] text-[#99907b]
+- Files changed: components/HeroSection.tsx
+- **Learnings for future iterations:**
+  - Eyebrow elements follow the same reduced-motion dual-branch pattern used for all animated elements in HeroSection
+  - motion.p is the correct element for animated paragraph eyebrows (not motion.div wrapping a p)
+---
