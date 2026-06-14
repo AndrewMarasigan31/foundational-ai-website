@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 const faqs = [
   {
     num: "01",
@@ -47,15 +47,10 @@ function FAQItem({
   index: number;
 }) {
   const [open, setOpen] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-5% 0px" }}
-      transition={{ duration: 0.4, delay: index * 0.07, ease: "easeOut" }}
-      className="border-b border-white/10"
-    >
+  const inner = (
+    <>
       <button
         onClick={() => setOpen((prev) => !prev)}
         aria-expanded={open}
@@ -97,6 +92,22 @@ function FAQItem({
           </motion.div>
         )}
       </AnimatePresence>
+    </>
+  );
+
+  if (prefersReducedMotion) {
+    return <div className="border-b border-white/10">{inner}</div>;
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-5% 0px" }}
+      transition={{ duration: 0.4, delay: index * 0.07, ease: "easeOut" }}
+      className="border-b border-white/10"
+    >
+      {inner}
     </motion.div>
   );
 }
