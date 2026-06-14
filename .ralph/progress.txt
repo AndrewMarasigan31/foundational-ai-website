@@ -77,6 +77,16 @@ Started: Sun Jun 14 11:18:36 PST 2026
   - The Services H2 uses an inline em for the gold accent word — follow same pattern for other copy rewrites
 ---
 
+## 2026-06-14 - US-085
+- ServicesSection: py-20 md:py-28 → py-24 md:py-32
+- HowItWorksSection: py-20 md:py-28 → py-24 md:py-32
+- CustomerJourneySection: py-20 md:py-28 → py-16 md:py-24 (tightened)
+- FAQSection: py-20 md:py-28 → py-16 md:py-20 (tightened)
+- CTABand: py-24 md:py-32 → py-28 md:py-40 (most generous — final destination)
+- Hero, TrustBar, WhyUsSection padding unchanged per spec
+- Files changed: components/ServicesSection.tsx, HowItWorksSection.tsx, CustomerJourneySection.tsx, FAQSection.tsx, CTABand.tsx
+---
+
 ## 2026-06-14 - US-084
 - Added overflow-x-hidden to body in app/layout.tsx (required to prevent scrollbar from negative margins)
 - Added -mx-6 sm:-mx-12 lg:-mx-24 and matching px-6 sm:px-12 lg:px-24 to ServicesSection outer <section>
