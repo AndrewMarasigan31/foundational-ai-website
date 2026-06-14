@@ -1,4 +1,10 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import CTABand from "@/components/CTABand";
+import AnimatedSection from "@/components/AnimatedSection";
+
+const ease = [0.16, 1, 0.3, 1] as const;
 
 const principles = [
   {
@@ -28,7 +34,16 @@ const dontDos = [
   "No scope that exists just to justify a monthly fee.",
 ];
 
+const headlineLines = [
+  { text: "We built this because local", delay: 0 },
+  { text: "businesses keep losing to", delay: 0.1 },
+  { text: "bigger competitors who simply", delay: 0.2 },
+  { text: "show up better online.", delay: 0.3 },
+];
+
 export default function AboutPage() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <main>
       {/* Section 1 — Founder statement hero */}
@@ -42,8 +57,22 @@ export default function AboutPage() {
       >
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
-            We built this because local businesses keep losing to bigger
-            competitors who simply show up better online.
+            {headlineLines.map(({ text, delay }) => (
+              <span key={text} className="block overflow-hidden">
+                {prefersReducedMotion ? (
+                  <span className="block">{text}</span>
+                ) : (
+                  <motion.span
+                    className="block"
+                    initial={{ y: "105%" }}
+                    animate={{ y: "0%" }}
+                    transition={{ duration: 0.7, delay, ease }}
+                  >
+                    {text}
+                  </motion.span>
+                )}
+              </span>
+            ))}
           </h1>
         </div>
       </section>
@@ -51,7 +80,7 @@ export default function AboutPage() {
       {/* Section 2 — Story */}
       <section className="bg-[#000f1d] py-20 md:py-28 px-6">
         <div className="max-w-3xl mx-auto">
-          <div className="flex flex-col gap-6 text-lg text-[#99907b] leading-relaxed">
+          <AnimatedSection direction="up" className="flex flex-col gap-6 text-lg text-[#99907b] leading-relaxed">
             <p>
               Most local SEO agencies sell bloated retainers and generic advice.
               We scope clearly, execute lean, and report on what actually moved.
@@ -61,23 +90,23 @@ export default function AboutPage() {
               output is reviewed and approved by a human before it touches your
               business.
             </p>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Section 3 — Principles */}
       <section className="bg-[#021524] py-20 md:py-28 px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#d1e5fb] text-center mb-14 tracking-tight">
-            How We Work
-          </h2>
+          <AnimatedSection direction="up">
+            <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#d1e5fb] text-center mb-14 tracking-tight">
+              How We Work
+            </h2>
+          </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {principles.map((p) => (
-                <div
-                  key={p.num}
-                  className="relative overflow-hidden bg-[#0e2131] border border-white/10 rounded-2xl p-8 flex flex-col gap-4"
-                >
+            {principles.map((p, i) => (
+              <AnimatedSection key={p.num} direction="up" delay={0.1 + i * 0.1}>
+                <div className="relative overflow-hidden bg-[#0e2131] border border-white/10 rounded-2xl p-8 flex flex-col gap-4 h-full">
                   <span className="absolute top-4 right-6 text-8xl font-extrabold text-[#C9A227]/[0.35] leading-none select-none pointer-events-none">
                     {p.num}
                   </span>
@@ -88,27 +117,32 @@ export default function AboutPage() {
                     {p.description}
                   </p>
                 </div>
-              ))}
-            </div>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Section 4 — What we don't do */}
       <section className="bg-[#000f1d] py-20 md:py-28 px-6">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#d1e5fb] mb-10 tracking-tight">
-            What We Don&apos;t Do
-          </h2>
-          <ul className="flex flex-col gap-4">
-            {dontDos.map((item) => (
-              <li key={item} className="flex items-start gap-3">
-                <span className="mt-1 text-red-400/80 material-symbols-outlined text-xl leading-none shrink-0">
-                  close
-                </span>
-                <span className="text-lg text-[#99907b] leading-relaxed">{item}</span>
-              </li>
-            ))}
-          </ul>
+          <AnimatedSection direction="up">
+            <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#d1e5fb] mb-10 tracking-tight">
+              What We Don&apos;t Do
+            </h2>
+          </AnimatedSection>
+          <AnimatedSection direction="up" delay={0.1}>
+            <ul className="flex flex-col gap-4">
+              {dontDos.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <span className="mt-1 text-red-400/80 material-symbols-outlined text-xl leading-none shrink-0">
+                    close
+                  </span>
+                  <span className="text-lg text-[#99907b] leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </AnimatedSection>
         </div>
       </section>
 
