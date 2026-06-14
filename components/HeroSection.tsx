@@ -145,7 +145,7 @@ export default function HeroSection() {
         {/* Left column */}
         <div className="flex flex-col gap-6">
           {/* Headline: masked line-lift per line (editorial technique) */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-light text-[#d1e5fb] leading-none tracking-[-0.05em]">
             {[
               { text: "Your Competitors", delay: 0 },
               { text: "Rank Higher.", delay: 0.1 },
