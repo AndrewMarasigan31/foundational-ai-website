@@ -114,7 +114,7 @@ function FAQItem({
 
 export default function FAQSection() {
   return (
-    <section className="py-20 md:py-28 px-6 bg-[#0e2131]">
+    <section className="py-20 md:py-28 px-6 bg-[#0e2131] border-t border-white/10">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="flex flex-col gap-4 mb-4">
