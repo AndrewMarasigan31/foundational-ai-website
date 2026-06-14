@@ -1,55 +1,17 @@
-## Codebase Patterns
-- This is a Next.js 14 app with Tailwind CSS; components are in /components, pages in /app
-- Tailwind opacity utilities (text-white/60, text-white/30, etc.) are preferred over hardcoded rgba values for consistency
-- stepNumColors array pattern: define per-step class arrays outside the component and index into them in the .map() for clean conditional styling
-
 # Ralph Progress Log
-Started: Sat Jun 13 18:50:20 PST 2026
+Started: Sun Jun 14 08:48:04 PST 2026
 ---
 
-## 2026-06-13 - US-046
-- Replaced gold/stepper step number treatment with opacity-based progression (white → white/60 → white/30 → white/15)
-- Removed conditional class logic and hover-gold states; added stepNumColors array for clean per-step lookup
-- Files changed: components/HowItWorksSection.tsx
-- **Learnings for future iterations:**
-  - The design-visibility-overhaul branch had all the Next.js components; this branch was branched from main (which lacked them) — had to merge design-visibility-overhaul in first
-  - Tailwind opacity fractions on text work well for progressive fading without custom colors
----
+## Codebase Patterns
+- AnimatedSection.tsx is the shared scroll-triggered entrance animation wrapper (uses Framer Motion's useInView + variants). Brand easing is [0.16, 1, 0.3, 1] at 0.5s duration.
+- For reduced motion: render plain divs, no animate props.
+- 'use client' is required on any component using Framer Motion hooks.
 
-## 2026-06-13 - US-047
-- Added responsive size breakpoint to HowItWorks display number: text-6xl md:text-8xl
-- Files changed: components/HowItWorksSection.tsx (line 95)
+## 2026-06-14 - US-052
+- Changed transition ease in AnimatedSection.tsx from 'easeOut' to [0.16, 1, 0.3, 1]
+- Files changed: components/AnimatedSection.tsx
 - **Learnings for future iterations:**
-  - Single-character change — responsive Tailwind prefixes (md:) are the right pattern for mobile size overrides
----
-
-## 2026-06-13 - US-049
-- Replaced FAQ heading "Things Worth Asking Before You Hire Anyone" with "Questions We Get Every Time"
-- Preserved em/italic treatment on "Every" to match brand voice pattern
-- Files changed: components/FAQSection.tsx (line 111-113)
-- **Learnings for future iterations:**
-  - The FAQ heading uses an em element for italic accent on a key word — keep that pattern when updating copy
----
-
-## 2026-06-13 - US-051
-- Changed coverItems bullet text in app/contact/page.tsx from text-[#99907b] to text-[#d1e5fb]
-- Bullet icon color (text-[#C9A227]) and section label color unchanged
-- Files changed: app/contact/page.tsx (line 76)
-- **Learnings for future iterations:**
-  - Contact page trust/cover items are in app/contact/page.tsx, not a separate component — inline page file
----
-
-## 2026-06-13 - US-050
-- Added max-w-xl to the h2 in CTABand.tsx to force a clean line break before "No pitch, no pressure."
-- Files changed: components/CTABand.tsx (line 16)
-- **Learnings for future iterations:**
-  - CTA Band heading lives in components/CTABand.tsx; the outer container is max-w-3xl, adding max-w-xl directly on the h2 is the right scope for controlling text wrapping
----
-
-## 2026-06-13 - US-048
-- Widened GBPOptimizationSequence wrapper from max-w-2xl to max-w-4xl in DashboardVisual.tsx
-- Widened heading from max-w-3xl to max-w-4xl and subhead from max-w-2xl to max-w-3xl in DashboardSection.tsx
-- Files changed: components/DashboardVisual.tsx, components/DashboardSection.tsx
-- **Learnings for future iterations:**
-  - Section-level content width constraints live in two places: the visual component root div and the section heading/subhead wrappers — update both for alignment
+  - AnimatedSection is in /components/AnimatedSection.tsx and already has useReducedMotion guard
+  - The brand easing curve [0.16, 1, 0.3, 1] is a custom cubic bezier (fast-out, slow-in feel)
+  - Duration is 0.5s throughout the system
 ---
