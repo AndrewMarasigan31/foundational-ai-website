@@ -20,3 +20,14 @@ Started: Sun Jun 14 11:18:36 PST 2026
   - H1 is on a single line (line 148), easy to find
   - All animation logic is inline in HeroSection.tsx, not in a separate file
 ---
+
+## 2026-06-14 - US-072
+- Rewrote Hero H1 from "Your Competitors / Rank Higher. / That's Fixable." to "Rank First. / Win Local."
+- "Local." is now the ScrambleWord with gold em accent (font-serif not-italic text-[#C9A227])
+- Simplified from 3-line array approach to explicit two-span blocks (cleaner since lines have different structures)
+- Subtext paragraph below headline is unchanged
+- Files changed: components/HeroSection.tsx
+- **Learnings for future iterations:**
+  - H1 had 3 lines: 2 in an array loop + 1 special line with ScrambleWord — refactored to 2 explicit spans
+  - ScrambleWord component lives at top of HeroSection.tsx and is straightforward to reuse
+---
