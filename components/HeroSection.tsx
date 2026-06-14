@@ -142,6 +142,14 @@ export default function HeroSection() {
       />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+        {/* Ghost watermark behind headline */}
+        <div
+          aria-hidden="true"
+          className="absolute select-none pointer-events-none text-[20vw] font-black text-white/[0.03] leading-none top-0 -left-4"
+        >
+          RANK
+        </div>
+
         {/* Left column */}
         <div className="flex flex-col gap-6">
           {/* Eyebrow label */}
