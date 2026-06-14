@@ -118,6 +118,7 @@ export default function FAQSection() {
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="flex flex-col gap-4 mb-4">
+          <p className="text-xs uppercase tracking-[0.2em] text-[#99907b] mb-3">05 — FAQ</p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-light text-[#d1e5fb] leading-tight tracking-[-0.04em]">
             Questions We Get{" "}
             <em className="font-serif not-italic text-[#C9A227]">Every</em>{" "}

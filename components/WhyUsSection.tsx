@@ -32,6 +32,7 @@ export default function WhyUsSection() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <AnimatedSection direction="up" className="flex flex-col items-center text-center gap-6 mb-16">
+          <p className="text-xs uppercase tracking-[0.2em] text-[#99907b] mb-3">03 — WHY US</p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-light text-[#d1e5fb] leading-tight tracking-[-0.04em] max-w-3xl">
             Built <em className="font-serif not-italic text-[#C9A227]">Lean.</em> Scoped Clearly.
           </h2>
