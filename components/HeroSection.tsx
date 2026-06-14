@@ -146,31 +146,26 @@ export default function HeroSection() {
         <div className="flex flex-col gap-6">
           {/* Headline: masked line-lift per line (editorial technique) */}
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-light text-[#d1e5fb] leading-none tracking-[-0.05em]">
-            {[
-              { text: "Your Competitors", delay: 0 },
-              { text: "Rank Higher.", delay: 0.1 },
-            ].map(({ text, delay }) => (
-              <span key={text} className="block overflow-hidden">
-                {prefersReducedMotion ? (
-                  <span className="block">{text}</span>
-                ) : (
-                  <motion.span
-                    className="block"
-                    initial={{ y: "105%" }}
-                    animate={{ y: "0%" }}
-                    transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    {text}
-                  </motion.span>
-                )}
-              </span>
-            ))}
+            <span className="block overflow-hidden">
+              {prefersReducedMotion ? (
+                <span className="block">Rank First.</span>
+              ) : (
+                <motion.span
+                  className="block"
+                  initial={{ y: "105%" }}
+                  animate={{ y: "0%" }}
+                  transition={{ duration: 0.7, delay: 0, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  Rank First.
+                </motion.span>
+              )}
+            </span>
             <span className="block overflow-hidden">
               {prefersReducedMotion ? (
                 <span className="block">
-                  That&apos;s{" "}
+                  Win{" "}
                   <em className="font-serif not-italic text-[#C9A227]">
-                    <ScrambleWord text="Fixable." startDelay={0.9} />
+                    <ScrambleWord text="Local." startDelay={0.9} />
                   </em>
                 </span>
               ) : (
@@ -180,9 +175,9 @@ export default function HeroSection() {
                   animate={{ y: "0%" }}
                   transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  That&apos;s{" "}
+                  Win{" "}
                   <em className="font-serif not-italic text-[#C9A227]">
-                    <ScrambleWord text="Fixable." startDelay={0.9} />
+                    <ScrambleWord text="Local." startDelay={0.9} />
                   </em>
                 </motion.span>
               )}
