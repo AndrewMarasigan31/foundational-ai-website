@@ -178,7 +178,7 @@ export default function CustomerJourneySection() {
         {/* Header */}
         {prefersReducedMotion ? (
           <div className="flex flex-col items-center text-center gap-5 mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-light text-[#d1e5fb] leading-tight tracking-[-0.04em] max-w-3xl">
               Where Most Local Businesses<br className="hidden sm:block" /> <em className="font-serif not-italic text-[#C9A227]">Lose</em> Customers
             </h2>
             <p className="text-lg sm:text-xl text-[#99907b] max-w-xl leading-relaxed">
@@ -193,7 +193,7 @@ export default function CustomerJourneySection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#d1e5fb] leading-tight tracking-tight max-w-3xl">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-light text-[#d1e5fb] leading-tight tracking-[-0.04em] max-w-3xl">
               Where Most Local Businesses<br className="hidden sm:block" /> <em className="font-serif not-italic text-[#C9A227]">Lose</em> Customers
             </h2>
             <p className="text-lg sm:text-xl text-[#99907b] max-w-xl leading-relaxed">
