@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView, useMotionValue, animate } from "framer-motion";
+import { motion, useInView, useMotionValue, animate, useReducedMotion } from "framer-motion";
 
 // ── GBP card: star rating 3.2 → 4.9 ──
 export function GBPStarAnimation() {
@@ -301,6 +301,8 @@ const services = [
 ];
 
 export default function ServicesSection() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section className="py-20 md:py-28 px-6 bg-[#021524]">
       <div className="max-w-7xl mx-auto">
@@ -317,42 +319,61 @@ export default function ServicesSection() {
 
         {/* Bento grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className={`${service.colSpan} group rounded-2xl bg-[#0e2131] border border-white/10 p-6 flex flex-col transition-all duration-300 hover:border-[#C9A227]/60 hover:-translate-y-1`}
-              >
-                {/* Icon */}
-                <div className="w-10 h-10 rounded-lg bg-[#C9A227]/10 flex items-center justify-center mb-4">
-                  <span className="material-symbols-outlined text-[#C9A227] text-xl">
-                    {service.icon}
-                  </span>
+            {services.map((service, i) => {
+              const cardContent = (
+                <>
+                  {/* Icon */}
+                  <div className="w-10 h-10 rounded-lg bg-[#C9A227]/10 flex items-center justify-center mb-4">
+                    <span className="material-symbols-outlined text-[#C9A227] text-xl">
+                      {service.icon}
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-lg font-bold text-[#d1e5fb] mb-2">{service.title}</h3>
+
+                  {/* Description */}
+                  <p className="text-[#99907b] text-sm leading-relaxed">{service.description}</p>
+
+                  {/* Optional checklist */}
+                  {service.checklist && (
+                    <ul className="mt-4 space-y-2">
+                      {service.checklist.map((item) => (
+                        <li key={item} className="flex items-start gap-2 text-sm text-[#d1e5fb]/80">
+                          <span className="material-symbols-outlined text-[#C9A227] text-base mt-0.5 shrink-0">
+                            check
+                          </span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {/* Animation panel */}
+                  {service.mockPanel}
+                </>
+              );
+
+              return prefersReducedMotion ? (
+                <div
+                  key={service.id}
+                  className={`${service.colSpan} group rounded-2xl bg-[#0e2131] border border-white/10 p-6 flex flex-col transition-all duration-300 hover:border-[#C9A227]/60 hover:-translate-y-1`}
+                >
+                  {cardContent}
                 </div>
-
-                {/* Title */}
-                <h3 className="text-lg font-bold text-[#d1e5fb] mb-2">{service.title}</h3>
-
-                {/* Description */}
-                <p className="text-[#99907b] text-sm leading-relaxed">{service.description}</p>
-
-                {/* Optional checklist */}
-                {service.checklist && (
-                  <ul className="mt-4 space-y-2">
-                    {service.checklist.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-sm text-[#d1e5fb]/80">
-                        <span className="material-symbols-outlined text-[#C9A227] text-base mt-0.5 shrink-0">
-                          check
-                        </span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {/* Animation panel */}
-                {service.mockPanel}
-              </div>
-            ))}
+              ) : (
+                <motion.div
+                  key={service.id}
+                  className={`${service.colSpan} group rounded-2xl bg-[#0e2131] border border-white/10 p-6 flex flex-col transition-all duration-300 hover:border-[#C9A227]/60 hover:-translate-y-1`}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: i * 0.07 }}
+                >
+                  {cardContent}
+                </motion.div>
+              );
+            })}
           </div>
       </div>
     </section>
