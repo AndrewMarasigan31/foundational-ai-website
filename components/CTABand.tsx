@@ -16,7 +16,7 @@ export default function CTABand() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden bg-[#021524] py-24 md:py-32">
+    <section className="relative overflow-hidden bg-[#021524] py-28 md:py-40">
       {/* Gold radial glow */}
       {prefersReducedMotion ? (
         <div

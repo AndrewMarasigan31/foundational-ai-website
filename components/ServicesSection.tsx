@@ -304,7 +304,7 @@ export default function ServicesSection() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="py-20 md:py-28 -mx-6 sm:-mx-12 lg:-mx-24 px-6 sm:px-12 lg:px-24 bg-[#021524]">
+    <section className="py-24 md:py-32 -mx-6 sm:-mx-12 lg:-mx-24 px-6 sm:px-12 lg:px-24 bg-[#021524]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-col items-center text-center gap-6 mb-14">

@@ -36,7 +36,7 @@ export default function HowItWorksSection() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="py-20 md:py-28 px-6 bg-[#0e2131] border-t border-white/10">
+    <section className="py-24 md:py-32 px-6 bg-[#0e2131] border-t border-white/10">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <AnimatedSection direction="up" className="flex flex-col items-center text-center gap-6 mb-16">
