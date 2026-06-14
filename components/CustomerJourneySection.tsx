@@ -176,7 +176,7 @@ export default function CustomerJourneySection() {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
+                transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
               >
                 {/* Icon */}
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${iconBgStyles[node.state]}`}>
