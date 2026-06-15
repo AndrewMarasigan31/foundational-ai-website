@@ -81,7 +81,6 @@ export async function submitContact(
         locationId: LOCATION_ID,
         pipelineId: PIPELINE_ID,
         pipelineStageId: NEW_LEAD_STAGE_ID,
-        stageId: NEW_LEAD_STAGE_ID,
         contactId,
         name: `${payload.name} - website`,
         status: "open",
