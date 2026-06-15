@@ -1,7 +1,7 @@
 # Foundational AI Systems — Website
 
-Static marketing website for [Foundational AI Systems](https://foundationalaIsystems.com).
-Navy + gold brand. Four pages. No build step.
+Static marketing website for Foundational AI Systems.
+Navy + gold brand. Five pages. No build step.
 
 ---
 
@@ -13,6 +13,7 @@ Navy + gold brand. Four pages. No build step.
 | `services.html` | `/services` | Full service detail for all three offerings with deliverables and pricing |
 | `about.html` | `/about` | Company mission, how-we-work flow, who we serve |
 | `contact.html` | `/contact` | Contact form with service selector and call-request toggle |
+| `thank-you.html` | `/thank-you` | Contact form success page |
 
 ---
 
@@ -23,9 +24,9 @@ Navy + gold brand. Four pages. No build step.
 | Markup | HTML5 | Semantic, no framework |
 | Styles | CSS3 (single file) | `assets/style.css` — CSS variables, flexbox/grid, responsive |
 | Font | Inter via Google Fonts | Loaded via `<link>` in each page head |
-| JS | Vanilla inline | Mobile nav toggle only — ~10 lines per page |
+| JS | Vanilla + shared helper | `assets/site.js` handles nav, attribution persistence, booking handoff, and optional GHL webhook submit |
 | Images | `assets/logo.png` | PNG logo, 400×400px circular |
-| Forms | Static `action="#"` | Needs a backend wired up before going live (see below) |
+| Forms | Native HTML form | Supports Netlify Forms by default and optional direct GHL webhook submission |
 
 No npm, no bundler, no framework. Open `index.html` in a browser and it works.
 
@@ -54,16 +55,7 @@ npx serve .
 1. Push this repo to GitHub
 2. Go to [netlify.com](https://netlify.com) → New site from Git
 3. Select repo, leave build command blank, set publish directory to `/` (root)
-4. Deploy — Netlify auto-assigns a URL, custom domain available in settings
-
-For the contact form, add `netlify` attribute to the `<form>` tag in `contact.html` and change `action="#"` to `action="/thank-you"`. Netlify handles the rest.
-
-```html
-<form name="contact" method="POST" data-netlify="true" action="/thank-you">
-  <input type="hidden" name="form-name" value="contact">
-  ...
-</form>
-```
+4. Deploy. Netlify auto-assigns a URL, and the contact form works through Netlify Forms.
 
 ### Option B — GitHub Pages
 
@@ -71,7 +63,7 @@ For the contact form, add `netlify` attribute to the `<form>` tag in `contact.ht
 2. Go to repo Settings → Pages → Source: Deploy from branch → `main` / `root`
 3. Site publishes at `https://<username>.github.io/<repo-name>/`
 
-Note: GitHub Pages does not handle form submissions. Use Formspree (see below).
+Note: GitHub Pages does not handle form submissions. Use Formspree or a GoHighLevel webhook if deploying there.
 
 ### Option C — Lightsail / nginx
 
@@ -99,26 +91,212 @@ server {
 
 ## Contact Form Setup
 
-The form in `contact.html` currently uses `action="#"` with a client-side demo handler. Before going live, swap in one of these:
+`contact.html` now uses a native HTML form plus `assets/site.js` to persist attribution and service intent across the site.
+
+Current Phase 1 behavior:
+
+- stores `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`
+- stores `gclid`, `fbclid`, and `msclkid` when present
+- carries CTA label, CTA page, and intended service into the form
+- pre-checks the call request path when the visitor came from a booking CTA
+- redirects booking-intent submissions to `thank-you.html` with a live calendar CTA handoff
+- can submit the lead payload directly to a GHL inbound webhook when configured in `assets/site-config.js`
+
+The base form markup still posts like a normal static-site form:
+
+```html
+<form name="contact" action="thank-you.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="contact">
+</form>
+```
+
+If deploying outside Netlify, swap the form action to one of these:
 
 ### Formspree (easiest)
 
 1. Sign up at [formspree.io](https://formspree.io) → create a new form
-2. Replace `action="#"` in `contact.html` with your endpoint:
+2. Replace `action="thank-you.html"` in `contact.html` with your endpoint:
    ```html
-   <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+   <form action="https://formspree.io/f/your-form-id" method="POST">
    ```
-3. Remove the demo submit handler JS block at the bottom of the file
+3. Remove the Netlify-only `data-netlify`, `netlify-honeypot`, and hidden `form-name` fields
 
-### GoHighLevel webhook
+### GoHighLevel Phase 1
 
-1. In GHL, create a form or webhook trigger
-2. Set `action` to the GHL form embed URL or webhook endpoint
-3. Match field `name` attributes to GHL custom field keys
+For this repo, the Phase 1 safe pattern is:
+
+1. Keep the native form and static pages
+2. Add HighLevel External Tracking in production
+3. Put the inbound workflow webhook URL in `assets/site-config.js`
+4. Use the hidden attribution fields already present in `contact.html`
+5. Send booking-intent users to the live calendar widget after submit
+
+The live custom fields already created in GHL for `locationId AAPY6H2WOEr7wRAWxdSO` are:
+
+- `Offer / Service Interest`
+- `Landing Page URL`
+- `utm_source`
+- `utm_medium`
+- `utm_campaign`
+
+The current form already captures the values needed to populate those fields.
+
+This repo now also includes a Netlify serverless relay at:
+
+`netlify/functions/ghl-intake.js`
+
+That function can:
+
+- upsert the contact in GHL
+- write the five core custom fields
+- add source / offer / intent tags
+- create a `New Lead` opportunity in the current Marketing Pipeline
+
+This repo also now includes:
+
+`netlify/functions/ghl-booking-status.js`
+
+That function can:
+
+- check whether the contact has a real appointment yet
+- promote the matching opportunity into a dedicated booked stage
+- keep the booked-stage logic separate from the current sales stages
+
+This avoids exposing the PIT in the browser and removes the dependency on a GHL inbound workflow for the basic lead-capture path.
+
+`assets/site-config.js` now exposes the only values the site needs:
+
+```js
+window.FAS_SITE_CONFIG = {
+  bookingCalendarUrl: "https://api.leadconnectorhq.com/widget/booking/...",
+  ghlWebhookMode: "live",
+  ghlWebhookUrl: "/.netlify/functions/ghl-intake",
+  ghlWebhookTimeoutMs: 8000,
+  ghlBookingStatusUrl: "/.netlify/functions/ghl-booking-status"
+};
+```
+
+Webhook mode behavior:
+
+- `off`: skip GHL and use the host fallback path
+- `dry-run`: do not send a lead anywhere; log/store the payload locally and continue to `thank-you.html`
+- `live`: POST JSON to the configured HighLevel webhook URL
+
+Fallback behavior is intentionally host-aware:
+
+- Netlify host or `data-netlify` form present: native submit remains available as the fallback path
+- Local preview / other static hosts with no live endpoint: the site redirects in preview mode so UX can be tested without pretending a lead was captured
+
+If `ghlWebhookMode` is `live` and `ghlWebhookUrl` is blank or fails, the site falls back safely and records the delivery mode for the thank-you page note.
+
+The JSON payload sent to the webhook looks like this:
+
+```json
+{
+  "submittedAt": "2026-06-15T07:30:00.000Z",
+  "contact": {
+    "firstName": "John",
+    "lastName": "Smith",
+    "email": "john@smithplumbing.com",
+    "phone": "(512) 555-0100",
+    "businessName": "Smith Plumbing LLC",
+    "city": "Austin, TX"
+  },
+  "lead": {
+    "service": "gbp-audit",
+    "serviceLabel": "GBP Audit & Optimization",
+    "wantsCall": true,
+    "message": "Need help getting more map pack calls."
+  },
+  "attribution": {
+    "landingPageUrl": "https://foundationalaisystems.com/contact?utm_source=google",
+    "landingPagePath": "/contact",
+    "originalEntryUrl": "https://foundationalaisystems.com/",
+    "currentPageUrl": "https://foundationalaisystems.com/contact",
+    "referrer": "https://google.com/",
+    "ctaLabel": "Book a Free Strategy Call",
+    "ctaPage": "index.html",
+    "timezone": "America/Chicago",
+    "language": "en-US",
+    "utm_source": "google",
+    "utm_medium": "cpc",
+    "utm_campaign": "brand",
+    "utm_term": "local seo agency",
+    "utm_content": "hero-button",
+    "gclid": "abc123",
+    "fbclid": "",
+    "msclkid": ""
+  },
+  "pageContext": {}
+}
+```
+
+Use the workflow to:
+
+1. Create or update the contact from `contact.email`
+2. Map `lead.serviceLabel` into `Offer / Service Interest`
+3. Map `attribution.landingPageUrl` into `Landing Page URL`
+4. Map `attribution.utm_source`, `attribution.utm_medium`, and `attribution.utm_campaign` into the existing custom fields
+5. If `lead.wantsCall` is true, tag the lead for calendar follow-up and send them through the booking handoff page so the site can watch for the real appointment
+
+### Safe Local Testing
+
+Use this repo without any secrets:
+
+1. Set `ghlWebhookMode: "dry-run"` in `assets/site-config.js`
+2. Run a local server and submit the contact form
+3. Confirm the thank-you page shows the dry-run note
+4. Open DevTools and inspect the `GHL dry-run payload` console log or `sessionStorage.fasContactSubmission`
+
+This verifies:
+
+- service selection and booking-intent carry through correctly
+- hidden attribution fields are being hydrated
+- thank-you routing behaves correctly for standard vs booking-intent leads
+
+When the real webhook exists, switch to:
+
+```js
+ghlWebhookMode: "live",
+ghlWebhookUrl: "/.netlify/functions/ghl-intake"
+```
+
+### Netlify Function Setup
+
+If this site is deployed on Netlify, set these environment variables in the Netlify dashboard:
+
+- `GHL_PIT`
+- `GHL_LOCATION_ID`
+- `GHL_PIPELINE_ID` (optional if using the current Foundational AI Systems pipeline)
+- `GHL_NEW_LEAD_STAGE_ID` (optional if using the current `New Lead` stage)
+- `GHL_BOOKED_STAGE_ID` (required if you want the booking-sync function to move opportunities after an appointment is created)
+
+Current defaults embedded in the function match the live objects I verified on June 15, 2026:
+
+- Location: `AAPY6H2WOEr7wRAWxdSO`
+- Pipeline: `Marketing Pipeline` → `rfnYDQwA3yas4OIP4NSA`
+- Stage: `New Lead` → `4d237f32-29f2-4ee8-9e68-da32ab9cccf8`
+- Stage: `Booked` → `ffa4c61e-5e02-4754-96a7-a536cda6c14c`
+
+Important limitation:
+
+- The relay covers contact creation, tagging, custom field mapping, and opportunity creation.
+- The booking-status function can promote an opportunity after a real appointment is detected, but only after you create a dedicated `Booked` stage in GHL and set `GHL_BOOKED_STAGE_ID`.
+- Custom reminder sequences still need to be configured inside GHL if required.
+
+### Deployment Reality Check
+
+This is a static site. Without one of the following, no lead is actually captured:
+
+- Netlify Forms on a Netlify deployment
+- a live HighLevel inbound workflow webhook in `live` mode
+- another external form backend the operator chooses to wire in
+
+GitHub Pages or plain local preview are suitable for UX testing, not lead capture, unless `ghlWebhookMode` points at a real backend.
 
 ### Netlify Forms
 
-See Option A above — zero config needed if deploying to Netlify.
+Already configured. No extra code changes needed.
 
 ---
 
@@ -130,8 +308,15 @@ foundational-ai-website/
 ├── services.html       # Services
 ├── about.html          # About
 ├── contact.html        # Contact
+├── thank-you.html      # Form success page
+├── book-call.html      # Booking handoff page with live sync status
+├── netlify/
+│   └── functions/
+│       ├── ghl-intake.js         # GHL lead intake relay
+│       └── ghl-booking-status.js # Appointment check + booked-stage promotion
 └── assets/
     ├── style.css       # All styles — edit brand colors in :root variables
+    ├── site-config.js  # Booking URL + GHL endpoint config
     └── logo.png        # Brand logo
 ```
 
