@@ -11,6 +11,7 @@ jest.mock("framer-motion", () => ({
   AnimatePresence: ({ children }: { children: React.ReactNode }) => (
     <>{children}</>
   ),
+  useReducedMotion: () => false,
 }));
 
 // Mock AnimatedSection to render children directly

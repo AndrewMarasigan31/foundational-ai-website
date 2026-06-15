@@ -11,6 +11,10 @@ const SERVICES = [
   "Not sure yet",
 ];
 
+const CALENDAR_URL =
+  process.env.NEXT_PUBLIC_GHL_CALENDAR_URL ??
+  "https://api.leadconnectorhq.com/widget/booking/foundational-ai";
+
 interface FormValues {
   name: string;
   email: string;
@@ -24,6 +28,8 @@ interface FormErrors {
   email?: string;
   businessName?: string;
 }
+
+type Step = "form" | "book" | "confirmed";
 
 function validate(values: FormValues): FormErrors {
   const errors: FormErrors = {};
@@ -54,7 +60,10 @@ export default function ContactForm() {
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [isPending, setIsPending] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
+  const [step, setStep] = useState<Step>("form");
+  const [contactId, setContactId] = useState<string | null>(null);
+  const [opportunityId, setOpportunityId] = useState<string | null>(null);
+  const [isCheckingBooking, setIsCheckingBooking] = useState(false);
 
   const errors = validate(values);
 
@@ -77,7 +86,6 @@ export default function ContactForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // Mark all required fields as touched
     setTouched({ name: true, email: true, businessName: true });
     if (Object.keys(errors).length > 0) return;
 
@@ -94,7 +102,9 @@ export default function ContactForm() {
         helpWith: values.helpWith,
       });
       if (result.success) {
-        setSuccess(true);
+        setContactId(result.contactId ?? null);
+        setOpportunityId(result.opportunityId ?? null);
+        setStep("book");
       } else {
         setSubmitError(
           result.error ?? "Something went wrong. Please try again."
@@ -109,11 +119,37 @@ export default function ContactForm() {
     }
   }
 
+  async function handleBookingConfirm() {
+    if (!contactId || !opportunityId) {
+      setStep("confirmed");
+      return;
+    }
+    setIsCheckingBooking(true);
+    try {
+      const res = await fetch("/api/ghl-booking-status", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contactId, opportunityId }),
+      });
+      const data = await res.json();
+      if (data.booked) {
+        setStep("confirmed");
+      } else {
+        // Not yet detected — still move to confirmed from UX perspective
+        setStep("confirmed");
+      }
+    } catch {
+      setStep("confirmed");
+    } finally {
+      setIsCheckingBooking(false);
+    }
+  }
+
   return (
     <AnimatePresence mode="wait">
-      {success ? (
+      {step === "confirmed" ? (
         <motion.div
-          key="success"
+          key="confirmed"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
@@ -127,13 +163,48 @@ export default function ContactForm() {
               You&apos;re all set.
             </h3>
             <p className="mt-2 text-[#99907b]">
-              We&apos;ll confirm your audit call time within one business day.
-              Check your inbox.
+              We&apos;ll see you on the call. Check your inbox for confirmation.
             </p>
           </div>
           <a href="/services" className="text-[#C9A227] hover:underline text-sm">
             Explore our services while you wait →
           </a>
+        </motion.div>
+      ) : step === "book" ? (
+        <motion.div
+          key="book"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="bg-[#0e2131] border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center gap-6 text-center min-h-[400px]"
+        >
+          <span className="material-symbols-outlined text-[#C9A227] text-5xl">
+            calendar_month
+          </span>
+          <div>
+            <h3 className="font-display font-extrabold text-[#d1e5fb] text-2xl">
+              You&apos;re in — now book your audit call.
+            </h3>
+            <p className="mt-2 text-[#99907b]">
+              Pick a time that works for you. Takes 30 seconds.
+            </p>
+          </div>
+          <a
+            href={CALENDAR_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#C9A227] hover:bg-[#b8911f] text-[#021524] font-bold px-7 py-3.5 rounded-full shadow-[0_0_20px_rgba(201,162,39,0.3)] transition-colors"
+          >
+            Book your audit call →
+          </a>
+          <button
+            type="button"
+            onClick={handleBookingConfirm}
+            disabled={isCheckingBooking}
+            className="text-[#99907b] hover:text-[#d1e5fb] text-sm underline transition-colors"
+          >
+            {isCheckingBooking ? "Checking…" : "I've booked my call"}
+          </button>
         </motion.div>
       ) : (
         <form
