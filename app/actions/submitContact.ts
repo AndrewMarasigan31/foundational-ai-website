@@ -66,7 +66,8 @@ export async function submitContact(
     });
 
     if (!upsertRes.ok) {
-      return { success: false, error: `Contact upsert failed: ${upsertRes.status}` };
+      const body = await upsertRes.text();
+      return { success: false, error: `Contact upsert failed: ${upsertRes.status} — ${body}` };
     }
 
     const upsertData = await upsertRes.json();
@@ -80,14 +81,16 @@ export async function submitContact(
         locationId: LOCATION_ID,
         pipelineId: PIPELINE_ID,
         pipelineStageId: NEW_LEAD_STAGE_ID,
+        stageId: NEW_LEAD_STAGE_ID,
         contactId,
-        name: `${payload.name} — website`,
+        name: `${payload.name} - website`,
         status: "open",
       }),
     });
 
     if (!oppRes.ok) {
-      return { success: false, error: `Opportunity creation failed: ${oppRes.status}` };
+      const body = await oppRes.text();
+      return { success: false, error: `Opportunity creation failed: ${oppRes.status} — ${body}` };
     }
 
     const oppData = await oppRes.json();
