@@ -127,3 +127,41 @@ describe("ContactForm — booking flow", () => {
     });
   });
 });
+
+describe("ContactForm — calendar pre-fill (Issue #23)", () => {
+  beforeEach(() => {
+    mockSubmitContact.mockReset();
+    mockSubmitContact.mockResolvedValue({
+      success: true,
+      contactId: "cid-1",
+      opportunityId: "oid-1",
+    });
+  });
+
+  it("appends email query param to calendar link after submit", async () => {
+    render(<ContactForm />);
+    await act(async () => { await fillAndSubmit(); });
+
+    await waitFor(() => screen.getByRole("heading", { name: /book your audit call/i }));
+    const link = screen.getByRole("link", { name: /book your audit call/i });
+    expect(link.getAttribute("href")).toContain("email=jane%40example.com");
+  });
+
+  it("appends firstName query param to calendar link", async () => {
+    render(<ContactForm />);
+    await act(async () => { await fillAndSubmit(); });
+
+    await waitFor(() => screen.getByRole("heading", { name: /book your audit call/i }));
+    const link = screen.getByRole("link", { name: /book your audit call/i });
+    expect(link.getAttribute("href")).toContain("firstName=Jane");
+  });
+
+  it("appends lastName query param to calendar link", async () => {
+    render(<ContactForm />);
+    await act(async () => { await fillAndSubmit(); });
+
+    await waitFor(() => screen.getByRole("heading", { name: /book your audit call/i }));
+    const link = screen.getByRole("link", { name: /book your audit call/i });
+    expect(link.getAttribute("href")).toContain("lastName=Smith");
+  });
+});

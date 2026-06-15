@@ -64,6 +64,7 @@ export default function ContactForm() {
   const [contactId, setContactId] = useState<string | null>(null);
   const [opportunityId, setOpportunityId] = useState<string | null>(null);
   const [isCheckingBooking, setIsCheckingBooking] = useState(false);
+  const [calendarUrl, setCalendarUrl] = useState(CALENDAR_URL);
 
   const errors = validate(values);
 
@@ -104,6 +105,12 @@ export default function ContactForm() {
       if (result.success) {
         setContactId(result.contactId ?? null);
         setOpportunityId(result.opportunityId ?? null);
+        const [first, ...rest] = values.name.trim().split(" ");
+        const params = new URLSearchParams();
+        if (first) params.set("firstName", first);
+        if (rest.length) params.set("lastName", rest.join(" "));
+        if (values.email) params.set("email", values.email);
+        setCalendarUrl(`${CALENDAR_URL}?${params.toString()}`);
         setStep("book");
       } else {
         setSubmitError(
@@ -190,7 +197,7 @@ export default function ContactForm() {
             </p>
           </div>
           <a
-            href={CALENDAR_URL}
+            href={calendarUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-[#C9A227] hover:bg-[#b8911f] text-[#021524] font-bold px-7 py-3.5 rounded-full shadow-[0_0_20px_rgba(201,162,39,0.3)] transition-colors"
