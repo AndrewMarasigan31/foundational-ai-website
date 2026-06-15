@@ -87,13 +87,19 @@ export async function submitContact(
       }),
     });
 
+    let opportunityId: string;
     if (!oppRes.ok) {
-      const body = await oppRes.text();
-      return { success: false, error: `Opportunity creation failed: ${oppRes.status} — ${body}` };
+      const oppError = await oppRes.json().catch(() => ({}));
+      // GHL rejects duplicate opportunities but gives us the existing ID
+      if (oppError?.meta?.existingId) {
+        opportunityId = oppError.meta.existingId;
+      } else {
+        return { success: false, error: `Opportunity creation failed: ${oppRes.status} — ${JSON.stringify(oppError)}` };
+      }
+    } else {
+      const oppData = await oppRes.json();
+      opportunityId = oppData.opportunity.id;
     }
-
-    const oppData = await oppRes.json();
-    const opportunityId: string = oppData.opportunity.id;
 
     return { success: true, contactId, opportunityId };
   } catch (err) {

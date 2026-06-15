@@ -127,4 +127,23 @@ describe("submitContact", () => {
     expect(result.success).toBe(false);
     expect(result.error).toBeTruthy();
   });
+
+  it("uses existingId from GHL duplicate-opportunity error", async () => {
+    process.env.GHL_PIT = "test-pit-token";
+    global.fetch = mockFetch([
+      { ok: true, json: { contact: { id: "cid-123" } } },
+      {
+        ok: false,
+        json: {
+          statusCode: 400,
+          message: "Can not create duplicate opportunity for the contact.",
+          meta: { existingId: "existing-opp-id" },
+        },
+      },
+    ]);
+
+    const { submitContact } = await import("@/app/actions/submitContact");
+    const result = await submitContact(PAYLOAD);
+    expect(result).toEqual({ success: true, contactId: "cid-123", opportunityId: "existing-opp-id" });
+  });
 });
