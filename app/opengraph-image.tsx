@@ -1,15 +1,18 @@
 import { ImageResponse } from "next/og";
-import { readFileSync } from "fs";
-import { join } from "path";
 
 export const alt = "Foundational AI Systems — Local SEO for Small Businesses";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OGImage() {
-  const logoData = readFileSync(join(process.cwd(), "public/logo.png"));
-  const logoSrc = `data:image/png;base64,${logoData.toString("base64")}`;
-  const fontData = readFileSync(join(process.cwd(), "public/fonts/BricolageGrotesque-800.woff2"));
+export default async function OGImage() {
+  const [logoData, fontData] = await Promise.all([
+    fetch(new URL("../public/logo.png", import.meta.url)).then((r) => r.arrayBuffer()),
+    fetch(new URL("../public/fonts/BricolageGrotesque-800.woff2", import.meta.url)).then((r) =>
+      r.arrayBuffer()
+    ),
+  ]);
+
+  const logoSrc = `data:image/png;base64,${Buffer.from(logoData).toString("base64")}`;
 
   return new ImageResponse(
     (
