@@ -6,9 +6,14 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OGImage() {
-  const font = await fetch(
-    "https://fonts.gstatic.com/s/bricolagegrotesque/v10/3y9U6as8bTXq_nANBjzKo3IeZx8z6up5BeSl5DWVBiG2.woff2"
-  ).then((res) => res.arrayBuffer());
+  let fontData: ArrayBuffer | undefined;
+  try {
+    fontData = await fetch(
+      "https://fonts.gstatic.com/s/bricolagegrotesque/v10/3y9U6as8bTXq_nANBjzKo3IeZx8z6up5BeSl5DWVBiG2.woff2"
+    ).then((res) => res.arrayBuffer());
+  } catch {
+    // fall back to system sans-serif if font fetch fails
+  }
 
   return new ImageResponse(
     (
@@ -92,14 +97,9 @@ export default async function OGImage() {
     ),
     {
       ...size,
-      fonts: [
-        {
-          name: "Bricolage Grotesque",
-          data: font,
-          style: "normal",
-          weight: 700,
-        },
-      ],
+      fonts: fontData
+        ? [{ name: "Bricolage Grotesque", data: fontData, style: "normal", weight: 700 }]
+        : [],
     }
   );
 }
