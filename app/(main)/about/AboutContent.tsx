@@ -77,19 +77,37 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Section 2 — Story */}
+      {/* Section 2 — Founder bio */}
       <section className="bg-[#000f1d] py-20 md:py-28 px-6">
-        <div className="max-w-3xl mx-auto">
-          <AnimatedSection direction="up" className="flex flex-col gap-6 text-lg text-[#99907b] leading-relaxed">
-            <p>
-              Most local SEO agencies sell bloated retainers and generic advice.
-              We scope clearly, execute lean, and report on what actually moved.
-            </p>
-            <p>
-              We use AI tools to move faster on research and content, but every
-              output is reviewed and approved by a human before it touches your
-              business.
-            </p>
+        <div className="max-w-3xl mx-auto flex flex-col gap-10">
+          <AnimatedSection direction="up">
+            <h2 className="text-3xl sm:text-4xl font-display font-light text-[#d1e5fb] mb-8 tracking-[-0.04em]">
+              The Founder
+            </h2>
+            <div className="flex flex-col gap-5 text-lg text-[#99907b] leading-relaxed">
+              <p>
+                I&apos;ve always had a natural instinct for tracking tech trends and staying ahead of the curve.
+                After diving deep into Nick Ponte&apos;s AI Inner Circle mastermind, the vision for Foundational AI Systems was born.
+                Now, I leverage those advanced, mastermind-level insights to help businesses build the rock-solid AI infrastructure they need to scale.
+              </p>
+              <p className="text-[#d1e5fb]/60 text-base italic">
+                Proud member of the Nick Ponte AI Inner Circle Network.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection direction="up" delay={0.1}>
+            <div className="flex flex-col gap-4 text-lg text-[#99907b] leading-relaxed border-t border-white/10 pt-10">
+              <p>
+                Most local SEO agencies sell bloated retainers and generic advice.
+                We scope clearly, execute lean, and report on what actually moved.
+              </p>
+              <p>
+                We use AI tools to move faster on research and content, but every
+                output is reviewed and approved by a human before it touches your
+                business.
+              </p>
+            </div>
           </AnimatedSection>
         </div>
       </section>

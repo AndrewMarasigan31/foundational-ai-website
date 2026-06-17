@@ -100,6 +100,7 @@ export default function RootLayout({
                 "AI-powered Local SEO for US small businesses. GBP audits, local content, AI search visibility, and lead reactivation.",
               url: SITE_URL,
               image: OG_IMAGE,
+              telephone: "+19842860738",
               priceRange: "$$",
               areaServed: {
                 "@type": "Country",
