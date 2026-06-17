@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Foundational AI Systems — Local SEO for Small Businesses";
+export const alt = "AI-Powered Local Growth for Small Businesses | Foundational AI Systems";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -46,7 +46,7 @@ export default async function OGImage() {
               letterSpacing: "-2px",
             }}
           >
-            Local SEO that gets
+            AI-Powered
           </div>
           <div
             style={{
@@ -58,7 +58,7 @@ export default async function OGImage() {
               letterSpacing: "-2px",
             }}
           >
-            small businesses
+            Local Growth
           </div>
           <div
             style={{
@@ -70,14 +70,14 @@ export default async function OGImage() {
               letterSpacing: "-2px",
             }}
           >
-            into the top 3.
+            for Small Businesses.
           </div>
         </div>
 
         {/* Bottom row */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ display: "flex", gap: 10 }}>
-            {["GBP Audit", "Local SEO", "AI Search", "Lead Reactivation"].map((tag) => (
+            {["Local SEO", "GBP Optimization", "AI Growth Planning", "Lead Reactivation"].map((tag) => (
               <div
                 key={tag}
                 style={{
