@@ -10,7 +10,7 @@ export default async function OGImage() {
   const { join } = await import(/* webpackIgnore: true */ "path");
 
   const logoData = readFileSync(join(process.cwd(), "public/logo.png"));
-  const fontData = readFileSync(join(process.cwd(), "public/fonts/BricolageGrotesque-800.woff2"));
+  const fontData = readFileSync(join(process.cwd(), "public/fonts/BricolageGrotesque-800.ttf"));
   const logoSrc = `data:image/png;base64,${logoData.toString("base64")}`;
 
   return new ImageResponse(
