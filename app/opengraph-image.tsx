@@ -5,14 +5,13 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OGImage() {
-  const [logoData, fontData] = await Promise.all([
-    fetch(new URL("../public/logo.png", import.meta.url)).then((r) => r.arrayBuffer()),
-    fetch(new URL("../public/fonts/BricolageGrotesque-800.woff2", import.meta.url)).then((r) =>
-      r.arrayBuffer()
-    ),
-  ]);
+  // webpackIgnore prevents webpack from bundling fs/path — uses Node.js native modules at runtime
+  const { readFileSync } = await import(/* webpackIgnore: true */ "fs");
+  const { join } = await import(/* webpackIgnore: true */ "path");
 
-  const logoSrc = `data:image/png;base64,${Buffer.from(logoData).toString("base64")}`;
+  const logoData = readFileSync(join(process.cwd(), "public/logo.png"));
+  const fontData = readFileSync(join(process.cwd(), "public/fonts/BricolageGrotesque-800.woff2"));
+  const logoSrc = `data:image/png;base64,${logoData.toString("base64")}`;
 
   return new ImageResponse(
     (
