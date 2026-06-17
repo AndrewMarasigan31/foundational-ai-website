@@ -28,7 +28,7 @@ const playfairDisplay = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `AI-Powered Local Growth for Small Businesses | ${SITE_NAME}`,
+    default: `AI-Powered Local Growth | ${SITE_NAME}`,
     template: `%s | ${SITE_NAME}`,
   },
   description:
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    title: `AI-Powered Local Growth for Small Businesses | ${SITE_NAME}`,
+    title: `AI-Powered Local Growth | ${SITE_NAME}`,
     description:
       "AI-powered local growth for small businesses. Local SEO, GBP optimization, and AI growth planning that gets you into Google's top 3.",
     url: SITE_URL,
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `AI-Powered Local Growth for Small Businesses | ${SITE_NAME}`,
+    title: `AI-Powered Local Growth | ${SITE_NAME}`,
     description:
       "AI-powered local growth for small businesses. Local SEO, GBP optimization, and AI growth planning that gets you into Google's top 3.",
     images: [OG_IMAGE],
