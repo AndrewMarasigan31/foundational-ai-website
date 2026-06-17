@@ -35,10 +35,10 @@ const dontDos = [
 ];
 
 const headlineLines = [
-  { text: "We built this because local", delay: 0 },
-  { text: "businesses keep losing to", delay: 0.1 },
-  { text: "bigger competitors who simply", delay: 0.2 },
-  { text: "show up better online.", delay: 0.3 },
+  { text: "Local businesses keep losing", delay: 0 },
+  { text: "to competitors who simply", delay: 0.1 },
+  { text: "show up better online.", delay: 0.2 },
+  { text: "We're here to fix that.", delay: 0.3 },
 ];
 
 export default function AboutPage() {
@@ -46,12 +46,12 @@ export default function AboutPage() {
 
   return (
     <main>
-      {/* Section 1 — Founder statement hero */}
+
+      {/* Section 1 — Hero */}
       <section
         className="relative overflow-hidden bg-[#021524] py-20 md:py-36 px-6"
         style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       >
@@ -77,47 +77,75 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Section 2 — Founder bio */}
+      {/* Section 2 — The founder story */}
       <section className="bg-[#000f1d] py-20 md:py-28 px-6">
-        <div className="max-w-3xl mx-auto flex flex-col gap-10">
+        <div className="max-w-3xl mx-auto">
+
           <AnimatedSection direction="up">
-            <h2 className="text-3xl sm:text-4xl font-display font-light text-[#d1e5fb] mb-8 tracking-[-0.04em]">
-              The Founder
+            <p className="font-mono text-xs uppercase tracking-widest text-[#C9A227] mb-6">The Founder</p>
+            <h2 className="text-3xl sm:text-4xl font-display font-light text-[#d1e5fb] mb-10 tracking-[-0.04em] leading-snug">
+              I&apos;ve always tracked where<br className="hidden sm:block" /> technology is going — before<br className="hidden sm:block" /> most people know it&apos;s coming.
             </h2>
-            <div className="flex flex-col gap-5 text-lg text-[#99907b] leading-relaxed">
-              <p>
-                I&apos;ve always had a natural instinct for tracking tech trends and staying ahead of the curve.
-                After diving deep into Nick Ponte&apos;s AI Inner Circle mastermind, the vision for Foundational AI Systems was born.
-                Now, I leverage those advanced, mastermind-level insights to help businesses build the rock-solid AI infrastructure they need to scale.
-              </p>
-              <p className="text-[#d1e5fb]/60 text-base italic">
-                Proud member of the Nick Ponte AI Inner Circle Network.
-              </p>
-            </div>
           </AnimatedSection>
 
-          <AnimatedSection direction="up" delay={0.1}>
-            <div className="flex flex-col gap-4 text-lg text-[#99907b] leading-relaxed border-t border-white/10 pt-10">
-              <p>
-                Most local SEO agencies sell bloated retainers and generic advice.
-                We scope clearly, execute lean, and report on what actually moved.
+          <div className="flex flex-col gap-8">
+            <AnimatedSection direction="up" delay={0.1}>
+              <p className="text-lg text-[#99907b] leading-relaxed">
+                Not as a hobby — as a discipline. When AI started reshaping how businesses get found, booked, and retained,{" "}
+                <span className="text-[#d1e5fb] font-medium">I didn&apos;t wait to see how it played out. I went all in.</span>
               </p>
-              <p>
-                We use AI tools to move faster on research and content, but every
-                output is reviewed and approved by a human before it touches your
-                business.
+            </AnimatedSection>
+
+            <AnimatedSection direction="up" delay={0.15}>
+              <p className="text-lg text-[#99907b] leading-relaxed">
+                I joined{" "}
+                <span className="text-[#d1e5fb] font-medium">Nick Ponte&apos;s AI Inner Circle mastermind</span>{" "}
+                and spent serious time learning what actually works at the frontier of AI-powered growth. Not theory. The playbook serious operators use to build systems that scale.
               </p>
-            </div>
+            </AnimatedSection>
+
+            <AnimatedSection direction="up" delay={0.2}>
+              <p className="text-lg text-[#99907b] leading-relaxed">
+                What I kept seeing was the same gap:{" "}
+                <span className="text-[#d1e5fb] font-medium">small businesses running on word-of-mouth and luck</span>{" "}
+                while their competitors quietly built systems that worked on autopilot — getting found, getting booked, and staying top of mind without lifting a finger.
+              </p>
+            </AnimatedSection>
+
+            <AnimatedSection direction="up" delay={0.25}>
+              <p className="text-lg text-[#99907b] leading-relaxed">
+                That gap doesn&apos;t close on its own.{" "}
+                <span className="text-[#d1e5fb] font-medium">Foundational AI Systems is how we close it.</span>
+              </p>
+            </AnimatedSection>
+
+            <AnimatedSection direction="up" delay={0.3}>
+              <p className="text-sm text-[#d1e5fb]/40 italic border-t border-white/10 pt-6">
+                Proud member of the Nick Ponte AI Inner Circle Network.
+              </p>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 3 — The reality */}
+      <section className="bg-[#021524] py-16 md:py-20 px-6 border-y border-white/5">
+        <div className="max-w-3xl mx-auto">
+          <AnimatedSection direction="up">
+            <blockquote className="text-2xl sm:text-3xl font-display font-light text-[#d1e5fb]/70 leading-snug tracking-[-0.03em] text-center">
+              &ldquo;Most local SEO agencies sell bloated retainers and generic advice. We scope clearly, execute lean, and report on what actually moved.&rdquo;
+            </blockquote>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Section 3 — Principles */}
-      <section className="bg-[#021524] py-20 md:py-28 px-6">
+      {/* Section 4 — Principles */}
+      <section className="bg-[#000f1d] py-20 md:py-28 px-6">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection direction="up">
+            <p className="font-mono text-xs uppercase tracking-widest text-[#C9A227] text-center mb-4">How We Work</p>
             <h2 className="text-3xl sm:text-4xl font-display font-light text-[#d1e5fb] text-center mb-14 tracking-[-0.04em]">
-              How We Work
+              Three things that never change
             </h2>
           </AnimatedSection>
 
@@ -128,12 +156,8 @@ export default function AboutPage() {
                   <span className="absolute top-4 right-6 text-8xl font-extrabold text-[#C9A227]/[0.35] leading-none select-none pointer-events-none">
                     {p.num}
                   </span>
-                  <h3 className="text-xl font-bold text-[#d1e5fb] relative z-10">
-                    {p.title}
-                  </h3>
-                  <p className="text-[#99907b] leading-relaxed relative z-10">
-                    {p.description}
-                  </p>
+                  <h3 className="text-xl font-bold text-[#d1e5fb] relative z-10">{p.title}</h3>
+                  <p className="text-[#99907b] leading-relaxed relative z-10">{p.description}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -141,21 +165,20 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Section 4 — What we don't do */}
-      <section className="bg-[#000f1d] py-20 md:py-28 px-6">
+      {/* Section 5 — What we don't do */}
+      <section className="bg-[#021524] py-20 md:py-28 px-6">
         <div className="max-w-3xl mx-auto">
           <AnimatedSection direction="up">
+            <p className="font-mono text-xs uppercase tracking-widest text-[#C9A227] mb-4">Guardrails</p>
             <h2 className="text-3xl sm:text-4xl font-display font-light text-[#d1e5fb] mb-10 tracking-[-0.04em]">
-              What We Don&apos;t Do
+              What we don&apos;t do
             </h2>
           </AnimatedSection>
           <AnimatedSection direction="up" delay={0.1}>
-            <ul className="flex flex-col gap-4">
+            <ul className="flex flex-col gap-5">
               {dontDos.map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <span className="mt-1 text-red-400/80 material-symbols-outlined text-xl leading-none shrink-0">
-                    close
-                  </span>
+                  <span className="mt-1 text-red-400/80 material-symbols-outlined text-xl leading-none shrink-0">close</span>
                   <span className="text-lg text-[#99907b] leading-relaxed">{item}</span>
                 </li>
               ))}
@@ -164,7 +187,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Section 5 — CTA */}
+      {/* Section 6 — CTA */}
       <CTABand />
     </main>
   );
