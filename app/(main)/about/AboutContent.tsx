@@ -84,14 +84,14 @@ export default function AboutPage() {
           <AnimatedSection direction="up">
             <p className="font-mono text-xs uppercase tracking-widest text-[#C9A227] mb-6">The Founder</p>
             <h2 className="text-3xl sm:text-4xl font-display font-light text-[#d1e5fb] mb-10 tracking-[-0.04em] leading-snug">
-              I&apos;ve always tracked where<br className="hidden sm:block" /> technology is going — before<br className="hidden sm:block" /> most people know it&apos;s coming.
+              I&apos;ve always tracked where<br className="hidden sm:block" /> technology is going, before<br className="hidden sm:block" /> most people know it&apos;s coming.
             </h2>
           </AnimatedSection>
 
           <div className="flex flex-col gap-8">
             <AnimatedSection direction="up" delay={0.1}>
               <p className="text-lg text-[#99907b] leading-relaxed">
-                Not as a hobby — as a discipline. When AI started reshaping how businesses get found, booked, and retained,{" "}
+                Not as a hobby. As a discipline. When AI started reshaping how businesses get found, booked, and retained,{" "}
                 <span className="text-[#d1e5fb] font-medium">I didn&apos;t wait to see how it played out. I went all in.</span>
               </p>
             </AnimatedSection>
@@ -108,7 +108,7 @@ export default function AboutPage() {
               <p className="text-lg text-[#99907b] leading-relaxed">
                 What I kept seeing was the same gap:{" "}
                 <span className="text-[#d1e5fb] font-medium">small businesses running on word-of-mouth and luck</span>{" "}
-                while their competitors quietly built systems that worked on autopilot — getting found, getting booked, and staying top of mind without lifting a finger.
+                while their competitors quietly built systems that worked on autopilot, getting found, getting booked, and staying top of mind without lifting a finger.
               </p>
             </AnimatedSection>
 
