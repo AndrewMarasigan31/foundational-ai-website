@@ -9,6 +9,7 @@ export const contentType = "image/png";
 export default function OGImage() {
   const logoData = readFileSync(join(process.cwd(), "public/logo.png"));
   const logoSrc = `data:image/png;base64,${logoData.toString("base64")}`;
+  const fontData = readFileSync(join(process.cwd(), "public/fonts/BricolageGrotesque-800.woff2"));
 
   return new ImageResponse(
     (
@@ -36,6 +37,7 @@ export default function OGImage() {
           <div
             style={{
               fontSize: 68,
+              fontFamily: "Bricolage Grotesque",
               fontWeight: 800,
               color: "#d1e5fb",
               lineHeight: 1.1,
@@ -47,6 +49,7 @@ export default function OGImage() {
           <div
             style={{
               fontSize: 68,
+              fontFamily: "Bricolage Grotesque",
               fontWeight: 800,
               color: "#C9A227",
               lineHeight: 1.1,
@@ -58,6 +61,7 @@ export default function OGImage() {
           <div
             style={{
               fontSize: 68,
+              fontFamily: "Bricolage Grotesque",
               fontWeight: 800,
               color: "#d1e5fb",
               lineHeight: 1.1,
@@ -91,6 +95,9 @@ export default function OGImage() {
         </div>
       </div>
     ),
-    size
+    {
+      ...size,
+      fonts: [{ name: "Bricolage Grotesque", data: fontData, style: "normal", weight: 800 }],
+    }
   );
 }
