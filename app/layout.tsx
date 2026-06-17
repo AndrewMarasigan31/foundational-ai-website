@@ -3,6 +3,7 @@ import { Bricolage_Grotesque, DM_Sans, Playfair_Display } from "next/font/google
 import Footer from "../components/Footer";
 import Nav from "../components/Nav";
 import PageTransition from "../components/PageTransition";
+import { SITE_URL, SITE_NAME, OG_IMAGE } from "@/lib/siteConfig";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -25,8 +26,29 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Foundational AI Systems",
-  description: "Local SEO for US Small Businesses",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} — Local SEO for Small Businesses`,
+    template: `%s — ${SITE_NAME}`,
+  },
+  description:
+    "Foundational AI Systems helps US small businesses get into the Google top 3 with AI-powered Local SEO, GBP audits, and lead reactivation.",
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — Local SEO for Small Businesses`,
+    description:
+      "Foundational AI Systems helps US small businesses get into the Google top 3 with AI-powered Local SEO, GBP audits, and lead reactivation.",
+    url: SITE_URL,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: SITE_NAME }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} — Local SEO for Small Businesses`,
+    description:
+      "Foundational AI Systems helps US small businesses get into the Google top 3 with AI-powered Local SEO, GBP audits, and lead reactivation.",
+    images: [OG_IMAGE],
+  },
 };
 
 export default function RootLayout({
@@ -51,6 +73,31 @@ export default function RootLayout({
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: SITE_NAME,
+              description:
+                "AI-powered Local SEO for US small businesses. GBP audits, local content, AI search visibility, and lead reactivation.",
+              url: SITE_URL,
+              image: OG_IMAGE,
+              priceRange: "$$",
+              areaServed: {
+                "@type": "Country",
+                name: "United States",
+              },
+              knowsAbout: [
+                "Local SEO",
+                "Google Business Profile",
+                "AI Search Optimization",
+                "Lead Reactivation",
+              ],
+            }),
+          }}
         />
       </head>
       <body className={`${dmSans.className} overflow-x-hidden`}>
