@@ -11,6 +11,9 @@ const config: Config = {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         display: ["var(--font-syne)", "system-ui", "sans-serif"],
         serif: ["var(--font-playfair)", "Georgia", "serif"],
+        inter: ["var(--font-inter-synapse)", "system-ui", "sans-serif"],
+        space: ["var(--font-space)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono-synapse)", "Menlo", "monospace"],
       },
       colors: {
         primary: "#C9A227",

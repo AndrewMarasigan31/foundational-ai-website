@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, DM_Sans, Playfair_Display } from "next/font/google";
-import Footer from "../components/Footer";
-import Nav from "../components/Nav";
-import PageTransition from "../components/PageTransition";
+import { Bricolage_Grotesque, DM_Sans, Playfair_Display, Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { SITE_URL, SITE_NAME, OG_IMAGE } from "@/lib/siteConfig";
 import "./globals.css";
 
@@ -23,6 +20,24 @@ const playfairDisplay = Playfair_Display({
   style: ["italic"],
   weight: ["400", "700"],
   variable: "--font-playfair",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter-synapse",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-space",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  variable: "--font-mono-synapse",
 });
 
 export const metadata: Metadata = {
@@ -57,7 +72,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${bricolage.variable} ${dmSans.variable} ${playfairDisplay.variable}`}>
+    <html lang="en" className={`${bricolage.variable} ${dmSans.variable} ${playfairDisplay.variable} ${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
       <head>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-QFW11762D7" />
         <script
@@ -101,9 +116,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${dmSans.className} overflow-x-hidden`}>
-        <Nav />
-        <PageTransition>{children}</PageTransition>
-        <Footer />
+        {children}
       </body>
     </html>
   );

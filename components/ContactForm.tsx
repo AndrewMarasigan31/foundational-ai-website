@@ -94,7 +94,7 @@ export default function ContactForm() {
     setSubmitError(null);
 
     try {
-      const { submitContact } = await import("@/app/actions/submitContact");
+      const { submitContact } = await import("@/app/(main)/actions/submitContact");
       const result = await submitContact({
         name: values.name,
         email: values.email,
