@@ -28,25 +28,25 @@ const playfairDisplay = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Local SEO for Small Businesses`,
-    template: `%s — ${SITE_NAME}`,
+    default: `AI-Powered Local Growth for Small Businesses | ${SITE_NAME}`,
+    template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Foundational AI Systems helps US small businesses get into the Google top 3 with AI-powered Local SEO, GBP audits, and lead reactivation.",
+    "AI-powered local growth for small businesses. Local SEO, GBP optimization, and AI growth planning that gets you into Google's top 3.",
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — Local SEO for Small Businesses`,
+    title: `AI-Powered Local Growth for Small Businesses | ${SITE_NAME}`,
     description:
-      "Foundational AI Systems helps US small businesses get into the Google top 3 with AI-powered Local SEO, GBP audits, and lead reactivation.",
+      "AI-powered local growth for small businesses. Local SEO, GBP optimization, and AI growth planning that gets you into Google's top 3.",
     url: SITE_URL,
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: SITE_NAME }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Local SEO for Small Businesses`,
+    title: `AI-Powered Local Growth for Small Businesses | ${SITE_NAME}`,
     description:
-      "Foundational AI Systems helps US small businesses get into the Google top 3 with AI-powered Local SEO, GBP audits, and lead reactivation.",
+      "AI-powered local growth for small businesses. Local SEO, GBP optimization, and AI growth planning that gets you into Google's top 3.",
     images: [OG_IMAGE],
   },
 };

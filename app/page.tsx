@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { SITE_URL, OG_IMAGE } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
-  title: "Local SEO for Small Businesses",
+  title: "AI-Powered Local Growth for Small Businesses",
   description:
-    "AI-powered Local SEO for US small businesses. GBP audits, local content, AI search visibility, and lead reactivation. Book a free strategy call.",
+    "Local SEO, GBP optimization, and AI growth planning for US small businesses. Get into Google's top 3. Book a free strategy call.",
   openGraph: {
-    title: "Local SEO for Small Businesses — Foundational AI Systems",
+    title: "AI-Powered Local Growth for Small Businesses | Foundational AI Systems",
     description:
-      "AI-powered Local SEO for US small businesses. GBP audits, local content, AI search visibility, and lead reactivation.",
+      "Local SEO, GBP optimization, and AI growth planning for US small businesses. Get into Google's top 3.",
     url: SITE_URL,
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Foundational AI Systems" }],
   },
