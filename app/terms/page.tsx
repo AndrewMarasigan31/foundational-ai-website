@@ -1,8 +1,16 @@
 import Link from "next/link";
+import { SITE_URL, OG_IMAGE } from "@/lib/siteConfig";
 
 export const metadata = {
-  title: "Terms of Service — Foundational AI Systems",
+  title: "Terms of Service",
   description: "Terms governing your use of Foundational AI Systems services and website.",
+  openGraph: {
+    title: "Terms of Service — Foundational AI Systems",
+    description: "Terms governing your use of Foundational AI Systems services and website.",
+    url: `${SITE_URL}/terms`,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Terms of Service" }],
+  },
+  alternates: { canonical: `${SITE_URL}/terms` },
 };
 
 export default function TermsPage() {
