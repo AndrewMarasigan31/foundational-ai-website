@@ -74,6 +74,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${bricolage.variable} ${dmSans.variable} ${playfairDisplay.variable} ${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
       <head>
+        <script
+          src="https://booking.foundationalaisystem.com/js/external-tracking.js"
+          data-tracking-id="tk_8b0a43be00614183a31262d72e969cf4"
+          async
+        />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-QFW11762D7" />
         <script
           dangerouslySetInnerHTML={{
