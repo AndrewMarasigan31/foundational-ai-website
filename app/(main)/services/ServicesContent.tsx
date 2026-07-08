@@ -79,6 +79,8 @@ interface ServiceSectionProps {
   deliverables: string[];
   visual: React.ReactNode;
   reverse?: boolean;
+  groupLabel?: string;
+  groupTitle?: string;
 }
 
 function ServiceSectionBlock({
@@ -90,10 +92,20 @@ function ServiceSectionBlock({
   deliverables,
   visual,
   reverse = false,
+  groupLabel,
+  groupTitle,
 }: ServiceSectionProps) {
   return (
     <section id={id} className={`py-24 md:py-32 ${bg} border-t border-white/5`}>
       <div className="max-w-7xl mx-auto px-6">
+        {groupLabel && (
+          <div className="text-center mb-16 md:mb-20">
+            <p className="text-sm uppercase tracking-[0.2em] text-[#C9A227] mb-3">{groupLabel}</p>
+            <p className="text-xl sm:text-2xl font-display font-light text-[#d1e5fb] tracking-[-0.02em] leading-snug">
+              {groupTitle}
+            </p>
+          </div>
+        )}
         <div
           className={`grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center ${
             reverse ? "md:[&>*:first-child]:order-2" : ""
@@ -190,20 +202,12 @@ export default function ServicesPage() {
       {/* Sticky section nav */}
       <StickyServiceNav activeId={activeId} />
 
-      {/* Job 1 band */}
-      <div className="bg-[#021524] pt-24 md:pt-32 -mb-12 md:-mb-16 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-sm uppercase tracking-[0.2em] text-[#C9A227] mb-3">First, fix the leak</p>
-          <p className="text-xl sm:text-2xl font-display font-light text-[#d1e5fb] tracking-[-0.02em] leading-snug">
-            Turn the clicks you already have into booked calls.
-          </p>
-        </div>
-      </div>
-
       {/* Service 1: Website Built to Convert — copy left / visual right */}
       <ServiceSectionBlock
         id="website"
         bg="bg-[#021524]"
+        groupLabel="First, fix the leak"
+        groupTitle="Turn the clicks you already have into booked calls."
         icon="web"
         title="Website Built to Convert"
         description="This is the engine. The clicks you pay for bounce when the site doesn't convert. You get a clean, fast site that turns local visitors into calls. One review, one approval, one launch. No retainer, no hostage hosting."
@@ -313,20 +317,11 @@ export default function ServicesPage() {
         reverse={false}
       />
 
-      {/* Job 2 band */}
-      <div className="bg-[#000f1d] pt-24 md:pt-32 px-6 border-t border-white/5">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-sm uppercase tracking-[0.2em] text-[#C9A227] mb-3">Then, get found</p>
-          <p className="text-xl sm:text-2xl font-display font-light text-[#d1e5fb] tracking-[-0.02em] leading-snug">
-            Once the funnel holds, turn up the traffic.
-          </p>
-        </div>
-      </div>
-
       {/* Get Found: the three ranking services, one offering */}
-      <section id="get-found" className="pt-14 pb-24 md:pb-32 bg-[#000f1d]">
+      <section id="get-found" className="py-24 md:py-32 bg-[#000f1d] border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-2xl mx-auto text-center mb-12">
+            <p className="text-sm uppercase tracking-[0.2em] text-[#C9A227] mb-3">Then, get found</p>
             <h2 className="text-3xl sm:text-4xl font-display font-light text-[#d1e5fb] leading-tight tracking-[-0.04em] mb-4">
               Get Found
             </h2>
