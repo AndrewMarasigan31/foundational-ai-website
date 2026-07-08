@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView, useMotionValue, animate, useReducedMotion } from "framer-motion";
 
@@ -234,148 +235,121 @@ export function RankTrackingAnimation() {
   );
 }
 
-const services = [
-  {
-    id: "gbp",
-    icon: "manage_search",
-    title: "GBP Audit & Optimization",
-    description:
-      "Your Google Business Profile is the first thing customers see, and most profiles have fixable problems dragging rankings down. We audit yours, fix the gaps, and set you up to compete in local search.",
-    checklist: [
-      "Fixes that move your ranking in weeks, not months",
-      "Profile built to attract calls, not just views",
-    ],
-    mockPanel: <GBPStarAnimation />,
-    colSpan: "md:col-span-8",
-  },
-  {
-    id: "content",
-    icon: "article",
-    title: "Local SEO Content",
-    description:
-      "Monthly blog posts, GBP updates, and location-targeted content written to rank in your city. Hands-off and consistent. Cancel any month with no penalties.",
-    checklist: null,
-    mockPanel: <BlogTypingAnimation />,
-    colSpan: "md:col-span-4",
-  },
-  {
-    id: "website",
-    icon: "web",
-    title: "Website Built to Convert",
-    description:
-      "A clean, fast, conversion-focused website, fully built. You review it once, you approve it, it launches. No revision loops, no monthly retainer, no hostage hosting.",
-    checklist: null,
-    mockPanel: <LighthouseAnimation />,
-    colSpan: "md:col-span-4",
-  },
-  {
-    id: "tracking",
-    icon: "monitoring",
-    title: "Performance Tracking",
-    description:
-      "We report on ranking movement, profile views, and call volume every month. If something isn't working, we adjust. You don't wait on a quarterly review to find out what happened.",
-    checklist: null,
-    mockPanel: <RankTrackingAnimation />,
-    colSpan: "md:col-span-8",
-  },
-  {
-    id: "ai-search",
-    icon: "travel_explore",
-    title: "AI Search Visibility",
-    description:
-      "ChatGPT, Perplexity, and Google AI Overviews are now where customers start. We optimize your business information, content, and authority so you show up in AI-generated answers, not just the traditional search results.",
-    checklist: null,
-    mockPanel: <AISearchAnimation />,
-    colSpan: "md:col-span-6",
-  },
-  {
-    id: "reactivation",
-    icon: "mark_chat_unread",
-    title: "Lead Reactivation Sprint",
-    description:
-      "Most businesses already have revenue sitting in old contacts and cold leads. We build a 90-day SMS and email follow-up sequence, set up your CRM workflow, and turn a neglected list back into booked appointments. Live in 5 to 7 business days.",
-    checklist: null,
-    mockPanel: <LeadReactivationAnimation />,
-    colSpan: "md:col-span-6",
-  },
+const PLUGS = [
+  { icon: "web", label: "A site that converts", sub: "Clicks stop bouncing." },
+  { icon: "mark_chat_unread", label: "Instant follow-up", sub: "Leads stop going cold." },
+  { icon: "monitoring", label: "See the leak", sub: "Know what's working." },
 ];
 
 export default function ServicesSection() {
   const prefersReducedMotion = useReducedMotion();
 
+  const reveal = (delay: number) =>
+    prefersReducedMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 20 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true },
+          transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const, delay },
+        };
+
   return (
     <section className="py-24 md:py-32 -mx-6 sm:-mx-12 lg:-mx-24 px-6 sm:px-12 lg:px-24 bg-[#021524]">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="flex flex-col items-center text-center gap-6 mb-14">
-          <p className="text-xs uppercase tracking-[0.2em] text-[#99907b] mb-3">02 — SERVICES</p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-light text-[#d1e5fb] leading-tight tracking-[-0.04em] max-w-3xl">
-            Get Found. <em className="font-serif not-italic text-[#C9A227]">Get Paid.</em>
+      <div className="max-w-5xl mx-auto">
+        {/* Header: the problem, stated in one glance */}
+        <div className="flex flex-col items-center text-center gap-5 mb-16 md:mb-24">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-light text-[#d1e5fb] leading-tight tracking-[-0.04em] max-w-3xl text-balance">
+            Three leaks between click and <em className="font-serif not-italic text-[#C9A227]">call.</em>
           </h2>
-          <p className="text-lg sm:text-xl text-[#99907b] leading-relaxed max-w-2xl">
-            From Google rankings and AI search visibility to recovering cold leads.
-            every service is scoped clearly, executed lean, and built to produce results you can measure.
+          <p className="text-lg sm:text-xl text-[#b9c6d6] leading-relaxed max-w-xl text-balance">
+            Fix these three, and the clicks you already pay for start booking calls.
           </p>
         </div>
 
-        {/* Bento grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-            {services.map((service, i) => {
-              const cardContent = (
-                <>
-                  {/* Icon */}
-                  <div className="w-10 h-10 rounded-lg bg-[#C9A227]/10 flex items-center justify-center mb-4">
-                    <span className="material-symbols-outlined text-[#C9A227] text-xl">
-                      {service.icon}
-                    </span>
+        {/* Desktop pipe: Click -> 3 plugs -> Booked call */}
+        <div className="hidden md:block relative">
+          <div
+            className="absolute top-8 left-[7%] right-[7%] h-[2px] bg-gradient-to-r from-white/10 via-[#C9A227]/40 to-[#C9A227]/70"
+            aria-hidden
+          />
+          <div className="relative grid grid-cols-[auto_1fr_1fr_1fr_auto] items-start gap-6">
+            {/* Click in */}
+            <div className="flex flex-col items-center text-center w-20">
+              <div className="h-16 flex items-center">
+                <span className="material-symbols-outlined text-[#99907b] text-3xl">ads_click</span>
+              </div>
+              <span className="mt-4 text-xs uppercase tracking-[0.15em] text-[#99907b]">Click</span>
+            </div>
+
+            {/* The three plugs */}
+            {PLUGS.map((p, i) => (
+              <motion.div key={p.label} {...reveal(0.1 + i * 0.12)} className="flex flex-col items-center text-center">
+                <div className="h-16 flex items-center">
+                  <div className="size-16 rounded-2xl bg-[#0e2131] border border-[#C9A227]/30 flex items-center justify-center shadow-[0_0_30px_rgba(201,162,39,0.08)]">
+                    <span className="material-symbols-outlined text-[#C9A227] text-2xl">{p.icon}</span>
                   </div>
-
-                  {/* Title */}
-                  <h3 className="text-lg font-bold text-[#d1e5fb] mb-2">{service.title}</h3>
-
-                  {/* Description */}
-                  <p className="text-[#99907b] text-sm leading-relaxed">{service.description}</p>
-
-                  {/* Optional checklist */}
-                  {service.checklist && (
-                    <ul className="mt-4 space-y-2">
-                      {service.checklist.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-sm text-[#d1e5fb]/80">
-                          <span className="material-symbols-outlined text-[#C9A227] text-base mt-0.5 shrink-0">
-                            check
-                          </span>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {/* Animation panel */}
-                  {service.mockPanel}
-                </>
-              );
-
-              return prefersReducedMotion ? (
-                <div
-                  key={service.id}
-                  className={`${service.colSpan} group rounded-2xl bg-[#0e2131] border border-white/10 p-6 flex flex-col transition-all duration-300 hover:border-[#C9A227]/60 hover:-translate-y-1`}
-                >
-                  {cardContent}
                 </div>
-              ) : (
-                <motion.div
-                  key={service.id}
-                  className={`${service.colSpan} group rounded-2xl bg-[#0e2131] border border-white/10 p-6 flex flex-col transition-all duration-300 hover:border-[#C9A227]/60 hover:-translate-y-1`}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: i * 0.07 }}
-                >
-                  {cardContent}
-                </motion.div>
-              );
-            })}
+                <h3 className="mt-4 text-base font-bold text-[#d1e5fb]">{p.label}</h3>
+                <p className="mt-1 text-sm text-[#99907b] max-w-[200px]">{p.sub}</p>
+              </motion.div>
+            ))}
+
+            {/* Booked call out */}
+            <div className="flex flex-col items-center text-center w-24">
+              <div className="h-16 flex items-center">
+                <div className="size-16 rounded-full bg-[#C9A227]/10 border border-[#C9A227]/50 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-[#C9A227] text-3xl">call</span>
+                </div>
+              </div>
+              <span className="mt-4 text-xs uppercase tracking-[0.15em] text-[#C9A227]">Booked call</span>
+            </div>
           </div>
+        </div>
+
+        {/* Mobile pipe: vertical */}
+        <div className="md:hidden flex flex-col max-w-sm mx-auto">
+          <div className="flex items-center gap-4">
+            <div className="size-12 flex items-center justify-center shrink-0">
+              <span className="material-symbols-outlined text-[#99907b] text-2xl">ads_click</span>
+            </div>
+            <span className="text-xs uppercase tracking-[0.15em] text-[#99907b]">A visitor clicks</span>
+          </div>
+          <div className="ml-6 h-6 w-[2px] bg-gradient-to-b from-white/10 to-[#C9A227]/40" />
+
+          {PLUGS.map((p, i) => (
+            <div key={p.label}>
+              <motion.div {...reveal(i * 0.1)} className="flex items-center gap-4">
+                <div className="size-12 rounded-xl bg-[#0e2131] border border-[#C9A227]/30 flex items-center justify-center shrink-0">
+                  <span className="material-symbols-outlined text-[#C9A227] text-xl">{p.icon}</span>
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-[#d1e5fb] leading-tight">{p.label}</h3>
+                  <p className="text-xs text-[#99907b] leading-tight mt-0.5">{p.sub}</p>
+                </div>
+              </motion.div>
+              <div className="ml-6 h-6 w-[2px] bg-[#C9A227]/40" />
+            </div>
+          ))}
+
+          <div className="flex items-center gap-4">
+            <div className="size-12 rounded-full bg-[#C9A227]/10 border border-[#C9A227]/50 flex items-center justify-center shrink-0">
+              <span className="material-symbols-outlined text-[#C9A227] text-2xl">call</span>
+            </div>
+            <span className="text-sm font-bold text-[#C9A227]">Booked call</span>
+          </div>
+        </div>
+
+        {/* The second job: ranking */}
+        <div className="mt-16 md:mt-24 text-center">
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-1.5 text-[#99907b] hover:text-[#C9A227] font-medium text-sm transition-colors group"
+          >
+            Need more clicks too? Once the leak&apos;s fixed, we get you found
+            <span className="material-symbols-outlined text-base transition-transform group-hover:translate-x-0.5">arrow_forward</span>
+          </Link>
+        </div>
       </div>
     </section>
   );

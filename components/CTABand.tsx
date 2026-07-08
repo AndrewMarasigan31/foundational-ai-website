@@ -44,12 +44,11 @@ export default function CTABand() {
         {prefersReducedMotion ? (
           <div className="flex flex-col gap-6">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-light text-[#d1e5fb] leading-none tracking-[-0.04em]">
-              Rank. Convert. <em className="font-serif not-italic text-[#C9A227]">Grow.</em>
+              Convert. Book. <em className="font-serif not-italic text-[#C9A227]">Grow.</em>
             </h2>
             <p className="text-lg sm:text-xl text-[#99907b] leading-relaxed">
-              We review your Google and AI search visibility, your existing lead list, and your
-              current site. Then we tell you exactly where revenue is leaking and what we would fix first.
-              No obligation.
+              You&apos;ll get a straight read on your site, your follow-up, and your lead list,
+              exactly where revenue is leaking. No obligation.
             </p>
           </div>
         ) : (
@@ -61,7 +60,7 @@ export default function CTABand() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease, delay: 0 }}
             >
-              Rank. Convert. <em className="font-serif not-italic text-[#C9A227]">Grow.</em>
+              Convert. Book. <em className="font-serif not-italic text-[#C9A227]">Grow.</em>
             </motion.h2>
             <motion.p
               className="text-lg sm:text-xl text-[#99907b] leading-relaxed"
@@ -70,9 +69,8 @@ export default function CTABand() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease, delay: 0.1 }}
             >
-              We review your Google and AI search visibility, your existing lead list, and your
-              current site. Then we tell you exactly where revenue is leaking and what we would fix first.
-              No obligation.
+              You&apos;ll get a straight read on your site, your follow-up, and your lead list,
+              exactly where revenue is leaking. No obligation.
             </motion.p>
           </div>
         )}

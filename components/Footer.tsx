@@ -15,7 +15,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-on-surface/50 text-sm leading-relaxed">
-              Local SEO that gets small businesses into the top 3.
+              We turn the clicks you already pay for into booked calls.
             </p>
           </div>
 
@@ -24,10 +24,10 @@ export default function Footer() {
             <h3 className="text-on-surface font-semibold text-sm mb-4">Services</h3>
             <ul className="flex flex-col gap-2">
               {[
-                { label: "GBP Audit", href: "/services" },
-                { label: "Local SEO Content", href: "/services" },
-                { label: "Website Design", href: "/services" },
+                { label: "Website Built to Convert", href: "/services" },
+                { label: "Lead Reactivation Sprint", href: "/services" },
                 { label: "Performance Tracking", href: "/services" },
+                { label: "Local SEO & AI Search", href: "/services" },
               ].map(({ label, href }) => (
                 <li key={label}>
                   <Link

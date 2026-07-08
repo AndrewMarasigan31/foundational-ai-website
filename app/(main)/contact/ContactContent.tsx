@@ -9,25 +9,25 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const coverItems = [
   {
     icon: "search",
-    text: "Your GBP and local search gaps",
-  },
-  {
-    icon: "star",
-    text: "AI search visibility (ChatGPT, Perplexity, Google AI Overviews)",
+    text: "Where your site is losing visitors instead of booking them",
   },
   {
     icon: "group",
-    text: "Your existing lead list and follow-up gaps",
+    text: "How your follow-up is letting leads go cold",
+  },
+  {
+    icon: "star",
+    text: "Your local and AI search visibility (Google, ChatGPT, Perplexity)",
   },
   {
     icon: "lightbulb",
-    text: "A clear recommended starting point, no obligation",
+    text: "A clear next step you can act on, whether or not you hire us",
   },
 ];
 
 const trustSignals = [
   "No long-term contract required",
-  "Results start showing in weeks",
+  "You leave knowing exactly where your clicks are leaking",
   "Direct access to the people doing the work",
 ];
 
@@ -64,8 +64,8 @@ export default function ContactPage() {
                   Call.
                 </h1>
                 <p className="mt-6 text-lg sm:text-xl text-[#99907b] leading-relaxed">
-                  No pitch. No pressure. 30 minutes to map exactly where revenue is
-                  leaking.
+                  No pitch. No pressure. 30 minutes to show you where your clicks
+                  are leaking instead of turning into calls.
                 </p>
               </>
             ) : (
@@ -86,8 +86,8 @@ export default function ContactPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease, delay: 0.1 }}
                 >
-                  No pitch. No pressure. 30 minutes to map exactly where revenue is
-                  leaking.
+                  No pitch. No pressure. 30 minutes to show you where your clicks
+                  are leaking instead of turning into calls.
                 </motion.p>
               </>
             )}
@@ -98,7 +98,7 @@ export default function ContactPage() {
             {/* Left — Info panel (below form on mobile) */}
             <div className="flex flex-col gap-8 order-last md:order-first">
               <h2 className="font-display font-bold text-xl text-[#d1e5fb]">
-                What We Cover on the Call
+                What You Get on the Call
               </h2>
 
               <ul className="flex flex-col gap-5">

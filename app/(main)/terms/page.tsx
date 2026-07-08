@@ -5,7 +5,7 @@ export const metadata = {
   title: "Terms of Service",
   description: "Terms governing your use of Foundational AI Systems services and website.",
   openGraph: {
-    title: "Terms of Service — Foundational AI Systems",
+    title: "Terms of Service | Foundational AI Systems",
     description: "Terms governing your use of Foundational AI Systems services and website.",
     url: `${SITE_URL}/terms`,
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Terms of Service" }],
@@ -58,7 +58,7 @@ export default function TermsPage() {
               Search rankings and lead generation are influenced by many factors outside our
               control, including Google algorithm changes, competitor activity, and the quality
               of your existing business presence. We commit to applying our expertise and
-              best practices on your behalf — we do not guarantee specific ranking positions,
+              best practices on your behalf, but we do not guarantee specific ranking positions,
               traffic volumes, or revenue outcomes.
             </p>
           </section>

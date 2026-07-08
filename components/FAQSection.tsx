@@ -5,33 +5,38 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 const faqs = [
   {
     num: "01",
+    q: "I'm getting clicks but no calls. Can you fix that?",
+    a: "That's exactly what we do. Usually the traffic is fine; the site and the follow-up are what leak. We rebuild where visitors land and add automatic follow-up, so more of the clicks you already pay for turn into booked calls.",
+  },
+  {
+    num: "02",
     q: "Do I have to sign a long-term contract?",
     a: "No long-term contract required to start. We use the audit call to recommend the right starting point and scope, then keep the engagement clear and month-to-month. The Lead Reactivation Sprint is a one-time project with no ongoing commitment unless you choose the optional management add-on.",
   },
   {
-    num: "02",
-    q: "How fast will I see results?",
-    a: "GBP fixes can show ranking movement in weeks. Lead reactivation replies typically come in within the first 5 to 7 days of the sprint going live. Content and AI search visibility compound over 60 to 90 days. We'll be straight with you if your market is unusually competitive.",
-  },
-  {
     num: "03",
-    q: "Do you help with AI search results like ChatGPT and Perplexity?",
-    a: "Yes. AI Overviews, ChatGPT, and Perplexity pull business information from structured data, review signals, and authoritative content. Those are the same foundations we build for traditional local SEO. We optimize for the full search landscape, not just the Google results page.",
+    q: "How fast will I see results?",
+    a: "Follow-up and reactivation start producing replies within 5 to 7 days. Site fixes show up in call volume within a few weeks. Ranking and content compound over 60 to 90 days.",
   },
   {
     num: "04",
     q: "What is the Lead Reactivation Sprint?",
-    a: "A focused one-time project that turns your cold lead list, past customer list, or stale pipeline back into replies and booked appointments. We build a 90-day SMS and email follow-up sequence, set up your CRM workflow, and have it live within 5 to 7 business days. Starts at $1,500.",
+    a: "A one-time project that turns your cold lead list back into replies and booked appointments. We build a 90-day SMS and email sequence, set up your CRM, and have it live within 5 to 7 days. Starts at $1,500.",
   },
   {
     num: "05",
     q: "I already have a website. Can you still help?",
-    a: "Yes. The GBP audit, Local SEO Content, AI Search Visibility, and Lead Reactivation Sprint all work independently of your existing site. We don't require you to use our website product to get results from the other services.",
+    a: "Yes. Follow-up, reactivation, and tracking all work on top of your existing site. And if the site itself is where leads leak, we can rebuild just the pages that need to convert.",
   },
   {
     num: "06",
+    q: "Do you also handle ranking and AI search?",
+    a: "Yes. We cover Local SEO, Google Business Profile, and AI search visibility (ChatGPT, Perplexity, AI Overviews). But we lead with conversion, because more traffic doesn't help if your current clicks aren't becoming calls.",
+  },
+  {
+    num: "07",
     q: "What kinds of businesses do you work with?",
-    a: "Local service businesses in the US: trades, home services, professional services, healthcare, dental, med spas, legal, and similar categories where local search and follow-up drive inbound revenue. If you rely on Google or referrals to get found and convert, we can help.",
+    a: "Local service businesses in the US: trades, home services, professional services, healthcare, dental, med spas, legal, and similar categories where inbound calls drive revenue. If you rely on Google, ads, or referrals to get found and need those visitors to convert, we can help.",
   },
 ];
 
@@ -118,7 +123,6 @@ export default function FAQSection() {
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="flex flex-col gap-4 mb-4">
-          <p className="text-xs uppercase tracking-[0.2em] text-[#99907b] mb-3">05 — FAQ</p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-light text-[#d1e5fb] leading-tight tracking-[-0.04em]">
             Questions We Get{" "}
             <em className="font-serif not-italic text-[#C9A227]">Every</em>{" "}

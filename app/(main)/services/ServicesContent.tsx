@@ -4,21 +4,34 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import CTABand from "@/components/CTABand";
 import {
-  GBPStarAnimation,
-  BlogTypingAnimation,
-  AISearchAnimation,
   LeadReactivationAnimation,
   LighthouseAnimation,
   RankTrackingAnimation,
 } from "@/components/ServicesSection";
 
 const SERVICE_SECTIONS = [
-  { id: "gbp-audit", label: "GBP Audit" },
-  { id: "local-seo-content", label: "Local SEO Content" },
-  { id: "ai-search", label: "AI Search" },
-  { id: "lead-reactivation", label: "Lead Reactivation" },
   { id: "website", label: "Website" },
-  { id: "performance-tracking", label: "Performance Tracking" },
+  { id: "lead-reactivation", label: "Lead Reactivation" },
+  { id: "performance-tracking", label: "Tracking" },
+  { id: "get-found", label: "Get Found" },
+];
+
+const GET_FOUND_PARTS = [
+  {
+    icon: "manage_search",
+    title: "Google Business Profile",
+    desc: "The profile that decides whether you show up in the local map pack. We audit it, fix every gap, and set it up to attract calls.",
+  },
+  {
+    icon: "article",
+    title: "Local SEO Content",
+    desc: "Monthly content written to rank in your city, feeding a steady stream of local traffic into your funnel. We handle it end to end.",
+  },
+  {
+    icon: "travel_explore",
+    title: "AI Search Visibility",
+    desc: "Show up in ChatGPT, Perplexity, and Google AI Overviews, where more and more customers now start their search.",
+  },
 ];
 
 function StickyServiceNav({ activeId }: { activeId: string }) {
@@ -164,11 +177,11 @@ export default function ServicesPage() {
         />
         <div className="relative z-10 max-w-3xl mx-auto px-6 flex flex-col items-center text-center gap-8">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-light text-[#d1e5fb] leading-tight tracking-[-0.05em]">
-            The Work We Do
+            Turn Clicks Into Booked Calls
           </h1>
           <p className="text-lg sm:text-xl text-[#99907b] leading-relaxed">
-            Six services. All scoped. All built to produce results you can
-            measure. Every engagement starts with a free audit call.
+            You&apos;re already paying for clicks. The system below turns them into
+            booked calls. Every engagement starts with a free audit call.
           </p>
           <BookCTA />
         </div>
@@ -177,32 +190,41 @@ export default function ServicesPage() {
       {/* Sticky section nav */}
       <StickyServiceNav activeId={activeId} />
 
-      {/* Service 1: GBP Audit — copy left / visual right */}
+      {/* Job 1 band */}
+      <div className="bg-[#021524] pt-24 md:pt-32 -mb-12 md:-mb-16 px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-sm uppercase tracking-[0.2em] text-[#C9A227] mb-3">First, fix the leak</p>
+          <p className="text-xl sm:text-2xl font-display font-light text-[#d1e5fb] tracking-[-0.02em] leading-snug">
+            Turn the clicks you already have into booked calls.
+          </p>
+        </div>
+      </div>
+
+      {/* Service 1: Website Built to Convert — copy left / visual right */}
       <ServiceSectionBlock
-        id="gbp-audit"
+        id="website"
         bg="bg-[#021524]"
-        icon="manage_search"
-        title="GBP Audit & Optimization"
-        description="Your Google Business Profile is the first thing customers see, and most profiles have fixable problems dragging rankings down. We audit yours, fix every gap, and set up your profile to compete at the top of local search."
+        icon="web"
+        title="Website Built to Convert"
+        description="This is the engine. The clicks you pay for bounce when the site doesn't convert. You get a clean, fast site that turns local visitors into calls. One review, one approval, one launch. No retainer, no hostage hosting."
         deliverables={[
-          "Full audit of profile completeness, categories, and description",
-          "Photo strategy and review response setup",
-          "Category and attribute optimization based on competitor analysis",
-          "Profile configured to attract calls, not just views",
+          "Clean, fast site built to convert local visitors into calls",
+          "One review, one approval, one launch. No drawn-out cycles.",
+          "No monthly retainer required after launch",
+          "Hosted wherever you want. No lock-in.",
         ]}
         visual={
           <div className="rounded-2xl bg-[#0e2131] border border-white/10 p-6">
             <div className="text-xs text-[#99907b] mb-1 flex items-center gap-1.5">
-              <span className="material-symbols-outlined text-sm text-[#C9A227]">manage_search</span>
-              GBP Optimization Result
+              <span className="material-symbols-outlined text-sm text-[#C9A227]">web</span>
+              Performance score
             </div>
-            <GBPStarAnimation />
+            <LighthouseAnimation />
             <div className="mt-4 space-y-2">
               {[
-                "Categories corrected",
-                "Business description rewritten",
-                "Photo library updated",
-                "Review response template live",
+                "Fully responsive across all devices",
+                "Built for speed and Core Web Vitals",
+                "Conversion-optimized layout and copy",
               ].map((item) => (
                 <div key={item} className="flex items-center gap-2 text-xs text-[#d1e5fb]/70">
                   <span className="material-symbols-outlined text-[#C9A227] text-xs">check</span>
@@ -215,88 +237,13 @@ export default function ServicesPage() {
         reverse={false}
       />
 
-      {/* Service 2: Local SEO Content — visual left / copy right */}
-      <ServiceSectionBlock
-        id="local-seo-content"
-        bg="bg-[#000f1d]"
-        icon="article"
-        title="Local SEO Content"
-        description="Monthly blog posts, GBP updates, and location-targeted content written to rank in your city. Hands-off and consistent. We handle the research, writing, and publishing. Cancel any month with no penalties."
-        deliverables={[
-          "Monthly blog posts targeting local search queries in your city",
-          "Google Business Profile post updates every two weeks",
-          "Location-targeted landing pages for service areas",
-          "Content calendar managed and executed for you",
-        ]}
-        visual={
-          <div className="rounded-2xl bg-[#0e2131] border border-white/10 p-6">
-            <div className="text-xs text-[#99907b] mb-3 flex items-center gap-1.5">
-              <span className="material-symbols-outlined text-sm text-[#C9A227]">article</span>
-              Monthly content delivered
-            </div>
-            <BlogTypingAnimation />
-            <div className="mt-4 grid grid-cols-2 gap-2">
-              {[
-                { label: "GBP posts", value: "2/mo" },
-                { label: "Blog posts", value: "4/mo" },
-                { label: "Keywords targeted", value: "12+" },
-                { label: "Cancel anytime", value: "✓" },
-              ].map((stat) => (
-                <div key={stat.label} className="bg-[#021524] rounded-lg px-3 py-2 text-center">
-                  <div className="text-[#C9A227] font-bold text-sm">{stat.value}</div>
-                  <div className="text-[#99907b] text-xs mt-0.5">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        }
-        reverse={true}
-      />
-
-      {/* Service 3: AI Search Visibility — copy left / visual right */}
-      <ServiceSectionBlock
-        id="ai-search"
-        bg="bg-[#021524]"
-        icon="travel_explore"
-        title="AI Search Visibility"
-        description="ChatGPT, Perplexity, and Google AI Overviews are now where customers start their search. We optimize your structured data, authority signals, and content so your business shows up in AI-generated answers, not just traditional results."
-        deliverables={[
-          "Structured data markup (schema.org) for your business and services",
-          "Authority signal building across directories and citations",
-          "Content optimized for ChatGPT, Perplexity, and AI Overview responses",
-          "Monthly report tracking AI search appearance and mentions",
-        ]}
-        visual={
-          <div className="rounded-2xl bg-[#0e2131] border border-white/10 p-6">
-            <div className="text-xs text-[#99907b] mb-3 flex items-center gap-1.5">
-              <span className="material-symbols-outlined text-sm text-[#C9A227]">travel_explore</span>
-              AI visibility results
-            </div>
-            <AISearchAnimation />
-            <div className="mt-4 space-y-2">
-              {[
-                "Structured data implemented",
-                "Citation consistency verified",
-                "AI Overview appearance tracked",
-              ].map((item) => (
-                <div key={item} className="flex items-center gap-2 text-xs text-[#d1e5fb]/70">
-                  <span className="material-symbols-outlined text-[#C9A227] text-xs">check</span>
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-        }
-        reverse={false}
-      />
-
-      {/* Service 4: Lead Reactivation Sprint — visual left / copy right */}
+      {/* Service 2: Lead Reactivation Sprint — visual left / copy right */}
       <ServiceSectionBlock
         id="lead-reactivation"
         bg="bg-[#000f1d]"
         icon="mark_chat_unread"
         title="Lead Reactivation Sprint"
-        description="Most businesses have revenue sitting in old contacts and cold leads. We build a 90-day SMS and email follow-up sequence, set up your CRM workflow, and turn a neglected list back into booked appointments. Live in 5 to 7 business days."
+        description="The fastest money is the leads you already have. You get a 90-day SMS and email sequence and a CRM workflow that runs it automatically, turning a cold list back into booked appointments. Live in 5 to 7 days."
         deliverables={[
           "90-day SMS and email sequence written and loaded",
           "CRM workflow setup with automated follow-up triggers",
@@ -328,50 +275,13 @@ export default function ServicesPage() {
         reverse={true}
       />
 
-      {/* Service 5: Website Built to Convert — copy left / visual right */}
-      <ServiceSectionBlock
-        id="website"
-        bg="bg-[#021524]"
-        icon="web"
-        title="Website Built to Convert"
-        description="A clean, fast, conversion-focused website, fully built. You review it once, you approve it, it launches. No revision loops, no monthly retainer, no hostage hosting."
-        deliverables={[
-          "Clean, fast site built to convert local visitors into calls",
-          "One review, one approval, one launch. No drawn-out cycles.",
-          "No monthly retainer required after launch",
-          "Hosted wherever you want. No lock-in.",
-        ]}
-        visual={
-          <div className="rounded-2xl bg-[#0e2131] border border-white/10 p-6">
-            <div className="text-xs text-[#99907b] mb-1 flex items-center gap-1.5">
-              <span className="material-symbols-outlined text-sm text-[#C9A227]">web</span>
-              Performance score
-            </div>
-            <LighthouseAnimation />
-            <div className="mt-4 space-y-2">
-              {[
-                "Fully responsive across all devices",
-                "Built for speed and Core Web Vitals",
-                "Conversion-optimized layout and copy",
-              ].map((item) => (
-                <div key={item} className="flex items-center gap-2 text-xs text-[#d1e5fb]/70">
-                  <span className="material-symbols-outlined text-[#C9A227] text-xs">check</span>
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-        }
-        reverse={false}
-      />
-
-      {/* Service 6: Performance Tracking — visual left / copy right */}
+      {/* Service 3: Performance Tracking — copy left / visual right */}
       <ServiceSectionBlock
         id="performance-tracking"
-        bg="bg-[#000f1d]"
+        bg="bg-[#021524]"
         icon="monitoring"
         title="Performance Tracking"
-        description="We report on ranking movement, profile views, and call volume every month. If something isn't working, we adjust. Adjustments are included, not billed as a separate service."
+        description="You can't fix what you can't see. You get monthly reporting on calls, conversions, and rankings, so you know exactly which clicks became booked calls. If something stalls, we adjust, at no extra charge."
         deliverables={[
           "Monthly report on local rankings, profile views, and call volume",
           "Competitor position tracking included",
@@ -400,8 +310,50 @@ export default function ServicesPage() {
             </div>
           </div>
         }
-        reverse={true}
+        reverse={false}
       />
+
+      {/* Job 2 band */}
+      <div className="bg-[#000f1d] pt-24 md:pt-32 px-6 border-t border-white/5">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-sm uppercase tracking-[0.2em] text-[#C9A227] mb-3">Then, get found</p>
+          <p className="text-xl sm:text-2xl font-display font-light text-[#d1e5fb] tracking-[-0.02em] leading-snug">
+            Once the funnel holds, turn up the traffic.
+          </p>
+        </div>
+      </div>
+
+      {/* Get Found: the three ranking services, one offering */}
+      <section id="get-found" className="pt-14 pb-24 md:pb-32 bg-[#000f1d]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-2xl mx-auto text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-display font-light text-[#d1e5fb] leading-tight tracking-[-0.04em] mb-4">
+              Get Found
+            </h2>
+            <p className="text-[#99907b] text-lg leading-relaxed">
+              We get you found everywhere customers look, so more of the right clicks enter
+              the system you just fixed. Three parts, one job.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {GET_FOUND_PARTS.map((part) => (
+              <div
+                key={part.title}
+                className="rounded-2xl bg-[#0e2131] border border-white/10 p-7 flex flex-col transition-all duration-300 hover:border-[#C9A227]/40 hover:-translate-y-1"
+              >
+                <div className="w-11 h-11 rounded-lg bg-[#C9A227]/10 flex items-center justify-center mb-5">
+                  <span className="material-symbols-outlined text-[#C9A227] text-2xl">{part.icon}</span>
+                </div>
+                <h3 className="text-lg font-bold text-[#d1e5fb] mb-2">{part.title}</h3>
+                <p className="text-[#99907b] text-sm leading-relaxed">{part.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <BookCTA />
+          </div>
+        </div>
+      </section>
 
       <CTABand />
     </main>

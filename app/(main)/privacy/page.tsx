@@ -5,7 +5,7 @@ export const metadata = {
   title: "Privacy Policy",
   description: "How Foundational AI Systems collects, uses, and protects your information.",
   openGraph: {
-    title: "Privacy Policy — Foundational AI Systems",
+    title: "Privacy Policy | Foundational AI Systems",
     description: "How Foundational AI Systems collects, uses, and protects your information.",
     url: `${SITE_URL}/privacy`,
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Privacy Policy" }],
