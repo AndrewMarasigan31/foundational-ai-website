@@ -8,25 +8,25 @@ const steps = [
     num: "01",
     title: "Free Audit Call",
     description:
-      "30 minutes. We review your GBP, Google and AI search visibility, existing lead list, and current site. You leave with a clear picture of where revenue is leaking, whether you hire us or not.",
+      "30 minutes. We show you exactly where your clicks are leaking instead of becoming calls. Yours to keep, whether you hire us or not.",
   },
   {
     num: "02",
     title: "We Build the Plan",
     description:
-      "Based on the audit, we recommend the right starting point: GBP optimization, content, AI search, or a lead reactivation sprint. No upsells. No unnecessary scope.",
+      "We recommend the one fix that moves the needle first: a site that converts, follow-up automation, or a reactivation sprint. No upsells.",
   },
   {
     num: "03",
     title: "You Approve, We Execute",
     description:
-      "Every deliverable goes through your review before it goes live. You're not handing us the keys. You stay in control of your brand and your messaging.",
+      "Every deliverable goes through your review before it goes live. You stay in control of your brand and your messaging.",
   },
   {
     num: "04",
     title: "Track Results, Iterate",
     description:
-      "We report on ranking movement, AI search appearances, profile views, and call volume. If something isn't working, we adjust. No waiting on a quarterly review.",
+      "We report on what matters: calls booked, conversion rate, and where leads drop off. If something isn't working, we adjust.",
   },
 ];
 
@@ -40,7 +40,7 @@ export default function HowItWorksSection() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <AnimatedSection direction="up" className="flex flex-col items-center text-center gap-6 mb-16">
-          <p className="text-xs uppercase tracking-[0.2em] text-[#99907b] mb-3">03 — PROCESS</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-[#99907b] mb-3">How it works</p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-light text-[#d1e5fb] leading-tight tracking-[-0.04em] max-w-3xl">
             Simple Enough to Explain in Four Steps
           </h2>

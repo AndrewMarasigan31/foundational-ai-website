@@ -5,11 +5,11 @@ import ServicesContent from "./ServicesContent";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "GBP audits, local SEO content, AI search visibility, lead reactivation, and website design for US small businesses. Fixed-scope. No retainers.",
+    "Turn the clicks you already get into booked calls. A website built to convert, lead reactivation, follow-up automation, and call tracking, plus the ranking work that gets you found. Fixed-scope. No retainers.",
   openGraph: {
-    title: "Services — Foundational AI Systems",
+    title: "Services | Foundational AI Systems",
     description:
-      "GBP audits, local SEO content, AI search visibility, lead reactivation, and website design for US small businesses.",
+      "Turn the clicks you already get into booked calls. Conversion-focused websites, lead reactivation, follow-up automation, and the local ranking work that feeds the funnel.",
     url: `${SITE_URL}/services`,
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Foundational AI Systems Services" }],
   },

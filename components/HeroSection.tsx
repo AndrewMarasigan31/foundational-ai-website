@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import LocalPackCard from "./LocalPackCard";
+import BookingsCard from "./BookingsCard";
 import TrustBar from "./TrustBar";
 
 const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#@!%$&";
@@ -147,7 +147,7 @@ export default function HeroSection() {
           {/* Eyebrow label */}
           {prefersReducedMotion ? (
             <p className="text-xs uppercase tracking-[0.2em] text-[#99907b]">
-              LOCAL SEO · AI SEARCH · RESULTS
+              GROWTH SYSTEMS FOR LOCAL SERVICE BUSINESSES
             </p>
           ) : (
             <motion.p
@@ -156,7 +156,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0, ease: "easeOut" }}
             >
-              LOCAL SEO · AI SEARCH · RESULTS
+              GROWTH SYSTEMS FOR LOCAL SERVICE BUSINESSES
             </motion.p>
           )}
 
@@ -164,7 +164,7 @@ export default function HeroSection() {
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-light text-[#d1e5fb] leading-none tracking-[-0.05em]">
             <span className="block overflow-hidden">
               {prefersReducedMotion ? (
-                <span className="block">Rank First.</span>
+                <span className="block">Clicks In.</span>
               ) : (
                 <motion.span
                   className="block"
@@ -172,16 +172,16 @@ export default function HeroSection() {
                   animate={{ y: "0%" }}
                   transition={{ duration: 0.7, delay: 0, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  Rank First.
+                  Clicks In.
                 </motion.span>
               )}
             </span>
             <span className="block overflow-hidden">
               {prefersReducedMotion ? (
                 <span className="block">
-                  Win{" "}
+                  Calls{" "}
                   <em className="font-serif not-italic text-[#C9A227]">
-                    <ScrambleWord text="Local." startDelay={0.9} />
+                    <ScrambleWord text="Booked." startDelay={0.9} />
                   </em>
                 </span>
               ) : (
@@ -191,9 +191,9 @@ export default function HeroSection() {
                   animate={{ y: "0%" }}
                   transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  Win{" "}
+                  Calls{" "}
                   <em className="font-serif not-italic text-[#C9A227]">
-                    <ScrambleWord text="Local." startDelay={0.9} />
+                    <ScrambleWord text="Booked." startDelay={0.9} />
                   </em>
                 </motion.span>
               )}
@@ -207,13 +207,12 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.55, ease: "easeOut" }}
           >
-            <p className="text-sm sm:text-base text-[#99907b] leading-relaxed max-w-md">
-              We build the local presence your business needs: optimized Google profiles,
-              AI search visibility, targeted content, and a system that recovers the leads
-              you already paid for. Stop losing customers to competitors who simply show up first.
+            <p className="text-base sm:text-lg text-[#b9c6d6] leading-relaxed max-w-md">
+              You&apos;re paying for clicks that never call. We turn the traffic
+              you already get into booked calls.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center gap-2 bg-[#C9A227] hover:bg-[#b8911f] text-[#021524] font-bold text-base px-7 py-3.5 rounded-full transition-colors shadow-[0_0_20px_rgba(201,162,39,0.3)] hover:shadow-[0_0_28px_rgba(201,162,39,0.5)]"
@@ -222,9 +221,10 @@ export default function HeroSection() {
               </Link>
               <Link
                 href="/services"
-                className="inline-flex items-center justify-center gap-2 border border-[#C9A227]/50 hover:border-[#C9A227] text-[#d1e5fb] hover:text-[#C9A227] font-semibold text-base px-7 py-3.5 rounded-full transition-colors"
+                className="inline-flex items-center gap-1.5 text-[#99907b] hover:text-[#C9A227] font-medium text-sm transition-colors group"
               >
-                See the Services
+                See how it works
+                <span className="material-symbols-outlined text-base transition-transform group-hover:translate-x-0.5">arrow_forward</span>
               </Link>
             </div>
 
@@ -239,7 +239,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="flex items-center justify-center"
         >
-          <LocalPackCard />
+          <BookingsCard />
         </motion.div>
       </div>
     </section>

@@ -43,25 +43,25 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `AI-Powered Local Growth | ${SITE_NAME}`,
+    default: `Turn Clicks Into Booked Calls | ${SITE_NAME}`,
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "AI-powered local growth for small businesses. Local SEO, GBP optimization, and AI growth planning that gets you into Google's top 3.",
+    "You're getting clicks but not calls. We turn the local traffic you already get into booked appointments: a website built to convert, follow-up automation, and call tracking, plus the Local SEO and AI search that gets you found.",
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    title: `AI-Powered Local Growth | ${SITE_NAME}`,
+    title: `Turn Clicks Into Booked Calls | ${SITE_NAME}`,
     description:
-      "AI-powered local growth for small businesses. Local SEO, GBP optimization, and AI growth planning that gets you into Google's top 3.",
+      "You're getting clicks but not calls. We turn the local traffic you already get into booked appointments: a website built to convert, follow-up automation, and call tracking, plus the Local SEO and AI search that gets you found.",
     url: SITE_URL,
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: SITE_NAME }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `AI-Powered Local Growth | ${SITE_NAME}`,
+    title: `Turn Clicks Into Booked Calls | ${SITE_NAME}`,
     description:
-      "AI-powered local growth for small businesses. Local SEO, GBP optimization, and AI growth planning that gets you into Google's top 3.",
+      "You're getting clicks but not calls. We turn the local traffic you already get into booked appointments: a website built to convert, follow-up automation, and call tracking, plus the Local SEO and AI search that gets you found.",
     images: [OG_IMAGE],
   },
 };
@@ -102,7 +102,7 @@ export default function RootLayout({
               "@type": "ProfessionalService",
               name: SITE_NAME,
               description:
-                "AI-powered Local SEO for US small businesses. GBP audits, local content, AI search visibility, and lead reactivation.",
+                "We turn the local traffic small businesses already get into booked calls: conversion-focused websites, lead reactivation, follow-up automation, and tracking, plus Local SEO and AI search.",
               url: SITE_URL,
               image: OG_IMAGE,
               telephone: "+19842860738",
@@ -112,10 +112,13 @@ export default function RootLayout({
                 name: "United States",
               },
               knowsAbout: [
+                "Conversion Rate Optimization",
+                "Website Design",
+                "Lead Reactivation",
+                "Marketing Automation",
                 "Local SEO",
                 "Google Business Profile",
                 "AI Search Optimization",
-                "Lead Reactivation",
               ],
             }),
           }}

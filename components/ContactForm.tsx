@@ -190,7 +190,7 @@ export default function ContactForm() {
           </span>
           <div>
             <h3 className="font-display font-extrabold text-[#d1e5fb] text-2xl">
-              You&apos;re in — now book your audit call.
+              You&apos;re in. Now book your audit call.
             </h3>
             <p className="mt-2 text-[#99907b]">
               Pick a time that works for you. Takes 30 seconds.

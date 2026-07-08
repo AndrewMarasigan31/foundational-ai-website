@@ -46,7 +46,7 @@ export default function WorkTeaser() {
 
   return (
     <div
-      className="fixed left-0 top-1/2 -translate-y-1/2 z-50 flex flex-row items-center gap-3"
+      className="hidden lg:flex fixed left-0 top-[78%] -translate-y-1/2 z-50 flex-row items-center gap-3"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
@@ -89,7 +89,7 @@ export default function WorkTeaser() {
                 Car Rental<br />Growth System
               </p>
               <p className="text-[11px] font-semibold text-[#4B5563] mt-1.5 leading-relaxed">
-                Bookings, automation, lead tracking & reviews — all running on autopilot.
+                Bookings, automation, lead tracking & reviews, all running on autopilot.
               </p>
               <Link
                 href="/work/car-rental"

@@ -1,160 +1,70 @@
 # Foundational AI Systems — Website
 
-Static marketing website for [Foundational AI Systems](https://foundationalaIsystems.com).
-Navy + gold brand. Four pages. No build step.
+Marketing site for [Foundational AI Systems](https://foundationalaisystems.com), a Local SEO agency.
+Next.js 14 (App Router), Tailwind, Framer Motion. Navy + gold brand.
 
 ---
 
 ## Pages
 
-| File | Route | Purpose |
-|------|-------|---------|
-| `index.html` | `/` | Home — hero, service cards, why-us section, CTA band |
-| `services.html` | `/services` | Full service detail for all three offerings with deliverables and pricing |
-| `about.html` | `/about` | Company mission, how-we-work flow, who we serve |
-| `contact.html` | `/contact` | Contact form with service selector and call-request toggle |
+| Route | File | Purpose |
+|-------|------|---------|
+| `/` | `app/(main)/page.tsx` | Home — hero, service cards, why-us section, CTA band |
+| `/services` | `app/(main)/services/page.tsx` | Full service detail for all offerings |
+| `/about` | `app/(main)/about/page.tsx` | Company mission, how-we-work flow, who we serve |
+| `/contact` | `app/(main)/contact/page.tsx` | Contact form, wired to GoHighLevel |
+| `/privacy`, `/terms` | `app/(main)/privacy`, `app/(main)/terms` | Legal pages |
+| `/work/car-rental` | `app/work/car-rental/page.tsx` | Case study |
+
+Interactive pages split into a server `page.tsx` (exports `metadata` for SEO) and a client
+`*Content.tsx` sibling (animations/interactivity).
 
 ---
 
-## Tech Stack
+## Local Development
 
-| Layer | Choice | Notes |
-|-------|--------|-------|
-| Markup | HTML5 | Semantic, no framework |
-| Styles | CSS3 (single file) | `assets/style.css` — CSS variables, flexbox/grid, responsive |
-| Font | Inter via Google Fonts | Loaded via `<link>` in each page head |
-| JS | Vanilla inline | Mobile nav toggle only — ~10 lines per page |
-| Images | `assets/logo.png` | PNG logo, 400×400px circular |
-| Forms | Static `action="#"` | Needs a backend wired up before going live (see below) |
+```bash
+npm install
+npm run dev
+# open http://localhost:3000
+```
 
-No npm, no bundler, no framework. Open `index.html` in a browser and it works.
+Other scripts: `npm run build`, `npm run lint`, `npm run typecheck`, `npm test`.
 
 ---
 
-## Local Preview
+## Contact Form / GHL Integration
 
-```bash
-cd foundational-ai-website
-python3 -m http.server 8080
-# open http://localhost:8080
-```
-
-Or with Node:
-
-```bash
-npx serve .
-```
+The contact form (`components/ContactForm.tsx`) submits via the `submitContact` server action
+(`app/(main)/actions/submitContact.ts`), which creates a contact/opportunity in GoHighLevel, then
+hands off to the GHL booking widget (`NEXT_PUBLIC_GHL_CALENDAR_URL`). See
+`docs/handoff-2026-06-16.md` for the full integration writeup, including known pitfalls (e.g.
+omit `stageId` from opportunity creation — causes a 422).
 
 ---
 
 ## Deployment
 
-### Option A — Netlify (recommended, free tier)
+Deployed on Vercel. Auto-deploy from `main` has been unreliable — after pushing, run
+`vercel --prod` explicitly (pass `--cwd` if the CLI resolves the wrong path) and verify the
+deployment before considering it live.
 
-1. Push this repo to GitHub
-2. Go to [netlify.com](https://netlify.com) → New site from Git
-3. Select repo, leave build command blank, set publish directory to `/` (root)
-4. Deploy — Netlify auto-assigns a URL, custom domain available in settings
-
-For the contact form, add `netlify` attribute to the `<form>` tag in `contact.html` and change `action="#"` to `action="/thank-you"`. Netlify handles the rest.
-
-```html
-<form name="contact" method="POST" data-netlify="true" action="/thank-you">
-  <input type="hidden" name="form-name" value="contact">
-  ...
-</form>
-```
-
-### Option B — GitHub Pages
-
-1. Push to a GitHub repo
-2. Go to repo Settings → Pages → Source: Deploy from branch → `main` / `root`
-3. Site publishes at `https://<username>.github.io/<repo-name>/`
-
-Note: GitHub Pages does not handle form submissions. Use Formspree (see below).
-
-### Option C — Lightsail / nginx
-
-```bash
-# Copy files to web root
-sudo cp -r /path/to/foundational-ai-website/* /var/www/html/
-
-# Or serve from a subdirectory
-sudo cp -r /path/to/foundational-ai-website /var/www/html/site
-```
-
-Ensure nginx is configured to serve `index.html` at the root:
-
-```nginx
-server {
-    listen 80;
-    server_name yourdomain.com;
-    root /var/www/html;
-    index index.html;
-    location / { try_files $uri $uri/ =404; }
-}
-```
+**Important:** the Vercel project's Root Directory setting must stay empty. Setting it to
+`foundational-ai-website` breaks the build because Vercel already scopes to the connected repo
+path.
 
 ---
 
-## Contact Form Setup
+## Brand
 
-The form in `contact.html` currently uses `action="#"` with a client-side demo handler. Before going live, swap in one of these:
-
-### Formspree (easiest)
-
-1. Sign up at [formspree.io](https://formspree.io) → create a new form
-2. Replace `action="#"` in `contact.html` with your endpoint:
-   ```html
-   <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-   ```
-3. Remove the demo submit handler JS block at the bottom of the file
-
-### GoHighLevel webhook
-
-1. In GHL, create a form or webhook trigger
-2. Set `action` to the GHL form embed URL or webhook endpoint
-3. Match field `name` attributes to GHL custom field keys
-
-### Netlify Forms
-
-See Option A above — zero config needed if deploying to Netlify.
+- Fonts: Bricolage Grotesque (display) + DM Sans (body), Playfair italic for accents
+- Colors (`tailwind.config.ts`): primary gold `#C9A227`, background navy `#021524`
+- No pill/tag badges, no em-dashes in copy
 
 ---
 
-## File Structure
+## Repo Notes
 
-```
-foundational-ai-website/
-├── index.html          # Home
-├── services.html       # Services
-├── about.html          # About
-├── contact.html        # Contact
-└── assets/
-    ├── style.css       # All styles — edit brand colors in :root variables
-    └── logo.png        # Brand logo
-```
-
-## Brand Colors (CSS variables in `assets/style.css`)
-
-```css
---c-bg: #080F1D;          /* deep navy background */
---c-surface: #0D1A30;     /* card / section surface */
---c-gold: #C9A227;        /* primary brand gold */
---c-gold-hover: #D4B340;  /* gold hover state */
---c-white: #FFFFFF;
---c-gray-light: #A8BBD0;  /* body text */
---c-gray: #7B8FA6;        /* muted / labels */
-```
-
-To change the brand color, update `--c-gold` and `--c-gold-hover` in `:root`.
-
----
-
-## Pricing Reference
-
-| Service | Price |
-|---------|-------|
-| AI-Powered Local SEO Content Package | $750/month + $200 onboarding |
-| GBP Audit & Optimization | $500 one-time |
-| Already Done Website | $1,200 one-time + $75/month optional hosting |
+- `proposals/` — client sales collateral (proposal docs), not part of the site build
+- `docs/` — handoff notes, planning docs (`docs/superpowers/`)
+- `.ralph/` — config for the Ralph autonomous coding loop (`.ralph/ralph.sh --tool claude <n>`)
